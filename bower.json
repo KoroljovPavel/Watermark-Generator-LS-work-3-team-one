@@ -2,5 +2,8 @@
   "name": "watermarks",
   "dependencies": {
     "normalize-css": "~3.0.3"
+  },
+  "devDependencies": {
+    "jquery": "~2.1.4"
   }
 }
