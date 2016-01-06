@@ -128,7 +128,7 @@ gulp.task('fonts:dist', function() {
 
 gulp.task('php:dist', function() {
     gulp.src(path.src.php)
-        .pipe(gulp.dest(path.dist.php))
+        .pipe(gulp.dest(path.dist.php));
 });
 
 
