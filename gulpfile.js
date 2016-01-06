@@ -31,7 +31,7 @@ var path = {
         fonts: 'app/fonts/**/*.*'
     },
     watch: { //Тут мы укажем, за изменением каких файлов мы хотим наблюдать
-    	jade: 'app/markups/_pages/index.jade',
+    	jade: 'app/markups/_pages/**/*.jade',
         js: 'app/js/**/*.js',
         style: 'app/sass/**/*.scss',
         img: 'app/img/**/*.*',
