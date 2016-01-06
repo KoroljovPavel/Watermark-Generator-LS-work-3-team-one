@@ -3,6 +3,8 @@
 
 @import "_layout/layout";
 
+@import "_main/fonts";
+
 @import "_components/left-column";
 @import "_components/right-column";
 
@@ -35,4 +37,6 @@ footer {
 	height: $footer-height;
 	margin-top: -$footer-height;
 	text-align: center;
+	font: 12px/12px "fira_sanslight", sans-serif;
+	color: #ffffff;
 }

@@ -1,4 +1,6 @@
 node_modules
 app/bower
+dist
+.idea
 app/test
 .idea

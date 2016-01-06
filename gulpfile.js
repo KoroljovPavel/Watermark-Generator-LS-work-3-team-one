@@ -13,6 +13,7 @@ var gulp = require('gulp'),
     pngquant = require('imagemin-pngquant'),
     browserSync = require("browser-sync"),
     rimraf = require('rimraf'),
+    php = require('gulp-connect-php'),
     reload = browserSync.reload;
 
 var path = {
@@ -21,20 +22,23 @@ var path = {
         js: 'dist/js/',
         css: 'dist/css/',
         img: 'dist/img/',
-        fonts: 'dist/fonts/'
+        fonts: 'dist/fonts/',
+        php: 'dist/php/'
     },
     src: { //Пути откуда брать исходники
         jade: 'app/markups/_pages/index.jade',
         js: 'app/js/main.js',//В стилях и скриптах нам понадобятся только main файлы
         style: 'app/sass/main.scss',
         img: 'app/img/**/*.*', //Синтаксис img/**/*.* означает - взять все файлы всех расширений из папки и из вложенных каталогов
-        fonts: 'app/fonts/**/*.*'
+        fonts: 'app/fonts/**/*.*',
+        php: 'app/php/**/*.*'
     },
     watch: { //Тут мы укажем, за изменением каких файлов мы хотим наблюдать
     	jade: 'app/markups/_pages/**/*.jade',
         js: 'app/js/**/*.js',
         style: 'app/sass/**/*.scss',
         img: 'app/img/**/*.*',
+        php: 'app/php/**/*.php',
         fonts: 'app/fonts/**/*.*'
     },
 
@@ -49,8 +53,27 @@ var config = {
     port: 9000
 };
 
+var configPhp = {
+    proxy: '127.0.0.1:9010',
+    port: 9000,
+    open: true,
+    notify: false
+};
+
 gulp.task('webserver', function () {
     browserSync(config);
+});
+
+gulp.task('php', function() {
+    php.server({ 
+        base: 'dist',
+        port: 9010, 
+        keepalive: true
+    });
+});
+
+gulp.task('webserver-php', ['php'], function () {
+    browserSync(configPhp);
 });
 
 
@@ -103,13 +126,19 @@ gulp.task('fonts:dist', function() {
         .pipe(gulp.dest(path.dist.fonts))
 });
 
+gulp.task('php:dist', function() {
+    gulp.src(path.src.php)
+        .pipe(gulp.dest(path.dist.php))
+});
+
 
 gulp.task('dist', [
     'jade:dist',
     'js:dist',
     'style:dist',
     'fonts:dist',
-    'image:dist'
+    'image:dist',
+    'php:dist'
 ]);
 
 
@@ -129,9 +158,12 @@ gulp.task('watch', function(){
     watch([path.watch.fonts], function(event, cb) {
         gulp.start('fonts:dist');
     });
+    watch([path.watch.php], function(event, cb) {
+        gulp.start('php:dist');
+    });
 });
 
 
-
+gulp.task('server-php', ['dist', 'webserver-php', 'watch']);
 
 gulp.task('default', ['dist', 'webserver', 'watch']);
