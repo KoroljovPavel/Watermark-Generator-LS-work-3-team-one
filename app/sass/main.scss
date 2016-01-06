@@ -1,1 +1,38 @@
-@import "../bower/normalize-css/normalize.css";
+
+@import "_mixins/clearfix";
+
+@import "_layout/layout";
+
+@import "_components/left-column";
+@import "_components/right-column";
+
+
+
+html {
+    font-size: 14px;
+}
+body {
+	background: #9f6f7a;
+}
+.clearfix {
+	@include clearfix;
+}
+$footer-height : 70px;
+.wrapper {
+	min-height: 100%;
+	min-width: 1120px;
+	overflow: hidden;
+	position: relative;
+
+	&:after {
+		content: "";
+		height: $footer-height;
+		display: block;
+	}
+}
+
+footer {
+	height: $footer-height;
+	margin-top: -$footer-height;
+	text-align: center;
+}
