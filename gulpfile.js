@@ -26,7 +26,7 @@ var path = {
         php: 'dist/php/'
     },
     src: { //Пути откуда брать исходники
-        jade: 'app/markups/_pages/index.jade',
+        jade: 'app/markups/index.jade',
         js: 'app/js/main.js',//В стилях и скриптах нам понадобятся только main файлы
         style: 'app/sass/main.scss',
         img: 'app/img/**/*.*', //Синтаксис img/**/*.* означает - взять все файлы всех расширений из папки и из вложенных каталогов
@@ -34,7 +34,7 @@ var path = {
         php: 'app/php/**/*.*'
     },
     watch: { //Тут мы укажем, за изменением каких файлов мы хотим наблюдать
-    	jade: 'app/markups/_pages/**/*.jade',
+    	jade: 'app/markups/**/*.jade',
         js: 'app/js/**/*.js',
         style: 'app/sass/**/*.scss',
         img: 'app/img/**/*.*',
@@ -117,7 +117,7 @@ gulp.task('image:dist', function () {
             use: [pngquant()],
             interlaced: true
         }))
-        .pipe(gulp.dest(path.dist.img)) //И бросим в build
+        .pipe(gulp.dest(path.dist.img)) //И бросим в dist
         .pipe(reload({stream: true}));
 });
 
