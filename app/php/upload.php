@@ -123,7 +123,8 @@ $imgs['orig']['path']  = $__config["path"]["imgUpload"] . $imgs['orig']['name'];
 $imgs['min']['name']   = $sId . "-$fileType-min." . $ext;
 $imgs['min']['path']   = $__config["path"]["imgUpload"] . $imgs['min']['name'];
 
-if (!move_uploaded_file ( $_FILES[$fileType]['tmp_name'], $imgs['orig']['path'])) {
+if (!move_uploaded_file ( $_FILES[$fileType]['tmp_name'], 
+        $imgs['orig']['path'])) {
     echo json_encode( array(
         'status' => 'error',                 
         'errorType' => 'file',
@@ -136,11 +137,8 @@ if (!move_uploaded_file ( $_FILES[$fileType]['tmp_name'], $imgs['orig']['path'])
 
 // Получаем данные о размере изображения
 $fileInfo  = getimagesize($imgs['orig']['path']);
-echo "<pre>";
-print_r($fileInfo);
-echo "</pre>";
 // Создаем миниатюру изображения
-function imageresize($outfile,$infile,$neww,$newh,$quality,$mime) {
+function imageresize($infile, $outfile, $neww, $newh, $mime, $quality) {
     if ($mime == "image/jpeg") {
         $im=imagecreatefromjpeg($infile);
     } else {
@@ -150,21 +148,40 @@ function imageresize($outfile,$infile,$neww,$newh,$quality,$mime) {
     $im1=imagecreatetruecolor($neww,$newh);
     imagecopyresampled($im1,$im,0,0,0,0,$neww,$newh,imagesx($im),imagesy($im));
 
-    imagejpeg($im1,$outfile,$quality);
+    if ($mime == "image/jpeg") {
+        imagejpeg($im1, $outfile, $quality);
+    } else {
+        imagealphablending($im1, false);
+        imagesavealpha($im1, true);
+        imagepng($im1, $outfile, 9);
+    }
     imagedestroy($im);
     imagedestroy($im1);
 }
 
 
-if ($file_info["width"] != 163 || $file_info["height"] != 119 || $file_info["mime"] != "image/jpeg") {
-    // Конвертируем изображение
-    //imageresize($_SESSION["img"],$_SESSION["img"],163,119,75,$file_info["mime"]);
+// Конвертируем изображение
+$whRatioCanvas = $__config['canvas']['width'] / $__config['canvas']['height'];
+$whRatioImage = $fileInfo[0] / $fileInfo[1];
+
+if ($whRatioCanvas < $whRatioImage ) {
+    // Масштабируем по ширине
+    $newWidth = $__config['canvas']['width'];
+    $newHeight = $newWidth / $whRatioImage;
+} else {
+    // Масштабируем по высоте
+    $newHeight = $__config['canvas']['height'];
+    $newWidth = $newHeight * $whRatioImage;
 }
 
-// заглушка формирования миниатюры
-copy($imgs['orig']['path'], $imgs['min']['path']); 
-// Формируем ответ
+if ($newWidth <  $fileInfo[0] || $newHeight < $fileInfo[1] ) {
+    imageresize( $imgs['orig']['path'], $imgs['min']['path'],
+            $newWidth, $newHeight, $fileInfo["mime"], 60);
+} else {
+    copy($imgs['orig']['path'], $imgs['min']['path']);
+}
 
+// Формируем ответ
 echo json_encode( array(
         'status' => 'success',
         'imgName' => $imgs['orig']['name'],
