@@ -1,3 +1,7 @@
+@import "../bower/normalize-css/normalize.css";
+
+@import "../css/icons-sprite.css";
+@import "../css/social-sprite.css";
 
 @import "_mixins/clearfix";
 
@@ -14,7 +18,11 @@ html {
     font-size: 14px;
 }
 body {
-	background: #9f6f7a;
+	background: url("../img/background.jpg");
+	background-attachment: fixed;
+	background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
 }
 .clearfix {
 	@include clearfix;
