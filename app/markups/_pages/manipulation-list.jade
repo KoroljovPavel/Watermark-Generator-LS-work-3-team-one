@@ -55,19 +55,20 @@ form.manipulation__list
 					span.position-lines.position-lines-y
 			div.manipulation__item_position-coordinates
 				div.position__coordinates.position__coordinates-one
-					p.coordinates__lines.coordinates__lines-up-down
 					input#coordinate-x.coordinate__input.coordinate__input-x(type='text')
 					div.coordinate__arrows
 						button.coordinate__arrow.coordinate__arrow-up
 						button.coordinate__arrow.coordinate__arrow-down
 				div.position__coordinates.position__coordinates-two
-					p.coordinates__lines.coordinates__lines-left-right
 					input#coordinate-y.coordinate__input.coordinate__input-y(type='text')
 					div.coordinate__arrows
 						button.coordinate__arrow.coordinate__arrow-up
 						button.coordinate__arrow.coordinate__arrow-down
 	div.manipulation__item.manipulation__item_image-opacity
 		label.manipulation__label.position__label Прозрачность
-	div.manipulation__item.manipulation__item_buttons
+		div.opacity-slider
+			div#slider.opacity-slider__range
+				span.opacity-slider__toggle
+	div.manipulation__item.manipulation__item_buttons.clearfix
 		button.manipulation__btn-reset(type='reset') Сброс
 		button.manipulation__btn-submit(type='submit') Скачать

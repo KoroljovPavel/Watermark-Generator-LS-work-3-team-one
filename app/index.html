@@ -132,7 +132,6 @@
                 </div>
                 <div class="manipulation__item_position-coordinates">
                   <div class="position__coordinates position__coordinates-one">
-                    <p class="coordinates__lines coordinates__lines-up-down"></p>
                     <input id="coordinate-x" type="text" class="coordinate__input coordinate__input-x">
                     <div class="coordinate__arrows">
                       <button class="coordinate__arrow coordinate__arrow-up"></button>
@@ -140,7 +139,6 @@
                     </div>
                   </div>
                   <div class="position__coordinates position__coordinates-two">
-                    <p class="coordinates__lines coordinates__lines-left-right"></p>
                     <input id="coordinate-y" type="text" class="coordinate__input coordinate__input-y">
                     <div class="coordinate__arrows">
                       <button class="coordinate__arrow coordinate__arrow-up"></button>
@@ -152,8 +150,11 @@
             </div>
             <div class="manipulation__item manipulation__item_image-opacity">
               <label class="manipulation__label position__label">Прозрачность</label>
+              <div class="opacity-slider">
+                <div id="slider" class="opacity-slider__range"><span class="opacity-slider__toggle"></span></div>
+              </div>
             </div>
-            <div class="manipulation__item manipulation__item_buttons">
+            <div class="manipulation__item manipulation__item_buttons clearfix">
               <button type="reset" class="manipulation__btn-reset">Сброс</button>
               <button type="submit" class="manipulation__btn-submit">Скачать</button>
             </div>
