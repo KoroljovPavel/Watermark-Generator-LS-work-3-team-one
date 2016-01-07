@@ -1,1 +1,8 @@
-h1 hi hi
+html
+    head
+        title test
+    body
+        form(action="php/upload.php?fileType=img" method="post" enctype="multipart/form-data")
+            input(type="file" name="img")
+            button(type="submit").
+                Отправить файл
