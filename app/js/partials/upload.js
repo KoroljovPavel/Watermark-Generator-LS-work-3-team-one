@@ -19,9 +19,9 @@ var upload = function() {
 		// Определяем GET параметр
 		var url;
 		if (type == 'img') {
-			url = 'upload.php?fileType=img';
+			url = 'php/upload.php?fileType=img';
 		} else {
-			url = 'upload.php?fileType=watermark';
+			url = 'php/upload.php?fileType=watermark';
 		}
 		image.fileupload({ 
 			url: url,
