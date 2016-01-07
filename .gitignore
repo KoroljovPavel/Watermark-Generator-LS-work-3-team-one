@@ -1,3 +1,6 @@
 node_modules
 app/bower
 dist
+.idea
+app/test
+test img
