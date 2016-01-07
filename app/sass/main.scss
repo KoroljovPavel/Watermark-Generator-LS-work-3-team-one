@@ -1,4 +1,10 @@
 @import "../bower/normalize-css/normalize.css";
+
+
+
+@import "../css/icons-sprite.css";
+@import "../css/social-sprite.css";
+
 @import "_mixins/clearfix";
 
 @import "_layout/layout";
@@ -14,7 +20,11 @@ html {
     font-size: 14px;
 }
 body {
-	background: #9f6f7a;
+	background: url("../img/background.jpg");
+	background-attachment: fixed;
+	background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
 }
 .clearfix {
 	@include clearfix;
@@ -39,4 +49,7 @@ footer {
 	text-align: center;
 	font: 12px/12px "fira_sanslight", sans-serif;
 	color: #ffffff;
+}
+.generation-footer__copyrighting{
+	padding-top: 35px;
 }
