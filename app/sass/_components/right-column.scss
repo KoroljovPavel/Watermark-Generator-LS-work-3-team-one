@@ -1,4 +1,4 @@
-@import "_components/input-file";
+@import "input-file";
 .container__right-column{
 	margin:0 auto;
 	margin-top: 60px;
@@ -24,7 +24,10 @@
 	background: #f1f1f5;
 }
 .generator__header{
-	font: 36px/36px "segoeui", sans-serif;
+	font: inherit;
+	font-size: 36px;
+	font-family: "segoeui", sans-serif;
+	font-weight: 400;
 	color: #ffffff;
 }
 .generator__output{
