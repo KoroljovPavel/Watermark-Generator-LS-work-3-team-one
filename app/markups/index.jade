@@ -1,0 +1,24 @@
+doctype html
+html(lang="ru-Ru")
+	include _pages/head
+	body
+		div.wrapper
+			div.container__left-column
+				include _pages/language
+
+				include _pages/social
+
+			div.container__right-column.clearfix
+				include _pages/generator
+
+				div.container__manipulation
+					h2.manipulation__header Настройки
+					include _pages/input-image
+
+					include _pages/input-watermark
+
+					include _pages/manipulation-list
+	footer
+		div.generation-footer__copyrighting @ 2016 Это сайт команды № 1, пожалуйста, не копируйте и не воруйте его
+
+	script(src = "js/main.js")

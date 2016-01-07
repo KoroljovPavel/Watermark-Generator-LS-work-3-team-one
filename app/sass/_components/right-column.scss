@@ -1,0 +1,44 @@
+@import "_components/input-file";
+.container__right-column{
+	margin:0 auto;
+	margin-top: 60px;
+	width: 960px;
+	height: 675px;
+}
+.container__generator{
+	float: left;
+	vertical-align: top;
+	width: 702px;
+	height: 100%;
+	background: #686362;
+	padding-left: 26px;
+	padding-right: 26px;
+	padding-top: 24px;
+	padding-bottom: 25px;
+}
+.container__manipulation{
+	float: right;
+	vertical-align: top;
+	width: 258px;
+	height: 100%;
+	background: #f1f1f5;
+}
+.generator__header{
+	font: 36px/36px "segoeui", sans-serif;
+	color: #ffffff;
+}
+.generator__output{
+	width: 652px;
+	height: 535px;
+	overflow: hidden;
+	position: relative;
+	background: #ffffff;
+}
+.output__image-result{
+	position: relative;
+	vertical-align: middle;
+	text-align: center;
+	height: inherit;
+	width: inherit;
+}
+
