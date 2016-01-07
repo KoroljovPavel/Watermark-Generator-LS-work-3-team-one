@@ -81,6 +81,7 @@ gulp.task('clean', function (cb) {
     rimraf(path.clean, cb);
 });
 
+
 gulp.task('js:dist', function () {
     gulp.src(path.src.js) //Найдем наш main файл
         .pipe(rigger()) //Прогоним через rigger
