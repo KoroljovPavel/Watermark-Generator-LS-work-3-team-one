@@ -14,6 +14,7 @@ var gulp = require('gulp'),
     browserSync = require("browser-sync"),
     rimraf = require('rimraf'),
     php = require('gulp-connect-php'),
+    plumber = require('gulp-plumber'),
     reload = browserSync.reload;
 
 var path = {
@@ -87,6 +88,7 @@ gulp.task('clean', function (cb) {
 
 gulp.task('js:dist', function () {
     gulp.src(path.src.js) //Найдем наш main файл
+        .pipe(plumber())
         .pipe(rigger()) //Прогоним через rigger
         .pipe(sourcemaps.init()) //Инициализируем sourcemap
         .pipe(uglify()) //Сожмем наш js
@@ -97,6 +99,7 @@ gulp.task('js:dist', function () {
 
 gulp.task('style:dist', function () {
     gulp.src(path.src.style) //Выберем наш main.scss
+        .pipe(plumber())
         .pipe(sourcemaps.init()) //То же самое что и с js
         .pipe(sass()) //Скомпилируем
         .pipe(prefixer()) //Добавим вендорные префиксы
@@ -108,13 +111,15 @@ gulp.task('style:dist', function () {
 
 gulp.task('jade:dist', function(){
   gulp.src(path.src.jade)
-    .pipe(jade())
+    .pipe(plumber())
+    .pipe(jade({pretty: true}))
     .pipe(gulp.dest(path.dist.jade))
     .pipe(reload({stream: true}));
 });
 
 gulp.task('image:dist', function () {
     gulp.src(path.src.img) //Выберем наши картинки
+        .pipe(plumber())
         .pipe(imagemin({ //Сожмем их
             progressive: true,
             svgoPlugins: [{removeViewBox: false}],
@@ -127,11 +132,13 @@ gulp.task('image:dist', function () {
 
 gulp.task('fonts:dist', function() {
     gulp.src(path.src.fonts)
+        .pipe(plumber())
         .pipe(gulp.dest(path.dist.fonts))
 });
 
 gulp.task('php:dist', function() {
     gulp.src(path.src.php)
+        .pipe(plumber())
         .pipe(gulp.dest(path.dist.php));
 });
 
