@@ -11,3 +11,5 @@
 //= partials/watermark.js
 
 //= partials/upload.js
+
+//= ./partials/download.js
