@@ -10,23 +10,35 @@
         block.css(property, value);
     }
 
-    function _setPosition(me, property, offset){
+    function _setPosition(me, property, offset, isAbsOffset) {
 
-        if ($.inArray(property, _positionNames) < 0){
+        if ($.inArray(property, _positionNames) < 0) {
             $.error("Wrong position property: " + property + ", expected: " + _positionNames);
             return;
         }
 
-        var posValue = parseInt(me.css(property));
+        var posValue;
 
-        if (!$.isNumeric(posValue)){
-            console.log("value of " + property + " is not numeric, setting to zero");
-            posValue = 0;
+        if (isAbsOffset) {
+            posValue = _getNum(offset, "offset");
+        }else{
+            posValue = _getNum(me.css(property), property) + _getNum(offset, "offset");
         }
-        posValue += offset;
+
         me.css(property, posValue);
 
         isAtPosition = false;
+    }
+
+    function _getNum(value, name){
+        value = parseInt(value);
+
+        if (!$.isNumeric(value)) {
+            console.log("value of " + name + " is not numeric, setting to zero");
+            value = 0;
+        }
+
+        return value;
     }
 
     function _getLeftPosition(horName, me){
@@ -99,7 +111,7 @@
         move_up:function(offset) {
             console.log("move_up", offset);
 
-            _setPosition($(this), "top", -offset);
+            _setPosition($(this), "top", -offset, false);
 
             return this;
         },
@@ -107,7 +119,7 @@
         move_down:function(offset) {
             console.log("move_down", offset);
 
-            _setPosition($(this), "top", offset);
+            _setPosition($(this), "top", offset, false);
 
             return this;
         },
@@ -115,7 +127,7 @@
         move_left:function(offset) {
             console.log("move_left", offset);
 
-            _setPosition($(this), "left", -offset);
+            _setPosition($(this), "left", -offset, false);
 
             return this;
         },
@@ -123,7 +135,7 @@
         move_right:function(offset) {
             console.log("move_right", offset);
 
-            _setPosition($(this), "left", offset);
+            _setPosition($(this), "left", offset, false);
 
             return this;
         },
@@ -155,6 +167,22 @@
             isAtPosition = true;
             atPositionHor = valueHor;
             atPositionVert = valueVert;
+
+            return this;
+        },
+
+        coordinate_x:function(x) {
+            console.log("coordinate_x", x);
+
+            _setPosition($(this), "left", x, true);
+
+            return this;
+        },
+
+        coordinate_y:function(y) {
+            console.log("coordinate_y", y);
+
+            _setPosition($(this), "top", y, true);
 
             return this;
         },
