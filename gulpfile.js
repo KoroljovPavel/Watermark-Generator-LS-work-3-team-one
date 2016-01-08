@@ -23,7 +23,9 @@ var path = {
         css: 'dist/css/',
         img: 'dist/img/',
         fonts: 'dist/fonts/',
-        php: 'dist/php/'
+        php: 'dist/php/',
+        users_img: 'dist/'
+
     },
     src: { //Пути откуда брать исходники
         jade: 'app/markups/index.jade',
@@ -31,7 +33,8 @@ var path = {
         style: 'app/sass/main.scss',
         img: 'app/img/**/*.*', //Синтаксис img/**/*.* означает - взять все файлы всех расширений из папки и из вложенных каталогов
         fonts: 'app/fonts/**/*.*',
-        php: 'app/php/**/*.*'
+        php: 'app/php/**/*.*',
+        users_img: 'app/users_img'
     },
     watch: { //Тут мы укажем, за изменением каких файлов мы хотим наблюдать
     	jade: 'app/markups/**/*.jade',
@@ -132,6 +135,10 @@ gulp.task('php:dist', function() {
         .pipe(gulp.dest(path.dist.php));
 });
 
+gulp.task('test_img', function(){
+   gulp.src(path.src.users_img)
+       .pipe(gulp.dest(path.dist.users_img));
+});
 
 gulp.task('dist', [
     'jade:dist',
@@ -139,7 +146,8 @@ gulp.task('dist', [
     'style:dist',
     'fonts:dist',
     'image:dist',
-    'php:dist'
+    'php:dist',
+    'test_img'
 ]);
 
 
