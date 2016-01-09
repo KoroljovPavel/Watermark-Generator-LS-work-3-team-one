@@ -33,13 +33,15 @@ var upload = function() {
 	        	if (data.textStatus == 'success') {
 	        		console.log('Successfully uploaded');
 	        		console.log(data.result);
+	        		// Определяем путь к файлу
+	        		path = 'users_img/' + data.result.minName + '?' + event.timeStamp;
 	        		// Проверка (картинка или водяной знак)
 	        		if (data.result.minName.indexOf('-img') + 1) {
-	        			// Если картинка - определяем путь к ней
-	        			path = 'users_img/' + data.result.minName + '?' + event.timeStamp;
 	        			// Добавляем путь соответствующему элементу
 	        			$('.img-display').attr({'src':path, 'alt':'Ваша картинка'});
-	        		};
+	        		} else if (data.result.minName.indexOf('-watermark') + 1) {
+	        			$('.watermark-display').attr({'src':path, 'alt':'Ваш водяной знак'});
+	        		}
 	        	} else {
 	        		console.log('Upload error');
 	        		console.log(data.result);
