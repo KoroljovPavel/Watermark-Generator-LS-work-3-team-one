@@ -1,7 +1,10 @@
 <?php
 session_start();
 
-$imgName = "../users_img/" . session_id() . "-img.jpg";
+include_once("./config.php");
+
+$imgName = $__config['path']['imgUpload'] . 'marged-' . $_SESSION["uploads"]["img"]["tmpName"];
+
 
 if (file_exists($imgName)) {
     // сбрасываем буфер вывода PHP, чтобы избежать переполнения памяти выделенной под скрипт
@@ -12,7 +15,8 @@ if (file_exists($imgName)) {
     // заставляем браузер показать окно сохранения файла
     header('Content-Description: File Transfer');
     header('Content-Type: application/octet-stream');
-    header('Content-Disposition: attachment; filename=' . basename($imgName));
+    header('Content-Disposition: attachment; filename=' 
+                    . $_SESSION["uploads"]["img"]["origName"]);
     header('Content-Transfer-Encoding: binary');
     header('Expires: 0');
     header('Cache-Control: must-revalidate');
@@ -27,5 +31,6 @@ if (file_exists($imgName)) {
     }
     exit();
 } else {
-    echo "Ошибочка вышла";
+    echo "Ошибочка вышла $imgName";
+
 }
