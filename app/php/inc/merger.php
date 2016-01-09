@@ -4,9 +4,9 @@ class merger {
     // Объявляем переменные класса
     private   $watermarkPath
             , $imagePath
-            , $watermarkOfsetX
-            , $watermarkOfsetY
-            , $watermarkTransparency
+            , $watermarkOfsetX = 0
+            , $watermarkOfsetY = 0
+            , $watermarkTransparency = 30
             ;
 
     // Публичные методы
@@ -35,6 +35,19 @@ class merger {
         }
         $this->watermarkTransparency = $transparency;
         return true;
+    }
+
+    public function setWatermarkOfsets($ofsetX, $ofsetY) {
+        $this->setWatermarkOfsetX($ofsetX);
+        $this->setWatermarkOfsetY($ofsetY);
+    }
+
+    public function setWatermarkOfsetX($ofsetX) {
+        $this->watermarkOfsetX = $ofsetX;
+    }
+
+    public function setWatermarkOfsetY($ofsetY) {
+        $this->watermarkOfsetY = $ofsetY;
     }
 
     public function merge($margedImagePath) {

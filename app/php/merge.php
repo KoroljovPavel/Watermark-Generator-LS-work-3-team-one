@@ -41,6 +41,8 @@ if (!$wmMerger->setWatermarkTransparency(30)) {
     exit();  
 }
 
+$wmMerger->setWatermarkOfsets(100, 300);
+
 if (!$wmMerger->merge($__config['path']['imgUpload'] . "marged-"
                 . $_SESSION["uploads"]["img"]["tmpName"])) {
     echo json_encode( array(
