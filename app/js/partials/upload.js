@@ -1,5 +1,7 @@
 var upload = function() {
 
+	// Для работы данного модуля используются методы плагина jquery.fileupload.js и модуля movement.js
+
 	// Определяем поля загрузки файлов
 	var mainImage = $('.img-input');
 		watermark = $('.watermark-input');
@@ -33,12 +35,18 @@ var upload = function() {
 	        	if (data.textStatus == 'success') {
 	        		console.log('Successfully uploaded');
 	        		console.log(data.result);
+	        		// Определяем путь к файлу
+	        		path = 'users_img/' + data.result.minName + '?' + event.timeStamp;
 	        		// Проверка (картинка или водяной знак)
 	        		if (data.result.minName.indexOf('-img') + 1) {
-	        			// Если картинка - определяем путь к ней
-	        			path = 'users_img/' + data.result.minName + '?' + event.timeStamp;
 	        			// Добавляем путь соответствующему элементу
 	        			$('.img-display').attr({'src':path, 'alt':'Ваша картинка'});
+	        		} else if (data.result.minName.indexOf('-watermark') + 1) {
+	        			$('.watermark-display').attr({'src':path, 'alt':'Ваш водяной знак'});
+	        			// Сбрасываем текущие координаты блока
+	        			$('.output__watermark-result').css('left', '0px');
+	        			$('.output__watermark-result').css('top', '0px');
+	        			movement.findPosition($('.output__watermark-result'));
 	        		};
 	        	} else {
 	        		console.log('Upload error');
@@ -48,6 +56,7 @@ var upload = function() {
 		});
 	};
 
+	// Публичные методы
 	return {
 		init: init
 	};
