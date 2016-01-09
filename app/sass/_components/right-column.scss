@@ -65,6 +65,12 @@
 	text-align: center;
 	height: inherit;
 	width: inherit;
+	display: table-cell;
+	margin: 0 auto;
+}
+.img-display{
+	display: inline-block;
+	margin: 0 auto;
 }
 .manipulation__image-upload{
 	margin-bottom: 23px;
