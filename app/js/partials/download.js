@@ -10,9 +10,6 @@ var download = function() {
     // Бдлок публичных методов
 
     var init = function() {
-        //$('body').append('<iframe id="jjsdhfbjsdhvfhsdgf">');
-        //iframeTransport =  $("#jjsdhfbjsdhvfhsdgf")
-        //console.log(iframeTransport);
         _setUpListners(); 
     };
 
@@ -22,9 +19,14 @@ var download = function() {
 
     var _downloadStart = function(eventObj) {
         eventObj.preventDefault();
-        $.ajax({url:"php/merge.php"}).success(function(data){ 
-            //iframeTransport.src = "php/merge.php";
-            window.location.href = 'php/download.php';
+        $.ajax({url:"php/merge.php", dataType: 'json'}).success(function(data){
+            if (data.status === "success")
+            {
+                window.location.href = 'php/download.php';
+            } else {
+                console.log(data);
+                alert("Произошла непредвиденная ошибка. Не удалось склеить файлы.");
+            }
         });
     };
 
