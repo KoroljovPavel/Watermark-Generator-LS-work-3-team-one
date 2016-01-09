@@ -30,6 +30,17 @@ if (!$wmMerger->setImage($__config['path']['imgUpload']
     exit();  
 }
 
+if (!$wmMerger->setWatermarkTransparency(30)) {
+    
+    echo json_encode( array(
+        'status' => 'error',                 
+        'errorId' => '1-5',
+        'errorText' => 'Invalid values of transparency'           
+        ), JSON_FORCE_OBJECT
+    );     
+    exit();  
+}
+
 if (!$wmMerger->merge($__config['path']['imgUpload'] . "marged-"
                 . $_SESSION["uploads"]["img"]["tmpName"])) {
     echo json_encode( array(

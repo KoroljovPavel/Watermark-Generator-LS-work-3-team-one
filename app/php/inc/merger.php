@@ -2,10 +2,11 @@
 
 class merger {
     // Объявляем переменные класса
-    private $watermarkPath
+    private   $watermarkPath
             , $imagePath
             , $watermarkOfsetX
             , $watermarkOfsetY
+            , $watermarkTransparency
             ;
 
     // Публичные методы
@@ -25,6 +26,15 @@ class merger {
         } else {
             return false;
         }
+    }
+
+    public function setWatermarkTransparency($transparency) {
+        if (!is_integer($transparency) ||
+                $transparency < 0 || $transparency > 100) {
+            return false;
+        }
+        $this->watermarkTransparency = $transparency;
+        return true;
     }
 
     public function merge($margedImagePath) {
@@ -47,8 +57,14 @@ class merger {
             $image = imagecreatefromjpeg($this->imagePath);
         }
 
-        imagecopy($image, $watermark, $this->watermarkOfsetX,
-            $this->watermarkOfsetY, 0, 0, $watermarkInfo[0], $watermarkInfo[1]);
+        imagesavealpha($image, true);
+        imagesavealpha($watermark, true);
+        imagealphablending($image, true);
+        imagealphablending($watermark, true);
+
+        imagecopymerge($image, $watermark, $this->watermarkOfsetX,
+            $this->watermarkOfsetY, 0, 0, $watermarkInfo[0], $watermarkInfo[1],
+            $this->watermarkTransparency);
         if ($imageInfo["mime"] == "image/png") {
             imagepng($image, $margedImagePath);
         } else {
