@@ -57,7 +57,7 @@
 	height: 535px;
 	overflow: hidden;
 	position: relative;
-	background: #ffffff;
+	background: url("../img/generator-back.jpg");
 }
 .output__image-result{
 	position: relative;
@@ -65,6 +65,12 @@
 	text-align: center;
 	height: inherit;
 	width: inherit;
+	display: table-cell;
+	margin: 0 auto;
+}
+.img-display{
+	display: inline-block;
+	margin: 0 auto;
 }
 .manipulation__image-upload{
 	margin-bottom: 23px;
@@ -79,6 +85,12 @@
     border: 1px solid #9eb2c0;
     border-radius: 5px;
     cursor: pointer;
+}
+.image-upload__inputs:active{
+	border: 1px solid #f97e76;
+}
+.watermark-upload__inputs:active{
+	border: 1px solid #f97e76;
 }
 .image-upload__btn, .watermark-upload__btn{
 	float: right;
