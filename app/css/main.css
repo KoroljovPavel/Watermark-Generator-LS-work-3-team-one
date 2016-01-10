@@ -220,15 +220,19 @@ ul {
   position: relative;
   height: inherit;
   width: inherit; }
-.img-display {
-  display: inline-block;
-  margin: 0 auto; }
+
 .output__image-result {
   position: absolute;
   top: 50%;
   left: 50%; }
+
+.img-display {
+  display: inline-block;
+  margin: 0 auto; }
+
 .output__watermark-result {
   position: absolute; }
+
 .manipulation__image-upload {
   margin-bottom: 23px; }
 
@@ -355,6 +359,13 @@ ul {
     height: 19px;
     background-position: -111px -63px; }
 
+.view__item-one.active {
+  outline: none;
+  background: url("../img/icons.png");
+  width: 19px;
+  height: 19px;
+  background-position: -111px -63px; }
+
 .view__item-two {
   background: url("../img/icons.png");
   background-repeat: no-repeat;
@@ -380,6 +391,13 @@ ul {
     width: 19px;
     height: 19px;
     background-position: -73px -74px; }
+
+.view__item-two.active {
+  outline: none;
+  background: url("../img/icons.png");
+  width: 19px;
+  height: 19px;
+  background-position: -73px -74px; }
 
 .manipulation__item_position-block--cells {
   display: none; }
