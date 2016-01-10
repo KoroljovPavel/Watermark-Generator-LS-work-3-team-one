@@ -6,7 +6,7 @@
 
 Watermark Generator — веб-сервис позволяющий производить наложение водяных знаков на другие изображения.
 
-Сервис имеет базовые настройки поп положению водяных знаков, прозрачногсти и пр. Более [подробно о возможностях сервиса](https://github.com/KoroljovPavel/Watermark-Generator-LS-work-3-team-one/wiki/%D0%92%D0%BE%D0%B7%D0%BC%D0%BE%D0%B6%D0%BD%D0%BE%D1%81%D1%82%D0%B8-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0-Watermark-Generator) можно ознакомиться в [Wiki проекта](https://github.com/KoroljovPavel/Watermark-Generator-LS-work-3-team-one/wiki/).
+Сервис имеет базовые настройки по положению водяных знаков, прозрачности и пр. Более [подробно о возможностях сервиса](https://github.com/KoroljovPavel/Watermark-Generator-LS-work-3-team-one/wiki/%D0%92%D0%BE%D0%B7%D0%BC%D0%BE%D0%B6%D0%BD%D0%BE%D1%81%D1%82%D0%B8-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0-Watermark-Generator) можно ознакомиться в [Wiki проекта](https://github.com/KoroljovPavel/Watermark-Generator-LS-work-3-team-one/wiki/).
 
 ## Содержание
 
@@ -51,7 +51,7 @@ $ gulp server-php
 ### Сборка версии для использования на внешнем сервере
 
 ```
-$git clone https://github.com/KoroljovPavel/Watermark-Generator-LS-work-3-team-one.git watermark-generator
+$ git clone https://github.com/KoroljovPavel/Watermark-Generator-LS-work-3-team-one.git watermark-generator
 $ cd watermark-generator
 $ npm i
 $ bower i
