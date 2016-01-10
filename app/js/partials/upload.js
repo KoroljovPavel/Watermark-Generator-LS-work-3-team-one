@@ -17,7 +17,7 @@ var upload = function() {
 	};
 
 	var _uploadImage = function(image, type) {
-
+		widthImage = 0, heightImage = 0,watermarkWidth = 0,	watermarkHeight = 0;
 		// Определяем GET параметр
 		var url = 'php/upload.php?fileType=' + type;
 		image.fileupload({ 
@@ -38,11 +38,42 @@ var upload = function() {
 	        		// Определяем путь к файлу
 	        		path = 'users_img/' + data.result.minName + '?' + event.timeStamp;
 	        		// Проверка (картинка или водяной знак)
+
 	        		if (data.result.minName.indexOf('-img') + 1) {
 	        			// Добавляем путь соответствующему элементу
 	        			$('.img-display').attr({'src':path, 'alt':'Ваша картинка'});
-	        		} else if (data.result.minName.indexOf('-watermark') + 1) {
-	        			$('.watermark-display').attr({'src':path, 'alt':'Ваш водяной знак'});
+
+						// Записываем оригинальные размеры изображения
+						widthImage = data.result.imgSize['width'];
+						heightImage = data.result.imgSize['height'];
+
+
+
+					} else if (data.result.minName.indexOf('-watermark') + 1) {
+						$('.watermark-display').attr({'src': path, 'alt': 'Ваш водяной знак'});
+
+						// Записываем оригинальные размеры изображения
+						watermarkWidth = data.result.imgSize['width'];
+						watermarkHeight = data.result.imgSize['height'];
+						// Вычисляем масштабы
+						scaleWidth = widthImage/$('.img-display').width();
+						scaleHeight = heightImage/$('.img-display').height();
+
+						// Применям масштаб к ватермарку
+						if(widthImage <= 652 && heightImage <= 535){
+							$('.watermark-display').css('width', watermarkWidth);
+							$('.watermark-display').css('height', watermarkHeight);
+						}else if(scaleWidth > scaleHeight){
+							$('.watermark-display').css('width', watermarkWidth/scaleHeight);
+							$('.watermark-display').css('height', watermarkHeight/scaleHeight);
+						}else{
+							$('.watermark-display').css('width', watermarkWidth/scaleWidth);
+							$('.watermark-display').css('height', watermarkHeight/scaleWidth);
+						};
+
+
+
+
 	        			// Сбрасываем текущие координаты блока
 	        			$('.output__watermark-result').css('left', '0px');
 	        			$('.output__watermark-result').css('top', '0px');
