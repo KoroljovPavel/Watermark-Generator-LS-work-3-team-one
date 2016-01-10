@@ -17,4 +17,6 @@
 //= partials/movement.js
 
 //= partials/opacity.js
+//= partials/view-position.js
+
 

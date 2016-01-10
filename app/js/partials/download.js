@@ -19,7 +19,16 @@ var download = function() {
 
     var _downloadStart = function(eventObj) {
         eventObj.preventDefault();
-        $.ajax({url:"php/merge.php", dataType: 'json'}).success(function(data){
+        $.ajax({url:"php/merge.php", 
+            data: {
+                ofsetX: $("#coordinate-cell-x").val(),
+                ofsetY: $("#coordinate-cell-y").val(),
+                opacity: 30
+            }, 
+            type: "post", dataType: 'json'}
+            )
+
+        .success(function(data){
             if (data.status === "success")
             {
                 window.location.href = 'php/download.php';

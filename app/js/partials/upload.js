@@ -41,7 +41,7 @@ var upload = function() {
 	        		if (data.result.minName.indexOf('-img') + 1) {
 	        			// Добавляем путь соответствующему элементу
 	        			$('.img-display').attr({'src':path, 'alt':'Ваша картинка'});
-	        		} else if (data.result.minName.indexOf('-watermark') + 1) {
+					} else if (data.result.minName.indexOf('-watermark') + 1) {
 	        			$('.watermark-display').attr({'src':path, 'alt':'Ваш водяной знак'});
 	        			// Сбрасываем текущие координаты блока
 	        			$('.output__watermark-result').css('left', '0px');
