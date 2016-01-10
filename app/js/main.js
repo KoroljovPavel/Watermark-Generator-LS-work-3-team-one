@@ -16,3 +16,5 @@
 
 //= partials/movement.js
 
+//= partials/view-position.js
+
