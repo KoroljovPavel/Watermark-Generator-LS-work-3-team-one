@@ -45,40 +45,32 @@ var upload = function() {
 
 						// Записываем оригинальные размеры изображения
 						widthImage = data.result.imgSize['width'];
-						heightImage = data.result.imgSize['height'];
-
-
 
 					} else if (data.result.minName.indexOf('-watermark') + 1) {
-						$('.watermark-display').attr({'src': path, 'alt': 'Ваш водяной знак'});
+	        			$('.watermark-display').attr({'src':path, 'alt':'Ваш водяной знак'});
 
 						// Записываем оригинальные размеры изображения
 						watermarkWidth = data.result.imgSize['width'];
 						watermarkHeight = data.result.imgSize['height'];
-						// Вычисляем масштабы
-						scaleWidth = widthImage/$('.img-display').width();
-						scaleHeight = heightImage/$('.img-display').height();
-
-						// Применям масштаб к ватермарку
-						if(widthImage <= 652 && heightImage <= 535){
-							$('.watermark-display').css('width', watermarkWidth);
-							$('.watermark-display').css('height', watermarkHeight);
-						}else if(scaleWidth > scaleHeight){
-							$('.watermark-display').css('width', watermarkWidth/scaleHeight);
-							$('.watermark-display').css('height', watermarkHeight/scaleHeight);
-						}else{
-							$('.watermark-display').css('width', watermarkWidth/scaleWidth);
-							$('.watermark-display').css('height', watermarkHeight/scaleWidth);
-						};
-
-
-
 
 	        			// Сбрасываем текущие координаты блока
 	        			$('.output__watermark-result').css('left', '0px');
 	        			$('.output__watermark-result').css('top', '0px');
 	        			movement.findPosition($('.output__watermark-result'));
 	        		};
+
+					// Вычисляем масштаб
+					var scale = widthImage/$('.img-display').width();
+
+					// Применям масштаб к ватермарку
+					if(widthImage <= 652 && heightImage <= 535) {
+						$('.watermark-display').css('width', watermarkWidth);
+						$('.watermark-display').css('height', watermarkHeight);
+					}else{
+						$('.watermark-display').css('width', watermarkWidth/scale);
+						$('.watermark-display').css('height', watermarkHeight/scale);
+					};
+
 	        	} else {
 	        		console.log('Upload error');
 	        		console.log(data.result);

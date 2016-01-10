@@ -1,5 +1,6 @@
 <?php
 session_start();
+
 include_once("./config.php");
 
 include_once("./inc/merger.php");
@@ -29,7 +30,7 @@ if (!$wmMerger->setImage($__config['path']['imgUpload']
     exit();  
 }
 
-if (!$wmMerger->setWatermarkTransparency(30)) {
+if (!$wmMerger->setWatermarkTransparency((int) $_POST['opacity'])) {
     echo json_encode( array(
         'status' => 'error',
         'errorId' => '1-5',
@@ -39,7 +40,8 @@ if (!$wmMerger->setWatermarkTransparency(30)) {
     exit();
 }
 
-$wmMerger->setWatermarkOfsets(100, 300);
+
+$wmMerger->setWatermarkOfsets((int) $_POST['ofsetX'], (int) $_POST['ofsetY']);
 
 if (!$wmMerger->merge($__config['path']['imgUpload'] . "marged-"
                 . $_SESSION["uploads"]["img"]["tmpName"])) {
