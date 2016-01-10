@@ -216,18 +216,18 @@ ul {
   position: relative;
   background: url("../img/generator-back.jpg"); }
 
-.output__image-result {
+.generator-result {
   position: relative;
-  vertical-align: middle;
-  text-align: center;
   height: inherit;
-  width: inherit;
-  display: table-cell;
-  margin: 0 auto; }
+  width: inherit; }
 
-.img-display {
-  display: inline-block;
-  margin: 0 auto; }
+.output__image-result {
+  position: absolute;
+  top: 50%;
+  left: 50%; }
+
+.output__watermark-result {
+  position: absolute; }
 
 .manipulation__image-upload {
   margin-bottom: 23px; }
@@ -388,7 +388,8 @@ ul {
   float: right; }
 
 .coordinates {
-  display: inline-block; }
+  display: inline-block;
+  margin-bottom: 0; }
 
 .coordinate__input {
   width: 45px;
@@ -620,14 +621,12 @@ body {
   background-size: cover;
   background-position: center center; }
 
-.clearfix {
-  display: block; }
-  .clearfix:after {
-    content: '';
-    display: table;
-    height: 0;
-    clear: both;
-    visibility: hidden; }
+.clearfix:after {
+  content: '';
+  display: table;
+  height: 0;
+  clear: both;
+  visibility: hidden; }
 
 .wrapper {
   min-height: 100%;
