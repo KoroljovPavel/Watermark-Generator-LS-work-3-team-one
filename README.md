@@ -4,10 +4,14 @@
 
 [![Build status](https://img.shields.io/badge/Version-0.1%20--%20Alpha-yellow.svg)](https://github.com/KoroljovPavel/Watermark-Generator-LS-work-3-team-one)
 
+Watermark Generator — веб-сервис позволяющий производить наложение водяных знаков на другие изображения.
+
+Сервис имеет базовые настройки по положению водяных знаков, прозрачности и пр. Более [подробно о возможностях сервиса](https://github.com/KoroljovPavel/Watermark-Generator-LS-work-3-team-one/wiki/%D0%92%D0%BE%D0%B7%D0%BC%D0%BE%D0%B6%D0%BD%D0%BE%D1%81%D1%82%D0%B8-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0-Watermark-Generator) можно ознакомиться в [Wiki проекта](https://github.com/KoroljovPavel/Watermark-Generator-LS-work-3-team-one/wiki/).
+
 ## Содержание
 
+* [Кратко о проекте](#watermark-generator)
 * [Требования проекта](#Требования-проекта)
-* [Кратко о проекте](#Кратко-о-проекте)
 * [Быстрый старт](#Быстрый-старт)
 * [Команда](#Команда)
 * [История изменений](#История-изменений)
@@ -26,12 +30,6 @@
 ### К браузерам
 
 [![IE7 Not support](https://img.shields.io/badge/IE7-not_support-red.svg)](http://browsehappy.com/) [![IE8 semisupport](https://img.shields.io/badge/IE8-semisupport-yellow.svg)](http://browsehappy.com/) [![IE9+ Full support](https://img.shields.io/badge/IE9+-support-green.svg)](http://browsehappy.com/) [![Chrome support](https://img.shields.io/badge/Chrome_(last_3_version)+-support-green.svg)](http://browsehappy.com/) [![Firefox support](https://img.shields.io/badge/Firefox_(last_3_version)+-support-green.svg)](http://browsehappy.com/) [![Opera support](https://img.shields.io/badge/Opera_(last_3_version)+-support-green.svg)](http://browsehappy.com/) 
-
-## Кратко о проекте
-
-Watermark Generator — веб-сервис позволяющий производить наложение водяных знаков на другие изображения.
-
-Сервис имеет базовые настройки поп положению водяных знаков, прозрачногсти и пр. Более [подробно о возможностях сервиса](https://github.com/KoroljovPavel/Watermark-Generator-LS-work-3-team-one/wiki/%D0%92%D0%BE%D0%B7%D0%BC%D0%BE%D0%B6%D0%BD%D0%BE%D1%81%D1%82%D0%B8-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0-Watermark-Generator) можно ознакомиться в [Wiki проекта](https://github.com/KoroljovPavel/Watermark-Generator-LS-work-3-team-one/wiki/).
 
 ## Быстрый старт
 
@@ -53,7 +51,7 @@ $ gulp server-php
 ### Сборка версии для использования на внешнем сервере
 
 ```
-$git clone https://github.com/KoroljovPavel/Watermark-Generator-LS-work-3-team-one.git watermark-generator
+$ git clone https://github.com/KoroljovPavel/Watermark-Generator-LS-work-3-team-one.git watermark-generator
 $ cd watermark-generator
 $ npm i
 $ bower i
