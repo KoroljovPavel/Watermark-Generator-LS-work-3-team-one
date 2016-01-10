@@ -1,6 +1,6 @@
 //= ../bower/jquery/dist/jquery.min.js
 
-//= jquery.ui.js
+//= ../bower/jquery-ui/jquery-ui.js
 
 //= ../bower/blueimp-file-upload/js/vendor/jquery.ui.widget.js
 
@@ -15,4 +15,6 @@
 //= ./partials/download.js
 
 //= partials/movement.js
+
+//= partials/opacity.js
 

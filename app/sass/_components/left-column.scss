@@ -38,88 +38,92 @@
 	content: "";
 	background: url("../img/socials.png");
 	width: 15px;
-    height: 27px;
-    background-position: -5px -5px;
-    position: absolute;
-    margin-top: 7px;
-    margin-left: 10px;
+	height: 27px;
+	background-position: -5px -5px;
+	position: absolute;
+	margin-top: 7px;
+	margin-left: 10px;
 }
 .social__btn--fb:hover:before{
-    background: url("../img/socials.png");
-    width: 15px;
-    height: 27px;
-    background-position: -30px -5px;
-    position: absolute;
-    margin-top: 7px;
-    margin-left: 10px;
+	background: url("../img/socials.png");
+	width: 15px;
+	height: 27px;
+	background-position: -30px -5px;
+	position: absolute;
+	margin-top: 7px;
+	margin-left: 10px;
 }
 .social__btn--tw:before{
 	content: "";
 	background: url("../img/socials.png");
 	width: 28px;
-    height: 22px;
-    background-position: -41px -47px;
-    position: absolute;
-    margin-top: 10px;
-    margin-left: 10px;
+	height: 22px;
+	background-position: -41px -47px;
+	position: absolute;
+	margin-top: 10px;
+	margin-left: 10px;
 }
 .social__btn--tw:hover:before{
 	content: "";
 	background: url("../img/socials.png");
 	width: 28px;
-    height: 22px;
-    background-position: -91px -5px;
-    position: absolute;
-    margin-top: 10px;
-    margin-left: 10px;
+	height: 22px;
+	background-position: -91px -5px;
+	position: absolute;
+	margin-top: 10px;
+	margin-left: 10px;
 }
 .social__btn--vk:before{
 	content: "";
 	background: url("../img/socials.png");
 	width: 32px;
-    height: 18px;
-    background-position: -91px -37px;
-    position: absolute;
-    margin-top: 15px;
-    margin-left: 5px;
+	height: 18px;
+	background-position: -91px -37px;
+	position: absolute;
+	margin-top: 15px;
+	margin-left: 5px;
 }
 .social__btn--vk:hover:before{
 	content: "";
 	background: url("../img/socials.png");
 	width: 32px;
-    height: 18px;
-    background-position: -79px -65px;
-    position: absolute;
-    margin-top: 15px;
-    margin-left: 5px;
+	height: 18px;
+	background-position: -79px -65px;
+	position: absolute;
+	margin-top: 15px;
+	margin-left: 5px;
 }
 .social__btn-open{
 	float: right;
 	width: 40px;
 	height: 40px;
 	background: #d4d2d1;
-    border: none;
-    position: absolute;
-    &:after{
-	    content: "";
+	border: none;
+	position: absolute;
+	&:after{
+		content: "";
 		background: url("../img/socials.png");
 		width: 26px;
-    	height: 32px;
-    	background-position: -55px -5px;
-	    position: absolute;
-	    margin-top: 20px;
-	    margin-top: -18px;
-    	margin-left: -10px;
-    }
-    &:hover:after{
-    	content: "";
+		height: 32px;
+		background-position: -55px -5px;
+		position: absolute;
+		margin-top: 20px;
+		margin-top: -18px;
+		margin-left: -10px;
+	}
+	&:hover:after{
+		content: "";
 		background: url("../img/socials.png");
 		width: 26px;
-    	height: 32px;
-    	background-position: -5px -47px;
-	    position: absolute;
-	    margin-top: 20px;
-	    margin-top: -18px;
-    	margin-left: -10px;
-    }
+		height: 32px;
+		background-position: -5px -47px;
+		position: absolute;
+		margin-top: 20px;
+		margin-top: -18px;
+		margin-left: -10px;
+	}
+}
+.watermark-display{
+	opacity: .5;
+	display: block;
 }

@@ -1,5 +1,14 @@
 @import "../bower/normalize-css/normalize.css";
-
+html {
+	font-size: 14px;
+}
+body {
+	background: url("../img/background.jpg");
+	background-attachment: fixed;
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center center;
+}
 
 
 @import "../css/icons-sprite.css";
@@ -13,19 +22,10 @@
 
 @import "_components/left-column";
 @import "_components/right-column";
+@import "_components/slider.scss";
 
 
 
-html {
-    font-size: 14px;
-}
-body {
-	background: url("../img/background.jpg");
-	background-attachment: fixed;
-	background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center center;
-}
 .clearfix {
 	@include clearfix;
 }
