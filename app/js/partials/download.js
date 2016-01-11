@@ -19,10 +19,14 @@ var download = function() {
 
     var _downloadStart = function(eventObj) {
         eventObj.preventDefault();
+        var actionType = $(".view__item-one").hasClass("active") ? "tiling" : "stamp";
         $.ajax({url:"php/merge.php", 
             data: {
+                type: actionType,
                 ofsetX: $("#coordinate-cell-x").val(),
                 ofsetY: $("#coordinate-cell-y").val(),
+                paddingX: $("#coordinate-line-x").val(),
+                paddingY: $("#coordinate-line-y").val(),
                 opacity: 30
             }, 
             type: "post", dataType: 'json'}
