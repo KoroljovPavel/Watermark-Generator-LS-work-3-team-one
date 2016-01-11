@@ -53,11 +53,12 @@ var upload = function() {
 						watermarkWidth = data.result.imgSize['width'];
 						watermarkHeight = data.result.imgSize['height'];
 
-	        			// Сбрасываем текущие координаты блока
-	        			$('.output__watermark-result').css('left', '0px');
-	        			$('.output__watermark-result').css('top', '0px');
-	        			movement.findPosition($('.output__watermark-result'));
 	        		};
+
+	        	// Сбрасываем текущие координаты блока
+	        	$('.output__watermark-result').css('left', '0px');
+	        	$('.output__watermark-result').css('top', '0px');
+	        	movement.findPosition($('.output__watermark-result'));
 
 					// Вычисляем масштаб
 					var scale = widthImage/$('.img-display').width();

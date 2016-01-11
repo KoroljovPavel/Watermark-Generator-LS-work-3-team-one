@@ -9,6 +9,7 @@ var movement = function() {
 
 	var init = function() {
 		_setUpListners();
+		_changePositionDrag();
 	};
 
 	// Вешаем обработчики
@@ -37,9 +38,9 @@ var movement = function() {
 	var _changePositionInput = function(event) {
 		event.preventDefault();
 		if ($(this).hasClass('x-pos')) {
-			image.css('left', $(this).val() + 'px');	
+			image.watermark('coordinate_x', $(this).val());	
 		} else {
-			image.css('top', -$(this).val() + 'px');
+			image.watermark('coordinate_y', $(this).val());
 		};
 	};
 
@@ -95,12 +96,24 @@ var movement = function() {
 		};
 	};
 
+	var _changePositionDrag = function() {
+		image.draggable({
+	        	drag: function(event, ui) {
+				console.log(ui.position.left);
+				$('.x-pos').val(ui.position.left);
+				$('.y-pos').val(ui.position.top);
+				$('.x-pos').trigger('change');
+				$('.y-pos').trigger('change');
+			}
+		});
+	};
+
 	// Запись текущих координат в инпуты
 	var findPosition = function(block) {
 		left = block.css('left');
 		top = block.css('top');
 		$('.x-pos').val(left.substr(0, left.length - 2));
-		$('.y-pos').val(-top.substr(0, top.length - 2));
+		$('.y-pos').val(top.substr(0, top.length - 2));
 	};
 
 	// Публичные методы
