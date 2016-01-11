@@ -61,15 +61,16 @@ var upload = function() {
 	        	movement.findPosition($('.output__watermark-result'));
 
 					// Вычисляем масштаб
-					var scale = widthImage/$('.img-display').width();
-
+					var scale = $('.img-display').width()/widthImage;
 					// Применям масштаб к ватермарку
 					if(widthImage <= 652 && heightImage <= 535) {
-						$('.watermark-display').css('width', watermarkWidth);
-						$('.watermark-display').css('height', watermarkHeight);
+						$('.watermark-display').watermark('size_width', watermarkWidth);
+						$('.watermark-display').watermark('size_height', watermarkHeight);
 					}else{
-						$('.watermark-display').css('width', watermarkWidth/scale);
-						$('.watermark-display').css('height', watermarkHeight/scale);
+						$('.watermark-display').watermark({scale: scale})
+								.watermark('size_width', watermarkWidth);
+						$('.watermark-display').watermark({scale: scale})
+								.watermark('size_height', watermarkHeight);
 					};
 
 	        	} else {
