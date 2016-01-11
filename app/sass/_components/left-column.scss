@@ -1,4 +1,129 @@
 .container__left-column{
 	position: absolute;
-	top: 100px;
+	top: 90px;
+}
+.language__list{
+	padding: 0;
+}
+.language__btn{
+	padding: 0;
+	width: 43px;
+	height: 35px;
+	text-transform: uppercase;
+	color: #8e9298;
+	font-family: "segoeui", sans-serif;
+	font-weight: 300;
+	font-size: 20px;
+	background: #d4d2d1;
+	&:hover{
+		color: #444a53;
+	}
+}
+.social__list{
+	ul{
+		float: left;
+		padding: 0;
+		margin:0;
+	}
+}
+.social__item,.social__btn--fb,.social__btn--tw,.social__btn--vk{
+	width: 43px;
+	height: 41px;
+	background: #d4d2d1;
+}
+.social__btn--fb,.social__btn--tw,.social__btn--vk{
+	display: block;
+}
+.social__btn--fb:before{
+	content: "";
+	background: url("../img/socials.png");
+	width: 15px;
+	height: 27px;
+	background-position: -5px -5px;
+	position: absolute;
+	margin-top: 7px;
+	margin-left: 10px;
+}
+.social__btn--fb:hover:before{
+	background: url("../img/socials.png");
+	width: 15px;
+	height: 27px;
+	background-position: -30px -5px;
+	position: absolute;
+	margin-top: 7px;
+	margin-left: 10px;
+}
+.social__btn--tw:before{
+	content: "";
+	background: url("../img/socials.png");
+	width: 28px;
+	height: 22px;
+	background-position: -41px -47px;
+	position: absolute;
+	margin-top: 10px;
+	margin-left: 10px;
+}
+.social__btn--tw:hover:before{
+	content: "";
+	background: url("../img/socials.png");
+	width: 28px;
+	height: 22px;
+	background-position: -91px -5px;
+	position: absolute;
+	margin-top: 10px;
+	margin-left: 10px;
+}
+.social__btn--vk:before{
+	content: "";
+	background: url("../img/socials.png");
+	width: 32px;
+	height: 18px;
+	background-position: -91px -37px;
+	position: absolute;
+	margin-top: 15px;
+	margin-left: 5px;
+}
+.social__btn--vk:hover:before{
+	content: "";
+	background: url("../img/socials.png");
+	width: 32px;
+	height: 18px;
+	background-position: -79px -65px;
+	position: absolute;
+	margin-top: 15px;
+	margin-left: 5px;
+}
+.social__btn-open{
+	float: right;
+	width: 40px;
+	height: 40px;
+	background: #d4d2d1;
+	border: none;
+	position: absolute;
+	&:after{
+		content: "";
+		background: url("../img/socials.png");
+		width: 26px;
+		height: 32px;
+		background-position: -55px -5px;
+		position: absolute;
+		margin-top: 20px;
+		margin-top: -18px;
+		margin-left: -10px;
+	}
+	&:hover:after{
+		content: "";
+		background: url("../img/socials.png");
+		width: 26px;
+		height: 32px;
+		background-position: -5px -47px;
+		position: absolute;
+		margin-top: 20px;
+		margin-top: -18px;
+		margin-left: -10px;
+	}
+}
+.watermark-display{
+	opacity: .5;
+	display: block;
 }

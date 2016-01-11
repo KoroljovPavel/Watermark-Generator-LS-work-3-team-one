@@ -21,20 +21,24 @@
             </li>
           </ul>
         </div>
-        <div class="social__list">
+        <div class="social__list clearfix">
           <ul>
-            <li class="social__item"><a href="#" class="social__btn--fb">Facebook</a></li>
-            <li class="social__item"><a href="#" class="social__btn--tw">Twitter</a></li>
-            <li class="social__item"><a href="#" class="social__btn--vk">Vkontakte</a></li>
+            <li class="social__item"><a href="#" class="social__btn--fb"></a></li>
+            <li class="social__item"><a href="#" class="social__btn--tw"></a></li>
+            <li class="social__item"><a href="#" class="social__btn--vk"></a></li>
           </ul>
-          <button class="social__btn-open social__btn-show">Like</button>
+          <button class="social__btn-open social__btn-show"></button>
         </div>
       </div>
       <div class="container__right-column clearfix">
         <div class="container__generator">
           <h1 class="generator__header">Генератор водяных знаков</h1>
           <div class="generator__output">
-            <div class="output__image-result"></div>
+            <div class="generator-result">
+              <div class="output__image-result"><img src="" alt="" class="img-display">
+                <div class="output__watermark-result"><img src="" alt="" class="watermark-display"></div>
+              </div>
+            </div>
           </div>
         </div>
         <div class="container__manipulation">
@@ -43,7 +47,7 @@
             <div class="image-upload__wrap">
               <label class="manipulation__label image-upload__label">Исходное изображение</label>
               <div class="image-upload__inputs"><span class="image-upload__btn"></span>
-                <input id="file-upload" type="file" name="file-image" class="image-upload__upload">
+                <input id="image-upload" type="file" name="file-image" class="image-upload__upload">
                 <input type="text" placeholder="Image.jpg" class="image-upload__upload-fake">
               </div>
             </div>
@@ -52,7 +56,7 @@
             <div class="watermark-upload__wrap">
               <label class="manipulation__label watermark-upload__label">Водяной знак</label>
               <div class="watermark-upload__inputs"><span class="watermark-upload__btn"></span>
-                <input id="file-upload" type="file" name="file-image" class="watermark-upload__upload">
+                <input id="watermark-upload" type="file" name="file-image" class="watermark-upload__upload">
                 <input type="text" placeholder="Image.png" class="watermark-upload__upload-fake">
               </div>
             </div>
@@ -66,7 +70,7 @@
                   <button class="view__item view__item-two"></button>
                 </div>
               </div>
-              <div class="manipulation__item_position-block--cells">
+              <div class="manipulation__item_position-block--cells clearfix">
                 <div class="manipulation__item_position-move">
                   <table class="manipulation__item_position-table">
                     <tbody class="manipulation__item_position-body">
@@ -91,7 +95,7 @@
                 <div class="manipulation__item_position-coordinates">
                   <div class="position__coordinates position__coordinates-one">
                     <p class="coordinates">X</p>
-                    <input id="coordinate-x" type="text" class="coordinate__input coordinate__input-x">
+                    <input id="coordinate-cell-x" type="text" value="0" class="coordinate__input coordinate__input-x">
                     <div class="coordinate__arrows">
                       <button class="coordinate__arrow coordinate__arrow-up"></button>
                       <button class="coordinate__arrow coordinate__arrow-down"></button>
@@ -99,7 +103,7 @@
                   </div>
                   <div class="position__coordinates position__coordinates-two">
                     <p class="coordinates">Y</p>
-                    <input id="coordinate-y" type="text" class="coordinate__input coordinate__input-y">
+                    <input id="coordinate-cell-y" type="text" value="0" class="coordinate__input coordinate__input-y">
                     <div class="coordinate__arrows">
                       <button class="coordinate__arrow coordinate__arrow-up"></button>
                       <button class="coordinate__arrow coordinate__arrow-down"></button>
@@ -107,7 +111,7 @@
                   </div>
                 </div>
               </div>
-              <div class="manipulation__item_position-block--lines">
+              <div class="manipulation__item_position-block--lines clearfix">
                 <div class="manipulation__item_position-move">
                   <table class="manipulation__item_position-table">
                     <tbody class="manipulation__item_position-body">
@@ -132,14 +136,14 @@
                 </div>
                 <div class="manipulation__item_position-coordinates">
                   <div class="position__coordinates position__coordinates-one">
-                    <input id="coordinate-x" type="text" class="coordinate__input coordinate__input-x">
+                    <input id="coordinate-line-x" type="text" value="0" class="coordinate__input coordinate__input-x">
                     <div class="coordinate__arrows">
                       <button class="coordinate__arrow coordinate__arrow-up"></button>
                       <button class="coordinate__arrow coordinate__arrow-down"></button>
                     </div>
                   </div>
                   <div class="position__coordinates position__coordinates-two">
-                    <input id="coordinate-y" type="text" class="coordinate__input coordinate__input-y">
+                    <input id="coordinate-line-y" type="text" value="0" class="coordinate__input coordinate__input-y">
                     <div class="coordinate__arrows">
                       <button class="coordinate__arrow coordinate__arrow-up"></button>
                       <button class="coordinate__arrow coordinate__arrow-down"></button>

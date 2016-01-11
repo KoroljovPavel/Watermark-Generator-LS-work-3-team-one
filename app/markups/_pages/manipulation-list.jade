@@ -5,36 +5,36 @@ form.manipulation__list
 			div.view__list
 				button.view__item.view__item-one
 				button.view__item.view__item-two
-		div.manipulation__item_position-block--cells
+		div.manipulation__item_position-block--cells.clearfix
 			div.manipulation__item_position-move
 				table.manipulation__item_position-table
 					tbody.manipulation__item_position-body
 						tr.position__line
-							td.position__cell
-							td.position__cell
-							td.position__cell
+							td.position__cell.cell1
+							td.position__cell.cell2
+							td.position__cell.cell3
 						tr.position__line
-							td.position__cell
-							td.position__cell
-							td.position__cell
+							td.position__cell.cell4
+							td.position__cell.cell5
+							td.position__cell.cell6
 						tr.position__line
-							td.position__cell
-							td.position__cell
-							td.position__cell
+							td.position__cell.cell7
+							td.position__cell.cell8
+							td.position__cell.cell9
 			div.manipulation__item_position-coordinates
 				div.position__coordinates.position__coordinates-one
 					p.coordinates X
-					input#coordinate-x.coordinate__input.coordinate__input-x(type='text')
+					input#coordinate-cell-x.coordinate__input.coordinate__input-x.x-pos(type='text' value="0")
 					div.coordinate__arrows
-						button.coordinate__arrow.coordinate__arrow-up
-						button.coordinate__arrow.coordinate__arrow-down
+						button.coordinate__arrow.coordinate__arrow-up.x-up
+						button.coordinate__arrow.coordinate__arrow-down.x-down
 				div.position__coordinates.position__coordinates-two
 					p.coordinates Y
-					input#coordinate-y.coordinate__input.coordinate__input-y(type='text')
+					input#coordinate-cell-y.coordinate__input.coordinate__input-y.y-pos(type='text' value="0")
 					div.coordinate__arrows
-						button.coordinate__arrow.coordinate__arrow-up
-						button.coordinate__arrow.coordinate__arrow-down
-		div.manipulation__item_position-block--lines
+						button.coordinate__arrow.coordinate__arrow-up.y-up
+						button.coordinate__arrow.coordinate__arrow-down.y-down
+		div.manipulation__item_position-block--lines.clearfix
 			div.manipulation__item_position-move
 				table.manipulation__item_position-table
 					tbody.manipulation__item_position-body
@@ -55,21 +55,20 @@ form.manipulation__list
 					span.position-lines.position-lines-y
 			div.manipulation__item_position-coordinates
 				div.position__coordinates.position__coordinates-one
-					input#coordinate-x.coordinate__input.coordinate__input-x(type='text')
+					input#coordinate-line-x.coordinate__input.coordinate__input-x(type='text' value="0")
 					div.coordinate__arrows
 						button.coordinate__arrow.coordinate__arrow-up
 						button.coordinate__arrow.coordinate__arrow-down
 				div.position__coordinates.position__coordinates-two
-					input#coordinate-y.coordinate__input.coordinate__input-y(type='text')
+					input#coordinate-line-y.coordinate__input.coordinate__input-y(type='text' value="0")
 					div.coordinate__arrows
 						button.coordinate__arrow.coordinate__arrow-up
 						button.coordinate__arrow.coordinate__arrow-down
 	div.manipulation__item.manipulation__item_image-opacity
-		label.manipulation__label.position__label Прозрачность
-		div.opacity-slider
-			div#slider.opacity-slider__range
-				span.opacity-slider__toggle
+		div.manipulation__item_image-opacity_header
+			label.manipulation__label.position__label Прозрачность
+		div#slider.opacity-slider__range
 	div.manipulation__item.manipulation__item_buttons.clearfix
 
 		button.manipulation__btn-reset(type='reset') Сброс
-		button.manipulation__btn-submit(type='submit') Скачать
+		button.manipulation__btn-submit.downloadBtn(type='submit') Скачать

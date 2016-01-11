@@ -189,3 +189,9 @@ echo json_encode( array(
             )            
         ), JSON_FORCE_OBJECT
     );
+
+// Сохраняем данные об изображении в сессии
+$_SESSION["uploads"][$fileType]["origName"] = $_FILES[$fileType]['name'];
+$_SESSION["uploads"][$fileType]["tmpName"] = $imgs['orig']['name'];
+$_SESSION["uploads"][$fileType]["width"] = $fileInfo[0];
+$_SESSION["uploads"][$fileType]["height"] = $fileInfo[1];

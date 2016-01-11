@@ -14,10 +14,20 @@ var gulp = require('gulp'),
     browserSync = require("browser-sync"),
     rimraf = require('rimraf'),
     php = require('gulp-connect-php'),
+    plumber = require('gulp-plumber'),
     reload = browserSync.reload;
 
 var path = {
-    dist: { //Тут мы укажем куда складывать готовые после сборки файлы
+    prod:{
+        jade: 'prod/',
+        js: 'prod/js',
+        css: 'prod/css',
+        img: 'prod/img',
+        fonts: 'prod/fonts',
+        php: 'prod/php',
+        users_img: 'prod/users_img'
+    },
+    dist: {
         jade: 'dist/',
         js: 'dist/js/',
         css: 'dist/css/',
@@ -28,8 +38,9 @@ var path = {
 
     },
     src: { //Пути откуда брать исходники
-        jade: 'app/markups/index.jade',
+        jade: 'app/markups/*.jade',
         js: 'app/js/main.js',//В стилях и скриптах нам понадобятся только main файлы
+        jsAll: 'app/js/partials/*.js',
         style: 'app/sass/main.scss',
         img: 'app/img/**/*.*', //Синтаксис img/**/*.* означает - взять все файлы всех расширений из папки и из вложенных каталогов
         fonts: 'app/fonts/**/*.*',
@@ -84,19 +95,17 @@ gulp.task('clean', function (cb) {
     rimraf(path.clean, cb);
 });
 
-
 gulp.task('js:dist', function () {
     gulp.src(path.src.js) //Найдем наш main файл
+        .pipe(plumber())
         .pipe(rigger()) //Прогоним через rigger
-        .pipe(sourcemaps.init()) //Инициализируем sourcemap
-        .pipe(uglify()) //Сожмем наш js
-        .pipe(sourcemaps.write()) //Пропишем карты
         .pipe(gulp.dest(path.dist.js)) //Выплюнем готовый файл в dist
         .pipe(reload({stream: true})); //И перезагрузим сервер
 });
 
 gulp.task('style:dist', function () {
     gulp.src(path.src.style) //Выберем наш main.scss
+        .pipe(plumber())
         .pipe(sourcemaps.init()) //То же самое что и с js
         .pipe(sass()) //Скомпилируем
         .pipe(prefixer()) //Добавим вендорные префиксы
@@ -108,13 +117,15 @@ gulp.task('style:dist', function () {
 
 gulp.task('jade:dist', function(){
   gulp.src(path.src.jade)
-    .pipe(jade())
+    .pipe(plumber())
+    .pipe(jade({pretty: true}))
     .pipe(gulp.dest(path.dist.jade))
     .pipe(reload({stream: true}));
 });
 
 gulp.task('image:dist', function () {
     gulp.src(path.src.img) //Выберем наши картинки
+        .pipe(plumber())
         .pipe(imagemin({ //Сожмем их
             progressive: true,
             svgoPlugins: [{removeViewBox: false}],
@@ -127,11 +138,13 @@ gulp.task('image:dist', function () {
 
 gulp.task('fonts:dist', function() {
     gulp.src(path.src.fonts)
+        .pipe(plumber())
         .pipe(gulp.dest(path.dist.fonts))
 });
 
 gulp.task('php:dist', function() {
     gulp.src(path.src.php)
+        .pipe(plumber())
         .pipe(gulp.dest(path.dist.php));
 });
 
@@ -149,7 +162,58 @@ gulp.task('dist', [
     'php:dist',
     'test_img'
 ]);
-
+gulp.task('test_img', function(){
+    gulp.src(path.src.users_img)
+        .pipe(gulp.dest(path.prod.users_img));
+});
+gulp.task('prod-php', function(){
+    gulp.src(path.src.php)
+        .pipe(gulp.dest(path.prod.php));
+});
+gulp.task('image', function(){
+    gulp.src(path.src.img)
+        .pipe(imagemin({
+            progressive: true,
+            svgoPlugins: [{removeViewBox: false}],
+            use: [pngquant()],
+            interlaced: true
+        }))
+        .pipe(gulp.dest(path.prod.img));
+});
+gulp.task('fonts', function(){
+    gulp.src(path.src.fonts)
+        .pipe(gulp.dest(path.prod.fonts));
+});
+gulp.task('style', function(){
+    gulp.src(path.src.style)
+        .pipe(sourcemaps.init())
+        .pipe(sass())
+        .pipe(prefixer())
+        .pipe(cssmin())
+        .pipe(sourcemaps.write())
+        .pipe(gulp.dest(path.prod.css));
+});
+gulp.task('jade', function(){
+    gulp.src(path.src.jade)
+        .pipe(jade())
+        .pipe(gulp.dest(path.prod.jade));
+});
+gulp.task('js', function(){
+    gulp.src(path.src.js)
+        .pipe(plumber())
+        .pipe(rigger())
+        .pipe(uglify())
+        .pipe(gulp.dest(path.prod.js));
+});
+gulp.task('build', [
+    'jade',
+    'js',
+    'style',
+    'fonts',
+    'image',
+    'prod-php',
+    'test_img'
+]);
 
 gulp.task('watch', function(){
     watch([path.watch.jade], function(event, cb) {
