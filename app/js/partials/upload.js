@@ -17,7 +17,7 @@ var upload = function() {
 	};
 
 	var _uploadImage = function(image, type) {
-		widthImage = 0, heightImage = 0,watermarkWidth = 0,	watermarkHeight = 0;
+		widthImage = 0, heightImage = 0,watermarkWidth = 0,	watermarkHeight = 0; //scaleHeight = 0; scaleWidth = 0;
 		// Определяем GET параметр
 		var url = 'php/upload.php?fileType=' + type;
 		image.fileupload({ 
@@ -38,45 +38,62 @@ var upload = function() {
 	        		// Определяем путь к файлу
 	        		path = 'users_img/' + data.result.minName + '?' + event.timeStamp;
 	        		// Проверка (картинка или водяной знак)
-
-	        		if (data.result.minName.indexOf('-img') + 1) {
+					if (data.result.minName.indexOf('-img') + 1) {
 	        			// Добавляем путь соответствующему элементу
 	        			$('.img-display').attr({'src':path, 'alt':'Ваша картинка'});
 
 						// Записываем оригинальные размеры изображения
 						widthImage = data.result.imgSize['width'];
+						heightImage = data.result.imgSize['height'];
+
+
+
+
 
 					} else if (data.result.minName.indexOf('-watermark') + 1) {
 	        			$('.watermark-display').attr({'src':path, 'alt':'Ваш водяной знак'});
-
 						// Записываем оригинальные размеры изображения
 						watermarkWidth = data.result.imgSize['width'];
 						watermarkHeight = data.result.imgSize['height'];
 
-	        			// Сбрасываем текущие координаты блока
-	        			$('.output__watermark-result').css('left', '0px');
-	        			$('.output__watermark-result').css('top', '0px');
-	        			movement.findPosition($('.output__watermark-result'));
-	        		};
 
-					// Вычисляем масштаб
-					var scale = widthImage/$('.img-display').width();
 
-					// Применям масштаб к ватермарку
-					if(widthImage <= 652 && heightImage <= 535) {
-						$('.watermark-display').css('width', watermarkWidth);
-						$('.watermark-display').css('height', watermarkHeight);
-					}else{
-						$('.watermark-display').css('width', watermarkWidth/scale);
-						$('.watermark-display').css('height', watermarkHeight/scale);
+
+
+						// Сбрасываем текущие координаты блока
+						$('.output__watermark-result').watermark('position_at', 'left', 'top');
+						movement.findPosition($('.output__watermark-result'));
+
 					};
 
-	        	} else {
+					_initScale();
+
+				} else {
 	        		console.log('Upload error');
 	        		console.log(data.result);
 	        	};
+
 	        },
 		});
+	};
+
+	var _initScale = function(){
+		var scaleWidth = $('.img-display').width()/widthImage;
+		var scaleHeight =$('.img-display').height()/heightImage;
+		console.log($('.img-display').width() + ':' + $('.img-display').height());
+		console.log(scaleWidth + ' ' + scaleHeight);
+		if(widthImage <= 652 && heightImage <= 535) {
+			$('.output__watermark-result').watermark('size_width', watermarkWidth)
+					.watermark('size_height', watermarkHeight);
+		}else if(scaleWidth < scaleHeight){
+			$('.output__watermark-result').watermark({scale:scaleWidth})
+					.watermark('size_width', watermarkWidth)
+					.watermark('size_height', watermarkHeight);
+		}else{
+			$('.output__watermark-result').watermark({scale:scaleHeight})
+					.watermark('size_width', watermarkWidth)
+					.watermark('size_height', watermarkHeight);
+		};
 	};
 
 	// Публичные методы
