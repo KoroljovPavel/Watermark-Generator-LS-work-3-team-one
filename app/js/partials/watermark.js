@@ -1,5 +1,9 @@
 (function($) {
 
+    var _defaults = {
+        scale: 1
+    };
+    var _options = _defaults;
     var _positionNames = ["top", "left"];
     var isAtPosition = false;
     var atPositionHor, atPositionVert;
@@ -91,11 +95,45 @@
         return top;
     }
 
+    function _checkParent(me){
+        if (!me.parent()){
+            $.error("Watermark block must have parent");
+        }
+    }
+
+    function _size(me, value, property) {
+
+        me.css(property, value);
+
+        if (isAtPosition){
+            _position_at( me, [atPositionHor, atPositionVert] );
+        }
+
+        return this;
+    }
+
+    function _position_at(me, valueHor, valueVert){
+        _checkParent(me);
+
+        var left = _getLeftPosition(valueHor, me),
+            top = _getTopPosition(valueVert, me);
+        console.log(top, left);
+
+        me.css("top", top);
+        me.css("left", left);
+
+        isAtPosition = true;
+        atPositionHor = valueHor;
+        atPositionVert = valueVert;
+    }
+
     //public
     var methods = {
 
         init:function(params) {
-            var options = $.extend({}, defaults, params);
+            var options = $.extend({}, _defaults, params);
+
+            _options = params;
 
             return this;
         },
@@ -103,13 +141,23 @@
         image:function(imgPath) {
             console.log("image", imgPath);
 
-            $(this).css("background-image", "url("+ imgPath +")");
+            var me = $(this);
+            me.css("background-image", "url("+ imgPath +")");
+
+            if (_options.scale != 1){
+                _checkParent(me);
+
+
+            }
 
             return this;
         },
 
         move_up:function(offset) {
             console.log("move_up", offset);
+
+            offset *= _options.scale;
+            console.log("scaled", offset);
 
             _setPosition($(this), "top", -offset, false);
 
@@ -119,6 +167,9 @@
         move_down:function(offset) {
             console.log("move_down", offset);
 
+            offset *= _options.scale;
+            console.log("scaled", offset);
+
             _setPosition($(this), "top", offset, false);
 
             return this;
@@ -127,6 +178,9 @@
         move_left:function(offset) {
             console.log("move_left", offset);
 
+            offset *= _options.scale;
+            console.log("scaled", offset);
+
             _setPosition($(this), "left", -offset, false);
 
             return this;
@@ -134,6 +188,9 @@
 
         move_right:function(offset) {
             console.log("move_right", offset);
+
+            offset *= _options.scale;
+            console.log("scaled", offset);
 
             _setPosition($(this), "left", offset, false);
 
@@ -153,26 +210,16 @@
 
             var me = $(this);
 
-            if (!me.parent()){
-                $.error("Watermark block must have parent");
-            }
-
-            var left = _getLeftPosition(valueHor, me),
-                top = _getTopPosition(valueVert, me);
-            console.log(top, left);
-
-            me.css("top", top);
-            me.css("left", left);
-
-            isAtPosition = true;
-            atPositionHor = valueHor;
-            atPositionVert = valueVert;
+            _position_at(me, valueHor, valueVert);
 
             return this;
         },
 
         coordinate_x:function(x) {
             console.log("coordinate_x", x);
+
+            x *= _options.scale;
+            console.log("scaled", x);
 
             _setPosition($(this), "left", x, true);
 
@@ -181,6 +228,9 @@
 
         coordinate_y:function(y) {
             console.log("coordinate_y", y);
+
+            y *= _options.scale;
+            console.log("scaled", y);
 
             _setPosition($(this), "top", y, true);
 
@@ -191,12 +241,13 @@
             console.log("size_width", width);
 
             var me = $(this);
+            console.log( _options.scale);
+            console.log(width);
 
-            me.css("width", width);
+            width *= _options.scale;
+            console.log(width);
 
-            if (isAtPosition){
-                methods.position_at.apply( this, [atPositionHor, atPositionVert] );
-            }
+            _size(me, width, "width");
 
             return this;
         },
@@ -206,11 +257,9 @@
 
             var me = $(this);
 
-            me.css("height", height);
+            height *= _options.scale;
 
-            if (isAtPosition){
-                methods.position_at.apply( this, [atPositionHor, atPositionVert] );
-            }
+            _size(me, height, "height");
 
             return this;
         }
