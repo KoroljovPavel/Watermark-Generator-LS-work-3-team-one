@@ -1,7 +1,7 @@
 var upload = function() {
 
 	// Для работы данного модуля используются методы плагина jquery.fileupload.js и модуля movement.js
-
+	mainRatio = 0;
 	// Определяем поля загрузки файлов
 	var mainImage = $('.img-input'),
 		watermark = $('.watermark-input'),
@@ -14,6 +14,7 @@ var upload = function() {
 		newWatermarkWidth,
 		newWatermarkHeight,
 		scale,
+		sRatio,
 		newScaleW,
 		newScaleH,
 		newHeightImage,
@@ -70,6 +71,9 @@ var upload = function() {
 
 	        		if (data.result.minName.indexOf('-img') + 1) {
 	        			// Добавляем путь соответствующему элементу
+							//var progress = parseInt(data.loaded / data.total * 100, 10);
+							//console.log(progress);
+
                         //$('.img-display').css('display', 'none');
                         $('.img-display').attr({'src':path, 'alt':'Ваша картинка'});
                         //$('.img-display').on('load', function(){
@@ -221,9 +225,11 @@ var upload = function() {
 	};
 
 
-	var scaleRatio = function(scale){
-		var scaleRatio = scale;
-		console.log("Коэффициент масштбирования: " + mainScale);
+	var scaleRatio = function(sRatio){
+		mainRatio = sRatio;
+		console.log("Коэффициент масштбирования: " + sRatio);
+		return mainRatio;
+
 	};
 
 
