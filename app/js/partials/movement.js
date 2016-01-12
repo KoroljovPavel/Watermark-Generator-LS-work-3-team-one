@@ -9,14 +9,15 @@ var movement = function() {
 
 	var init = function() {
 		_setUpListners();
+		_changePositionDrag();
 	};
 
 	// Вешаем обработчики
 	var _setUpListners = function() {
-		$('.x-up').on('click', {method: 'move_right', param: 1}, _changePositionArrow);
-		$('.x-down').on('click', {method: 'move_left', param: 1}, _changePositionArrow);
-		$('.y-up').on('click', {method: 'move_up', param: 1}, _changePositionArrow);
-		$('.y-down').on('click', {method: 'move_down', param: 1}, _changePositionArrow);
+		$('.x-up').on('click', {input: $('.x-pos'), param: 1}, _changePositionArrow);
+		$('.x-down').on('click', {input: $('.x-pos'), param: -1}, _changePositionArrow);
+		$('.y-up').on('click', {input: $('.y-pos'), param: 1}, _changePositionArrow);
+		$('.y-down').on('click', {input: $('.y-pos'), param: -1}, _changePositionArrow);
 		$('.x-pos').on('change', _changePositionInput);
 		$('.y-pos').on('change', _changePositionInput);
 		$('.x-pos').on('keypress', _noSubmit);
@@ -29,17 +30,19 @@ var movement = function() {
 	// Смена координат с помощью стрелочек
 	var _changePositionArrow = function(event) {
 		event.preventDefault();
-		image.watermark(event.data.method, event.data.param);
-		findPosition(image);
+		val = +event.data.input.val();
+		val += event.data.param;
+		event.data.input.val(val);
+		event.data.input.trigger('change');
 	};
 
 	// Смена координат с помощью инпутов
 	var _changePositionInput = function(event) {
 		event.preventDefault();
 		if ($(this).hasClass('x-pos')) {
-			image.css('left', $(this).val() + 'px');	
+			image.watermark('coordinate_x', $(this).val());	
 		} else {
-			image.css('top', -$(this).val() + 'px');
+			image.watermark('coordinate_y', $(this).val());
 		};
 	};
 
@@ -95,12 +98,25 @@ var movement = function() {
 		};
 	};
 
+	// Смена координат с помощью мыши
+	var _changePositionDrag = function() {
+		image.draggable({
+	        	drag: function(event, ui) {
+				console.log(ui.position.left);
+				$('.x-pos').val(ui.position.left);
+				$('.y-pos').val(ui.position.top);
+				$('.x-pos').trigger('change');
+				$('.y-pos').trigger('change');
+			}
+		});
+	};
+
 	// Запись текущих координат в инпуты
 	var findPosition = function(block) {
 		left = block.css('left');
 		top = block.css('top');
 		$('.x-pos').val(left.substr(0, left.length - 2));
-		$('.y-pos').val(-top.substr(0, top.length - 2));
+		$('.y-pos').val(top.substr(0, top.length - 2));
 	};
 
 	// Публичные методы

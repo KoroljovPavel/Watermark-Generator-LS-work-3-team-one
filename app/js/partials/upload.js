@@ -3,8 +3,28 @@ var upload = function() {
 	// Для работы данного модуля используются методы плагина jquery.fileupload.js и модуля movement.js
 
 	// Определяем поля загрузки файлов
-	var mainImage = $('.img-input');
-		watermark = $('.watermark-input');
+	var mainImage = $('.img-input'),
+		watermark = $('.watermark-input'),
+		preventAction = true;
+	$('.watermark-upload__inputs').css('opacity', '.5');
+	$('.x-pos').attr('disabled', true);
+	$('.y-pos').attr('disabled', true);
+	$('.x-up').attr('disabled', true);
+	$('.x-down').attr('disabled', true);
+	$('.y-up').attr('disabled', true);
+	$('.y-down').attr('disabled', true);
+	$('.watermark-upload__inputs').click(function(e){
+
+		if(preventAction){
+			e.preventDefault();
+			$('.image-upload__inputs').effect('pulsate', 'hide', 'slow');
+		}else{
+			watermark.attr('disabled', false);
+		}
+
+
+
+	});
 
 	var init = function() {
 		_setUpListners();
@@ -43,6 +63,8 @@ var upload = function() {
 	        			// Добавляем путь соответствующему элементу
 	        			$('.img-display').attr({'src':path, 'alt':'Ваша картинка'});
 
+						$('.watermark-upload__inputs').css('opacity', '1');
+						preventAction = false;
 						// Записываем оригинальные размеры изображения
 						widthImage = data.result.imgSize['width'];
 
@@ -53,16 +75,30 @@ var upload = function() {
 						watermarkWidth = data.result.imgSize['width'];
 						watermarkHeight = data.result.imgSize['height'];
 
+
+						$('.x-pos').attr('disabled', false);
+						$('.y-pos').attr('disabled', false);
+						$('.x-up').attr('disabled', false);
+						$('.x-down').attr('disabled', false);
+						$('.y-up').attr('disabled', false);
+						$('.y-down').attr('disabled', false);
+
+
+						// Сбрасываем текущие координаты блока
+						$('.output__watermark-result').css('left', '0px');
+						$('.output__watermark-result').css('top', '0px');
+						movement.findPosition($('.output__watermark-result'));
+
+
+
 	        		};
 
-	        	// Сбрасываем текущие координаты блока
-	        	$('.output__watermark-result').css('left', '0px');
-	        	$('.output__watermark-result').css('top', '0px');
-	        	movement.findPosition($('.output__watermark-result'));
+
 
 					// Вычисляем масштаб
 					var scale = $('.img-display').width()/widthImage;
-					//$('.output__watermark-result').watermark({scale: scale})
+					var watermarkScale = $('.watermark-display').width()/watermarkWidth;
+					console.log(watermarkScale);
 					// Применям масштаб к ватермарку
 					if(widthImage <= 652 && heightImage <= 535) {
 						$('.watermark-display').watermark('size_width', watermarkWidth);

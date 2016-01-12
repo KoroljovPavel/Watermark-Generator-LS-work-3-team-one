@@ -2,10 +2,10 @@ var opacity = function(){
 
     // Определяем ватермарк и блок со слайдером
     var watermark = $('.watermark-display'),
-        slider = $('#slider');
+        slider = $('#opacity');
 
     slider.slider({range: 'min',
-                    value: watermark.css('opacity')*100});
+                   value: watermark.css('opacity')*100});
 
 
     var init = function(){
@@ -13,20 +13,17 @@ var opacity = function(){
     };
 
     var _setUpListeners = function(){
-        $(slider).bind( "slide", _setOpacity);
+        slider.on( "slide", function( event, ui ) {
+            var opacity = ui.value/100;
+                watermark.css('opacity', opacity);
+                slider.data('opacity', opacity).attr('data-opacity',opacity);
+        });
     };
-
-    var _setOpacity = function(e, ui){
-        watermark.watermark('opacity', slider.slider("option", "value")/100);
-    };
-
-
 
     return {
         init: init
     }
 
 }();
-
 
 opacity.init();
