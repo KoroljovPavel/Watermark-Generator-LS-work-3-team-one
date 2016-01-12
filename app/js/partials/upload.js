@@ -187,12 +187,12 @@ var upload = function() {
 					if(widthImage > 652 || heightImage > 535){
 						scale = newWidthImage/widthImage;
 						wMark.watermark({scale: scale});
-						mainScale(scale);
+						scaleRatio(scale);
 						console.log('Watermark нормалдьный');
 					}else{
 						scale = 1;
 						wMark.watermark({scale: scale});
-						mainScale(scale);
+						scaleRatio(scale);
 					};
 
 					if(watermarkWidth > widthImage || watermarkHeight > heightImage){
@@ -200,10 +200,10 @@ var upload = function() {
 						newScaleH = (heightImage/watermarkHeight)*scale;
 						if(newScaleW < newScaleH){
 							wMark.watermark({scale: newScaleW});
-							mainScale(newScaleW);
+							scaleRatio(newScaleW);
 						}else{
 							wMark.watermark({scale: newScaleH});
-							mainScale(newScaleH);
+							scaleRatio(newScaleH);
 						};
 					};
 
@@ -221,8 +221,8 @@ var upload = function() {
 	};
 
 
-	var mainScale = function(scale){
-		var mainScale = scale;
+	var scaleRatio = function(scale){
+		var scaleRatio = scale;
 		console.log("Коэффициент масштбирования: " + mainScale);
 	};
 
@@ -231,7 +231,7 @@ var upload = function() {
 	// Публичные методы
 	return {
 		init: init,
-		scale : scale
+		scaleRatio : scaleRatio
 	};
 
 }();
