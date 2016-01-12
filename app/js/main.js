@@ -18,5 +18,6 @@
 
 //= partials/opacity.js
 //= partials/view-position.js
+//= partials/social.js
 
 
