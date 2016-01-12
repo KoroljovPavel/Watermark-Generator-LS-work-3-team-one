@@ -173,16 +173,21 @@ if ($whRatioCanvas < $whRatioImage ) {
 
 if ($newWidth <  $fileInfo[0] || $newHeight < $fileInfo[1] ) {
     imageresize( $imgs['orig']['path'], $imgs['min']['path'],
-            $newWidth, $newHeight, $fileInfo["mime"], 60);
+        $newWidth, $newHeight, $fileInfo["mime"], 60);
 } else {
+    $newWidth =  $fileInfo[0];
+    $newHeight = $fileInfo[1];
     copy($imgs['orig']['path'], $imgs['min']['path']);
 }
-
 // Формируем ответ
 echo json_encode( array(
         'status' => 'success',
         'imgName' => $imgs['orig']['name'],
         'minName' => $imgs['min']['name'],
+        'newSize' => array (
+                'newWidth' => $newWidth,
+                'newHeight' => $newHeight
+        ),
         'imgSize' => array (
                 'width' => $fileInfo[0],
                 'height' => $fileInfo[1]

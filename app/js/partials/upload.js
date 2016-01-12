@@ -5,7 +5,19 @@ var upload = function() {
 	// Определяем поля загрузки файлов
 	var mainImage = $('.img-input'),
 		watermark = $('.watermark-input'),
-		preventAction = true;
+		wMark = $('.output__watermark-result'),
+		preventAction = true,
+		widthImage,
+		heightImage,
+		watermarkWidth,
+		watermarkHeight,
+		newWatermarkWidth,
+		newWatermarkHeight,
+		scale,
+		newScaleW,
+		newScaleH,
+		newHeightImage,
+		newWidthImage;
 	$('.watermark-upload__inputs').css('opacity', '.5');
 	$('.x-pos').attr('disabled', true);
 	$('.y-pos').attr('disabled', true);
@@ -21,9 +33,6 @@ var upload = function() {
 		}else{
 			watermark.attr('disabled', false);
 		}
-
-
-
 	});
 
 	var init = function() {
@@ -37,7 +46,7 @@ var upload = function() {
 	};
 
 	var _uploadImage = function(image, type) {
-		widthImage = 0, heightImage = 0,watermarkWidth = 0,	watermarkHeight = 0;
+
 		// Определяем GET параметр
 		var url = 'php/upload.php?fileType=' + type;
 		image.fileupload({
@@ -62,18 +71,28 @@ var upload = function() {
 	        		if (data.result.minName.indexOf('-img') + 1) {
 	        			// Добавляем путь соответствующему элементу
 	        			$('.img-display').attr({'src':path, 'alt':'Ваша картинка'});
-
-						$('.watermark-upload__inputs').css('opacity', '1');
 						preventAction = false;
+						$('.watermark-upload__inputs').css('opacity', '1');
 						// Записываем оригинальные размеры изображения
 						widthImage = data.result.imgSize['width'];
+						heightImage = data.result.imgSize['height'];
+
+						newWidthImage = data.result.newSize['newWidth'];
+						newHeightImage = data.result.newSize['newHeight'];
+
+
+
+
 
 					} else if (data.result.minName.indexOf('-watermark') + 1) {
 	        			$('.watermark-display').attr({'src':path, 'alt':'Ваш водяной знак'});
 
-						// Записываем оригинальные размеры изображения
+						// Записываем оригинальные размеры watermark
 						watermarkWidth = data.result.imgSize['width'];
 						watermarkHeight = data.result.imgSize['height'];
+
+						newWatermarkWidth = data.result.newSize['newWidth'];
+						newWatermarkHeight = data.result.newSize['newHeight']
 
 
 						$('.x-pos').attr('disabled', false);
@@ -85,30 +104,38 @@ var upload = function() {
 
 
 						// Сбрасываем текущие координаты блока
-						$('.output__watermark-result').css('left', '0px');
-						$('.output__watermark-result').css('top', '0px');
-						movement.findPosition($('.output__watermark-result'));
+						wMark.css('left', '0px');
+						wMark.css('top', '0px');
+						movement.findPosition(wMark);
 
 
 
 	        		};
 
-
-
-					// Вычисляем масштаб
-					var scale = $('.img-display').width()/widthImage;
-					var watermarkScale = $('.watermark-display').width()/watermarkWidth;
-					console.log(watermarkScale);
-					// Применям масштаб к ватермарку
-					if(widthImage <= 652 && heightImage <= 535) {
-						$('.watermark-display').watermark('size_width', watermarkWidth);
-						$('.watermark-display').watermark('size_height', watermarkHeight);
+					// Масштабируем
+					if(widthImage > 652 || heightImage > 535){
+						scale = newWidthImage/widthImage;
+						wMark.watermark({scale: scale});
+						console.log('Watermark нормалдьный');
 					}else{
-						$('.watermark-display').watermark({scale: scale})
-								.watermark('size_width', watermarkWidth);
-						$('.watermark-display').watermark({scale: scale})
-								.watermark('size_height', watermarkHeight);
+						scale = 1;
+						wMark.watermark({scale: scale});
 					};
+
+					if(watermarkWidth > widthImage || watermarkHeight > heightImage){
+						newScaleW = (widthImage/watermarkWidth)*scale;
+						newScaleH = (heightImage/watermarkHeight)*scale;
+						if(newScaleW < newScaleH){
+							wMark.watermark({scale: newScaleW});
+						}else{
+							wMark.watermark({scale: newScaleH});
+						};
+					};
+
+					wMark.watermark('size_width', watermarkWidth)
+							.watermark('size_height', watermarkHeight);
+					console.log(scale);
+
 
 	        	} else {
 	        		console.log('Upload error');
@@ -117,6 +144,8 @@ var upload = function() {
 	        },
 		});
 	};
+
+
 
 	// Публичные методы
 	return {
