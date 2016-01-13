@@ -81,7 +81,7 @@
 	position: absolute;
 }
 .manipulation__image-upload{
-	margin-bottom: 23px;
+	margin-bottom: 18px;
 }
 .image-upload__inputs, .watermark-upload__inputs{
 	width: 220px;
@@ -146,6 +146,7 @@
 }
 .manipulation__item_position-header{
 	display: block;
+	height: 20px;
 	margin-bottom: 30px;
 }
 .manipulation__item{
@@ -156,8 +157,7 @@
 	}
 }
 .position__label{
-	display: inline-block;
-	vertical-align: top;
+	float: left;
 }
 .manipulation__item_position-move{
 	float: left;
@@ -181,9 +181,8 @@
 	}
 }
 .view__list{
-	display: inline-block;
-	vertical-align: top;
-	margin-left: 100px;
+	float: right;
+	margin-right: 5px;
 }
 .view__item-one{
 	background: url("../img/icons.png");
@@ -229,6 +228,7 @@
     background-position: -82px -45px;
     padding: 0;
     border: none;
+    margin-left: 5px;
     &:hover{
 	    background: url("../img/icons.png");
 		width: 19px;
