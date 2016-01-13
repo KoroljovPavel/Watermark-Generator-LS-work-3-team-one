@@ -26,6 +26,8 @@ var upload = function() {
 	$('.x-down').attr('disabled', true);
 	$('.y-up').attr('disabled', true);
 	$('.y-down').attr('disabled', true);
+	$('.position__cell').css('pointer-events', 'none');
+	$('button').attr('disabled', true);
 	$('.watermark-upload__inputs').click(function(e){
 
 		if(preventAction){
@@ -66,7 +68,7 @@ var upload = function() {
 	        		console.log('Successfully uploaded');
 	        		console.log(data.result);
 	        		// Определяем путь к файлу
-	        		path = 'users_img/' + data.result.minName + '?' + event.timeStamp;
+	        		path = 'users_img/' + data.result.minName + '?' + e.timeStamp;
 	        		// Проверка (картинка или водяной знак)
 
 	        		if (data.result.minName.indexOf('-img') + 1) {
@@ -108,7 +110,8 @@ var upload = function() {
 						$('.x-down').attr('disabled', false);
 						$('.y-up').attr('disabled', false);
 						$('.y-down').attr('disabled', false);
-
+						$('.position__cell').css('pointer-events', 'auto');
+						$('button').attr('disabled', false);
 
 						// Сбрасываем текущие координаты блока
 						wMark.css('left', '0px');
