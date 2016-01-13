@@ -20,12 +20,12 @@ var gulp = require('gulp'),
 var path = {
     prod:{
         jade: 'prod/',
-        js: 'prod/js',
-        css: 'prod/css',
-        img: 'prod/img',
-        fonts: 'prod/fonts',
-        php: 'prod/php',
-        users_img: 'prod/users_img'
+        js: 'prod/js/',
+        css: 'prod/css/',
+        img: 'prod/img/',
+        fonts: 'prod/fonts/',
+        php: 'prod/php/',
+        users_img: 'prod/users_img/'
     },
     dist: {
         jade: 'dist/',
@@ -185,22 +185,22 @@ gulp.task('fonts', function(){
         .pipe(gulp.dest(path.prod.fonts));
 });
 gulp.task('style', function(){
-    gulp.src(path.src.style)
-        .pipe(sourcemaps.init())
-        .pipe(sass())
-        .pipe(prefixer())
-        .pipe(cssmin())
+    gulp.src(path.src.style) //Выберем наш main.scss
+        .pipe(plumber())
+        .pipe(sourcemaps.init()) //То же самое что и с js
+        .pipe(sass()) //Скомпилируем
+        .pipe(prefixer()) //Добавим вендорные префиксы
+        .pipe(cssmin()) //Сожмем
         .pipe(sourcemaps.write())
         .pipe(gulp.dest(path.prod.css));
 });
 gulp.task('jade', function(){
     gulp.src(path.src.jade)
-        .pipe(jade())
+        .pipe(jade({pretty: true}))
         .pipe(gulp.dest(path.prod.jade));
 });
 gulp.task('js', function(){
     gulp.src(path.src.js)
-        .pipe(plumber())
         .pipe(rigger())
         .pipe(uglify())
         .pipe(gulp.dest(path.prod.js));

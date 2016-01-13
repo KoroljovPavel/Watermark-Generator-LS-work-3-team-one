@@ -18,6 +18,7 @@ var upload = function() {
 		newScaleH,
 		newHeightImage,
 		newWidthImage;
+	$('#my_canvas').css("display:", 'none');
 	$('.watermark-upload__inputs').css('opacity', '.5');
 	$('.x-pos').attr('disabled', true);
 	$('.y-pos').attr('disabled', true);
@@ -69,49 +70,15 @@ var upload = function() {
 	        		// Проверка (картинка или водяной знак)
 
 	        		if (data.result.minName.indexOf('-img') + 1) {
-	        			// Добавляем путь соответствующему элементу
-							//var progress = parseInt(data.loaded / data.total * 100, 10);
-							//console.log(progress);
 
-                        //$('.img-display').css('display', 'none');
-                        $('.img-display').attr({'src':path, 'alt':'Ваша картинка'});
-                        //$('.img-display').on('load', function(){
-							//$('#my_canvas').css('display', 'block');
-							//var ctx = document.getElementById('my_canvas').getContext('2d');
-							//var al = 0;
-							//var start = 4.72;
-							//var cw = ctx.canvas.width;
-							//var ch = ctx.canvas.height;
-							//var diff;
-							//function progressSim(){
-							//	diff = ((al / 100) * Math.PI*2*100).toFixed(2);
-							//	ctx.clearRect(0, 0, cw, ch);
-							//	ctx.lineWidth = 100;
-							//	var gradient = ctx.createLinearGradient(0,500,0, 0);
-							//	gradient.addColorStop(0, '#9b6d7b');
-							//	gradient.addColorStop(1, '#d8ba9d');
-							//	ctx.beginPath();
-							//	ctx.arc(267.5, 267.5, 215, start, diff/100+start, false);
-							//	ctx.strokeStyle = gradient;
-							//	ctx.stroke();
-							//	ctx.fillStyle = gradient;
-							//	ctx.font = "50px Arial";
-							//	ctx.textAlign = 'center';
-							//	ctx.fillText(al+'%', cw*.5, ch*.5+2, cw);
-                        //
-							//	if(al >= 100){
-							//		clearTimeout(sim);
-							//		$('#my_canvas').fadeOut('fast');
-							//		$('.img-display').fadeIn('fast');
-							//		$('watermark-display').css('position', 'absolute');
-							//	}
-							//	al++;
-							//}
-							//var sim = setInterval(progressSim, 10);
-                        //
-                        //});
+						$('.img-display').attr({'src':path, 'alt':'Ваша картинка'});
+
+						// Добавляем путь соответствующему элементу
+						//$('.img-display').css('display', 'none');
 						preventAction = false;
 						$('.watermark-upload__inputs').css('opacity', '1');
+
+
 						// Записываем оригинальные размеры изображения
 						widthImage = data.result.imgSize['width'];
 						heightImage = data.result.imgSize['height'];
@@ -124,43 +91,9 @@ var upload = function() {
 
 
 					} else if (data.result.minName.indexOf('-watermark') + 1) {
-						//$('.watermark-display').css('display', 'none');
-                        $('.watermark-display').attr({'src':path, 'alt':'Ваш водяной знак'});
-						//$('.watermark-display').on('load', function(){
-						//	$('#my_canvas').css('display', 'block');
-						//	var ctx = document.getElementById('my_canvas').getContext('2d');
-						//	var al = 0;
-						//	var start = 4.72;
-						//	var cw = ctx.canvas.width;
-						//	var ch = ctx.canvas.height;
-						//	var diff;
-						//	function progressSim(){
-						//		diff = ((al / 100) * Math.PI*2*100).toFixed(2);
-						//		ctx.clearRect(0, 0, cw, ch);
-						//		ctx.lineWidth = 100;
-						//		var gradient = ctx.createLinearGradient(0,500,0, 0);
-						//		gradient.addColorStop(0, '#9b6d7b');
-						//		gradient.addColorStop(1, '#d8ba9d');
-						//		ctx.beginPath();
-						//		ctx.arc(267.5, 267.5, 215, start, diff/100+start, false);
-						//		ctx.strokeStyle = gradient;
-						//		ctx.stroke();
-						//		ctx.fillStyle = gradient;
-						//		ctx.font = "50px Arial";
-						//		ctx.textAlign = 'center';
-						//		ctx.fillText(al+'%', cw*.5, ch*.5+2, cw);
-                        //
-						//		if(al >= 100){
-						//			clearTimeout(sim);
-						//			$('#my_canvas').fadeOut('fast');
-						//			$('.watermark-display').fadeIn('fast');
-                        //
-						//		}
-						//		al++;
-						//	}
-						//	var sim = setInterval(progressSim, 10);
-                        //
-						//});
+
+						$('.watermark-display').attr({'src':path, 'alt':'Ваш водяной знак'});
+
 						// Записываем оригинальные размеры watermark
 						watermarkWidth = data.result.imgSize['width'];
 						watermarkHeight = data.result.imgSize['height'];
@@ -220,6 +153,34 @@ var upload = function() {
 	        		console.log(data.result);
 	        	};
 	        },
+			progress: function (e, data) {
+				var progress = parseInt(data.loaded / data.total * 100, 10);
+				$('#my_canvas').css('display', 'block');
+				var ctx = document.getElementById('my_canvas').getContext('2d');
+				var al = progress;
+				var start = 4.72;
+				var cw = ctx.canvas.width;
+				var ch = ctx.canvas.height;
+				var diff;
+
+				diff = ((al / 100) * Math.PI * 2 * 100).toFixed(2);
+				ctx.clearRect(0, 0, cw, ch);
+				ctx.lineWidth = 100;
+				var gradient = ctx.createLinearGradient(0, 500, 0, 0);
+				gradient.addColorStop(0, '#9b6d7b');
+				gradient.addColorStop(1, '#d8ba9d');
+				ctx.beginPath();
+				ctx.arc(267.5, 267.5, 215, start, diff / 100 + start, false);
+				ctx.strokeStyle = gradient;
+				ctx.stroke();
+				ctx.fillStyle = gradient;
+				ctx.font = "50px Arial";
+				ctx.textAlign = 'center';
+				ctx.fillText(al + '%', cw * .5, ch * .5 + 2, cw);
+				if (al >= 100) {
+					$('#my_canvas').fadeOut('slow');
+				};
+			},
 		});
 	};
 
