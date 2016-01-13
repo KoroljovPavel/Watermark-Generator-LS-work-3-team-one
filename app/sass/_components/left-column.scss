@@ -15,10 +15,22 @@
 	font-weight: 300;
 	font-size: 20px;
 	background: #d4d2d1;
+	border: none;
 	&:hover{
 		color: #444a53;
 	}
+	&:active{
+		outline: none;
+		background: #8e9298;
+		color: #444a53;
+	}
+	&:focus{
+		outline: none;
+		background: #8e9298;
+		color: #444a53;
+	}
 }
+
 .social__list{
 	min-height: 123px; 
 }
