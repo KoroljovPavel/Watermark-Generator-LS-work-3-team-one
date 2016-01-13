@@ -267,8 +267,12 @@
 .coordinates{
 	display: inline-block;
 	margin-bottom: 0;
+	margin-left: -65px;
+	position: absolute;
 }
 .coordinate__input{
+	margin-left: -50px;
+	position: absolute;
 	width: 45px;
 	height: 45px;
 	font-size: 24px;
@@ -286,6 +290,7 @@
 .coordinate__arrows{
 	display: inline-block;
 	width: 18px;
+	height: 43px;
 	margin-right: 5px;
 }
 .coordinate__arrow-up{
@@ -294,7 +299,6 @@
     height: 8px;
     background-position: -5px -24px;
     border: none;
-    margin-top: -30px;
 	position: absolute;
 	&:hover{
 		background: url("../img/icons.png");
@@ -315,7 +319,7 @@
     height: 8px;
     background-position: -5px -5px;
     border: none;
-    margin-top: 3px;
+    margin-top: 35px;
 	position: absolute;
 	&:hover{
 		background: url("../img/icons.png");
@@ -336,7 +340,7 @@
 		margin-right: 3px;
 		&:before{
 			position: absolute;
-			margin-left: -15px;
+			margin-left: -65px;
     		margin-top: 10px;
 			content: "";
 			background: url("../img/icons.png");
@@ -348,7 +352,7 @@
 	.position__coordinates-two{
 		&:before{
 			position: absolute;
-			margin-left: -35px;
+			margin-left: -85px;
     		margin-top: 20px;
 			content: "";
 			background: url("../img/icons.png");
