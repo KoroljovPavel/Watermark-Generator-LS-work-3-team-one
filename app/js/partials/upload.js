@@ -14,7 +14,6 @@ var upload = function() {
 		newWatermarkWidth,
 		newWatermarkHeight,
 		scale,
-		sRatio,
 		newScaleW,
 		newScaleH,
 		newHeightImage,
