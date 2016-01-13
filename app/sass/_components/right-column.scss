@@ -286,6 +286,7 @@
 .coordinate__arrows{
 	display: inline-block;
 	width: 18px;
+	height: 43px;
 	margin-right: 5px;
 }
 .coordinate__arrow-up{
@@ -294,7 +295,7 @@
     height: 8px;
     background-position: -5px -24px;
     border: none;
-    margin-top: -30px;
+    margin-top: 15px;
 	position: absolute;
 	&:hover{
 		background: url("../img/icons.png");
@@ -315,7 +316,7 @@
     height: 8px;
     background-position: -5px -5px;
     border: none;
-    margin-top: 3px;
+    margin-top: 45px;
 	position: absolute;
 	&:hover{
 		background: url("../img/icons.png");

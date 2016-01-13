@@ -44,6 +44,7 @@ $footer-height : 60px;
 }
 
 footer {
+	position: relative;
 	height: $footer-height;
 	margin-top: -$footer-height;
 	text-align: center;
