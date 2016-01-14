@@ -35,13 +35,15 @@
 	margin-top: 0;
 	margin-bottom: 50px;
 }
+.container__manipulation-header{
+	text-align: center;
+}
 .manipulation__header{
 	font-family: "robotolight", sans-serif;
 	font-size: 26px;
 	color: #2e3641;
 	font-weight: 300;
 	display: block;
-	margin-left: 40px;
 	margin-bottom: 30px;
 }
 .manipulation__label{
@@ -82,7 +84,7 @@
 	cursor: move;
 }
 .manipulation__image-upload{
-	margin-bottom: 23px;
+	margin-bottom: 18px;
 }
 .image-upload__inputs, .watermark-upload__inputs{
 	width: 220px;
@@ -147,6 +149,7 @@
 }
 .manipulation__item_position-header{
 	display: block;
+	height: 20px;
 	margin-bottom: 30px;
 }
 .manipulation__item{
@@ -157,8 +160,7 @@
 	}
 }
 .position__label{
-	display: inline-block;
-	vertical-align: top;
+	float: left;
 }
 .manipulation__item_position-move{
 	float: left;
@@ -182,9 +184,8 @@
 	}
 }
 .view__list{
-	display: inline-block;
-	vertical-align: top;
-	margin-left: 100px;
+	float: right;
+	margin-right: 5px;
 }
 .view__item-one{
 	background: url("../img/icons.png");
@@ -230,6 +231,7 @@
     background-position: -82px -45px;
     padding: 0;
     border: none;
+    margin-left: 5px;
     &:hover{
 	    background: url("../img/icons.png");
 		width: 19px;
@@ -264,39 +266,49 @@
 }
 .manipulation__item_position-coordinates{
 	float: right;
+	width: 90px;
 }
 .coordinates{
-	display: inline-block;
 	margin-bottom: 0;
+	float: left;
+	margin-right: 5px;
 }
 .coordinate__input{
+	float: left;
 	width: 45px;
 	height: 45px;
-	font-size: 24px;
+	font-size: 20px;
 	font-family: "segoeui", sans-serif;
 	font-weight: 400;
 	text-align: center;
-}
-.position__coordinates-one{
-	margin-right: 3px;
-}
-.position__coordinates-two{
-	margin-top: 10px;
-	margin-right: 3px;
-}
-.coordinate__arrows{
-	display: inline-block;
-	width: 18px;
-	height: 43px;
 	margin-right: 5px;
 }
+.position__coordinates-one{
+	position: relative;
+    float: right;
+    margin-right: 0;
+    margin-bottom: 9px;
+}
+.position__coordinates-two{
+	position: relative;
+    float: right;
+    margin-right: 0;
+    margin-bottom: 9px;
+}
+.coordinate__arrows{
+	position: relative;
+    float: left;
+    width: 18px;
+    height: 43px;
+    margin-right: 5px;
+}
 .coordinate__arrow-up{
+	cursor: pointer!important;
 	background: url("../img/icons.png");
 	width: 13px;
     height: 8px;
     background-position: -5px -24px;
     border: none;
-    margin-top: 15px;
 	position: absolute;
 	&:hover{
 		background: url("../img/icons.png");
@@ -312,12 +324,13 @@
 	}
 }
 .coordinate__arrow-down{
+	cursor: pointer!important;
 	background: url("../img/icons.png");
 	width: 13px;
     height: 8px;
     background-position: -5px -5px;
     border: none;
-    margin-top: 45px;
+    margin-top: 35px;
 	position: absolute;
 	&:hover{
 		background: url("../img/icons.png");
@@ -335,7 +348,6 @@
 //Линии во втором виде 
 .manipulation__item_position-block--lines{
 	.position__coordinates-one{
-		margin-right: 3px;
 		&:before{
 			position: absolute;
 			margin-left: -15px;

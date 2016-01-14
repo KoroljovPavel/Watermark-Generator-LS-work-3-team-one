@@ -1,10 +1,10 @@
 form.manipulation__list
 	div.manipulation__item.manipulation__item_image-position.clearfix
 		div.manipulation__item_position-header
-			label.manipulation__label.position__label Положение
+			label.manipulation__label.position__label(data-translate-key="position__label") Положение
 			div.view__list
 				button.view__item.view__item-one
-				button.view__item.view__item-two.active
+				button.view__item.view__item-two
 		div.manipulation__item_position-block--cells.clearfix
 			div.manipulation__item_position-move
 				table.manipulation__item_position-table
@@ -21,7 +21,7 @@ form.manipulation__list
 							td.position__cell.cell7
 							td.position__cell.cell8
 							td.position__cell.cell9
-			div.manipulation__item_position-coordinates
+			div.manipulation__item_position-coordinates.clearfix
 				div.position__coordinates.position__coordinates-one
 					p.coordinates X
 					input#coordinate-cell-x.coordinate__input.coordinate__input-x.x-pos(type='text' value="0")
@@ -53,7 +53,7 @@ form.manipulation__list
 				div.manipulation__item_position-lines
 					span.position-lines.position-lines-x
 					span.position-lines.position-lines-y
-			div.manipulation__item_position-coordinates
+			div.manipulation__item_position-coordinates.clearfix
 				div.position__coordinates.position__coordinates-one
 					input#coordinate-line-x.coordinate__input.coordinate__input-x(type='text' value="0")
 					div.coordinate__arrows
@@ -66,9 +66,9 @@ form.manipulation__list
 						button.coordinate__arrow.coordinate__arrow-down
 	div.manipulation__item.manipulation__item_image-opacity
 		div.manipulation__item_image-opacity_header
-			label.manipulation__label.position__label Прозрачность
+			label.manipulation__label.opacity__label(data-translate-key="opacity__label") Прозрачность
 		div(id="opacity" class="opacity-slider__range" data-opacity="0.5")
 	div.manipulation__item.manipulation__item_buttons.clearfix
 
-		button.manipulation__btn-reset(type='reset') Сброс
-		button.manipulation__btn-submit.downloadBtn(type='submit') Скачать
+		button.manipulation__btn-reset(type='reset', data-translate-key="manipulation__btn-reset") Сброс
+		button.manipulation__btn-submit.downloadBtn(type='submit', data-translate-key="manipulation__btn-submit") Скачать
