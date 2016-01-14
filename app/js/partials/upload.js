@@ -134,7 +134,7 @@ var upload = function() {
 					// Сбрасываем текущие координаты блока
 					wMark.css('left', '0px');
 					wMark.css('top', '0px');
-					movement.findPosition(wMark);
+
 	        	} else {
 	        		console.log('Upload error');
 	        		console.log(data.result);
