@@ -35,13 +35,15 @@
 	margin-top: 0;
 	margin-bottom: 50px;
 }
+.container__manipulation-header{
+	text-align: center;
+}
 .manipulation__header{
 	font-family: "robotolight", sans-serif;
 	font-size: 26px;
 	color: #2e3641;
 	font-weight: 300;
 	display: block;
-	margin-left: 40px;
 	margin-bottom: 30px;
 }
 .manipulation__label{
@@ -263,37 +265,44 @@
 }
 .manipulation__item_position-coordinates{
 	float: right;
+	width: 90px;
 }
 .coordinates{
-	display: inline-block;
 	margin-bottom: 0;
-	margin-left: -65px;
-	position: absolute;
+	float: left;
+	margin-right: 5px;
 }
 .coordinate__input{
-	margin-left: -50px;
-	position: absolute;
+	float: left;
 	width: 45px;
 	height: 45px;
-	font-size: 24px;
+	font-size: 20px;
 	font-family: "segoeui", sans-serif;
 	font-weight: 400;
 	text-align: center;
-}
-.position__coordinates-one{
-	margin-right: 3px;
-}
-.position__coordinates-two{
-	margin-top: 10px;
-	margin-right: 3px;
-}
-.coordinate__arrows{
-	display: inline-block;
-	width: 18px;
-	height: 43px;
 	margin-right: 5px;
 }
+.position__coordinates-one{
+	position: relative;
+    float: right;
+    margin-right: 0;
+    margin-bottom: 9px;
+}
+.position__coordinates-two{
+	position: relative;
+    float: right;
+    margin-right: 0;
+    margin-bottom: 9px;
+}
+.coordinate__arrows{
+	position: relative;
+    float: left;
+    width: 18px;
+    height: 43px;
+    margin-right: 5px;
+}
 .coordinate__arrow-up{
+	cursor: pointer!important;
 	background: url("../img/icons.png");
 	width: 13px;
     height: 8px;
@@ -314,6 +323,7 @@
 	}
 }
 .coordinate__arrow-down{
+	cursor: pointer!important;
 	background: url("../img/icons.png");
 	width: 13px;
     height: 8px;
@@ -337,10 +347,9 @@
 //Линии во втором виде 
 .manipulation__item_position-block--lines{
 	.position__coordinates-one{
-		margin-right: 3px;
 		&:before{
 			position: absolute;
-			margin-left: -65px;
+			margin-left: -15px;
     		margin-top: 10px;
 			content: "";
 			background: url("../img/icons.png");
@@ -352,7 +361,7 @@
 	.position__coordinates-two{
 		&:before{
 			position: absolute;
-			margin-left: -85px;
+			margin-left: -35px;
     		margin-top: 20px;
 			content: "";
 			background: url("../img/icons.png");

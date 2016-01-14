@@ -30,7 +30,16 @@
 		color: #444a53;
 	}
 }
-
+.language__btn-eng.active{
+	outline: none;
+	background: #8e9298;
+	color: #444a53;
+}
+.language__btn-rus.active{
+	outline: none;
+	background: #8e9298;
+	color: #444a53;
+}
 .social__list{
 	min-height: 123px; 
 }
