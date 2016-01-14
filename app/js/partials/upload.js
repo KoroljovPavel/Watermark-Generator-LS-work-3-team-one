@@ -20,16 +20,10 @@ var upload = function() {
 		newWidthImage;
 	$('#my_canvas').css("display:", 'none');
 	$('.watermark-upload__inputs').css('opacity', '.5');
-	$('.x-pos').attr('disabled', true);
-	$('.y-pos').attr('disabled', true);
-	$('.x-up').attr('disabled', true);
-	$('.x-down').attr('disabled', true);
-	$('.y-up').attr('disabled', true);
-	$('.y-down').attr('disabled', true);
-	$('.position__cell').css('pointer-events', 'none');
-	$('.view__item').attr('disabled', true);
-	$('.manipulation__btn-reset').attr('disabled', true);
-	$('.manipulation__btn-submit').attr('disabled', true);
+	$('.manipulation__list').css({
+		'pointer-events' : 'none',
+		'opacity'        : '.5'
+	});
 	$('.watermark-upload__inputs').click(function(e){
 
 		if(preventAction){
@@ -75,18 +69,16 @@ var upload = function() {
 
 	        		if (data.result.minName.indexOf('-img') + 1) {
 
+						// Добавляем путь соответствующему элементу
 						$('.img-display').attr({'src':path, 'alt':'Ваша картинка'});
 
-						// Добавляем путь соответствующему элементу
-						//$('.img-display').css('display', 'none');
 						preventAction = false;
 						$('.watermark-upload__inputs').css('opacity', '1');
-
 
 						// Записываем оригинальные размеры изображения
 						widthImage = data.result.imgSize['width'];
 						heightImage = data.result.imgSize['height'];
-
+						// И отмасштабированные
 						newWidthImage = data.result.newSize['newWidth'];
 						newHeightImage = data.result.newSize['newHeight'];
 
@@ -101,28 +93,16 @@ var upload = function() {
 						// Записываем оригинальные размеры watermark
 						watermarkWidth = data.result.imgSize['width'];
 						watermarkHeight = data.result.imgSize['height'];
-
+						// И отмасштабированные
 						newWatermarkWidth = data.result.newSize['newWidth'];
 						newWatermarkHeight = data.result.newSize['newHeight']
 
 
-						$('.x-pos').attr('disabled', false);
-						$('.y-pos').attr('disabled', false);
-						$('.x-up').attr('disabled', false);
-						$('.x-down').attr('disabled', false);
-						$('.y-up').attr('disabled', false);
-						$('.y-down').attr('disabled', false);
-						$('.position__cell').css('pointer-events', 'auto');
-						$('.view__item').attr('disabled', false);
-						$('.manipulation__btn-reset').attr('disabled', false);
-						$('.manipulation__btn-submit').attr('disabled', false);
-
-						// Сбрасываем текущие координаты блока
-						wMark.css('left', '0px');
-						wMark.css('top', '0px');
-						movement.findPosition(wMark);
-
-
+						$('.view__item-two').addClass('active');
+						$('.manipulation__list').css({
+							'pointer-events' : 'auto',
+							'opacity'        : '1'
+						});
 
 	        		};
 
@@ -131,7 +111,7 @@ var upload = function() {
 						scale = newWidthImage/widthImage;
 						wMark.watermark({scale: scale});
 						scaleRatio(scale);
-						console.log('Watermark нормалдьный');
+						console.log('Watermark нормальный');
 					}else{
 						scale = 1;
 						wMark.watermark({scale: scale});
@@ -152,9 +132,11 @@ var upload = function() {
 
 					wMark.watermark('size_width', watermarkWidth)
 							.watermark('size_height', watermarkHeight);
-					console.log(scale);
 
-
+					// Сбрасываем текущие координаты блока
+					wMark.css('left', '0px');
+					wMark.css('top', '0px');
+					movement.findPosition(wMark);
 	        	} else {
 	        		console.log('Upload error');
 	        		console.log(data.result);
