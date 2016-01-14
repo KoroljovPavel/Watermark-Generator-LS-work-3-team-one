@@ -35,13 +35,15 @@
 	margin-top: 0;
 	margin-bottom: 50px;
 }
+.container__manipulation-header{
+	text-align: center;
+}
 .manipulation__header{
 	font-family: "robotolight", sans-serif;
 	font-size: 26px;
 	color: #2e3641;
 	font-weight: 300;
 	display: block;
-	margin-left: 40px;
 	margin-bottom: 30px;
 }
 .manipulation__label{
@@ -275,7 +277,7 @@
 	position: absolute;
 	width: 45px;
 	height: 45px;
-	font-size: 24px;
+	font-size: 20px;
 	font-family: "segoeui", sans-serif;
 	font-weight: 400;
 	text-align: center;
