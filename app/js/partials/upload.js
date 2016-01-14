@@ -180,18 +180,15 @@ var upload = function() {
 	        		// Сбрасываем текущие координаты блока
 						wMark.css('left', '0px');
 						wMark.css('top', '0px');
-						movement.findPosition(wMark);
 
 					// Масштабируем
 					if(widthImage > 652 || heightImage > 535){
 						scale = newWidthImage/widthImage;
 						wMark.watermark({scale: scale});
-						//scaleRatio(scale);
 						console.log('Watermark нормалдьный');
 					}else{
 						scale = 1;
 						wMark.watermark({scale: scale});
-						//scaleRatio(scale);
 					};
 
 					if(watermarkWidth > widthImage || watermarkHeight > heightImage){
@@ -199,10 +196,10 @@ var upload = function() {
 						newScaleH = (heightImage/watermarkHeight)*scale;
 						if(newScaleW < newScaleH){
 							wMark.watermark({scale: newScaleW});
-							scaleRatio(newScaleW);
+							scale = newScaleW;
 						}else{
 							wMark.watermark({scale: newScaleH});
-							scaleRatio(newScaleH);
+							scale = newScaleH;
 						};
 					};
 
@@ -221,10 +218,8 @@ var upload = function() {
 
 
 	var scaleRatio = function(){
-		//mainRatio = sRatio;
 		console.log("Коэффициент масштбирования: " + scale);
-		return scale;
-
+		return {scale: scale, bgWidth: widthImage, bgHeight: heightImage, wmWidth: watermarkWidth, wmHeight: watermarkHeight};
 	};
 
 

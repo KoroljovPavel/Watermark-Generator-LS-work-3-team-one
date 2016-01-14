@@ -5,7 +5,8 @@ var movement = function() {
 	// Определяем блок с водяным знаком и переменные для его координат
 	var image = $('.output__watermark-result'),
 		left,
-		top;
+		top,
+		info;
 
 	var init = function() {
 		_setUpListners();
@@ -40,9 +41,20 @@ var movement = function() {
 	var _changePositionInput = function(event) {
 		event.preventDefault();
 		_InputsRound();
+		info = upload.scaleRatio();
+		// Проверки на соответствие границам
+		if ($(this).val() < 0) {
+				$(this).val(0);
+			};
 		if ($(this).hasClass('x-pos')) {
-			image.watermark('coordinate_x', $(this).val());	
+			if ($(this).val() > info.bgWidth - info.wmWidth) {
+				$(this).val(info.bgWidth - info.wmWidth);	
+			};
+			image.watermark('coordinate_x', $(this).val());
 		} else {
+			if ($(this).val() > info.bgHeight - info.wmHeight) {
+				$(this).val(info.bgHeight - info.wmHeight);	
+			};
 			image.watermark('coordinate_y', $(this).val());
 		};
 	};
@@ -104,12 +116,11 @@ var movement = function() {
 	var _changePositionDrag = function() {
 		image.draggable({
 			cursor: 'move',
+			containment: 'parent',
 	        drag: function(event, ui) {
-				console.log(ui.position.left);
-				var scale = upload.scaleRatio();
-				console.log(scale);
-				$('.x-pos').val(ui.position.left / scale);
-				$('.y-pos').val(ui.position.top / scale);
+				info = upload.scaleRatio();
+				$('.x-pos').val(ui.position.left / info.scale);
+				$('.y-pos').val(ui.position.top / info.scale);
 				$('.x-pos').trigger('change');
 				$('.y-pos').trigger('change');
 			}
@@ -118,10 +129,11 @@ var movement = function() {
 
 	// Запись текущих координат в инпуты
 	var findPosition = function(block) {
+		info = upload.scaleRatio();
 		left = block.css('left');
 		top = block.css('top');
-		$('.x-pos').val(left.substr(0, left.length - 2));
-		$('.y-pos').val(top.substr(0, top.length - 2));
+		$('.x-pos').val(left.substr(0, left.length - 2) / info.scale);
+		$('.y-pos').val(top.substr(0, top.length - 2) / info.scale);
 	};
 
 	var _InputsRound = function() {
