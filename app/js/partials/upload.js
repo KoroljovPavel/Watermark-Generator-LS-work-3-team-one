@@ -175,27 +175,23 @@ var upload = function() {
 						$('.x-down').attr('disabled', false);
 						$('.y-up').attr('disabled', false);
 						$('.y-down').attr('disabled', false);
+	        		};
 
-
-						// Сбрасываем текущие координаты блока
+	        		// Сбрасываем текущие координаты блока
 						wMark.css('left', '0px');
 						wMark.css('top', '0px');
 						movement.findPosition(wMark);
-
-
-
-	        		};
 
 					// Масштабируем
 					if(widthImage > 652 || heightImage > 535){
 						scale = newWidthImage/widthImage;
 						wMark.watermark({scale: scale});
-						scaleRatio(scale);
+						//scaleRatio(scale);
 						console.log('Watermark нормалдьный');
 					}else{
 						scale = 1;
 						wMark.watermark({scale: scale});
-						scaleRatio(scale);
+						//scaleRatio(scale);
 					};
 
 					if(watermarkWidth > widthImage || watermarkHeight > heightImage){
@@ -224,10 +220,10 @@ var upload = function() {
 	};
 
 
-	var scaleRatio = function(sRatio){
-		mainRatio = sRatio;
-		console.log("Коэффициент масштбирования: " + sRatio);
-		return mainRatio;
+	var scaleRatio = function(){
+		//mainRatio = sRatio;
+		console.log("Коэффициент масштбирования: " + scale);
+		return scale;
 
 	};
 

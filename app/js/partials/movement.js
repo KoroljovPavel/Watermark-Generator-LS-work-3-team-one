@@ -39,6 +39,7 @@ var movement = function() {
 	// Смена координат с помощью инпутов
 	var _changePositionInput = function(event) {
 		event.preventDefault();
+		_InputsRound();
 		if ($(this).hasClass('x-pos')) {
 			image.watermark('coordinate_x', $(this).val());	
 		} else {
@@ -96,15 +97,19 @@ var movement = function() {
 				findPosition(image);
 				break;
 		};
+		_InputsRound();
 	};
 
 	// Смена координат с помощью мыши
 	var _changePositionDrag = function() {
 		image.draggable({
-	        	drag: function(event, ui) {
+			cursor: 'move',
+	        drag: function(event, ui) {
 				console.log(ui.position.left);
-				$('.x-pos').val(ui.position.left);
-				$('.y-pos').val(ui.position.top);
+				var scale = upload.scaleRatio();
+				console.log(scale);
+				$('.x-pos').val(ui.position.left / scale);
+				$('.y-pos').val(ui.position.top / scale);
 				$('.x-pos').trigger('change');
 				$('.y-pos').trigger('change');
 			}
@@ -117,6 +122,11 @@ var movement = function() {
 		top = block.css('top');
 		$('.x-pos').val(left.substr(0, left.length - 2));
 		$('.y-pos').val(top.substr(0, top.length - 2));
+	};
+
+	var _InputsRound = function() {
+		$('.x-pos').val(Math.round($('.x-pos').val()));
+		$('.y-pos').val(Math.round($('.y-pos').val()));
 	};
 
 	// Публичные методы
