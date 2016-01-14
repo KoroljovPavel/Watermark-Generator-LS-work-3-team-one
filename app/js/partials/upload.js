@@ -27,7 +27,9 @@ var upload = function() {
 	$('.y-up').attr('disabled', true);
 	$('.y-down').attr('disabled', true);
 	$('.position__cell').css('pointer-events', 'none');
-	$('button').attr('disabled', true);
+	$('.view__item').attr('disabled', true);
+	$('.manipulation__btn-reset').attr('disabled', true);
+	$('.manipulation__btn-submit').attr('disabled', true);
 	$('.watermark-upload__inputs').click(function(e){
 
 		if(preventAction){
@@ -111,7 +113,9 @@ var upload = function() {
 						$('.y-up').attr('disabled', false);
 						$('.y-down').attr('disabled', false);
 						$('.position__cell').css('pointer-events', 'auto');
-						$('button').attr('disabled', false);
+						$('.view__item').attr('disabled', false);
+						$('.manipulation__btn-reset').attr('disabled', false);
+						$('.manipulation__btn-submit').attr('disabled', false);
 
 						// Сбрасываем текущие координаты блока
 						wMark.css('left', '0px');
