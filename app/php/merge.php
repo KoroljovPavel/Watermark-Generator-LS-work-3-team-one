@@ -71,7 +71,6 @@ if ($_POST["type"] == 'tiling') {
     }
 }
 
-
 echo json_encode( array(
     'status' => 'success'
     ), JSON_FORCE_OBJECT
