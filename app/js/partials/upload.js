@@ -48,6 +48,7 @@ var upload = function() {
 
 		// Определяем GET параметр
 		var url = 'php/upload.php?fileType=' + type;
+
 		image.fileupload({
 			url: url,
 			dataType: 'json',
@@ -57,6 +58,7 @@ var upload = function() {
 				console.log(data);
 	        	data.submit();
 	        },
+
 			// Получаем ответ от сервера
 			done: function (e, data) {
 				var path;
@@ -68,7 +70,7 @@ var upload = function() {
 	        		// Проверка (картинка или водяной знак)
 
 	        		if (data.result.minName.indexOf('-img') + 1) {
-
+						$('.loader').hide();
 						// Добавляем путь соответствующему элементу
 						$('.img-display').attr({'src':path, 'alt':'Ваша картинка'});
 
@@ -87,7 +89,7 @@ var upload = function() {
 
 
 					} else if (data.result.minName.indexOf('-watermark') + 1) {
-
+						$('.loader').hide();
 						$('.watermark-display').attr({'src':path, 'alt':'Ваш водяной знак'});
 
 						// Записываем оригинальные размеры watermark
@@ -166,6 +168,7 @@ var upload = function() {
 				ctx.fillText(al + '%', cw * .5, ch * .5 + 2, cw);
 				if (al >= 100) {
 					$('#my_canvas').fadeOut('slow');
+					$('.loader').fadeIn('slow').css("z-index", '2');
 				};
 			},
 		});
