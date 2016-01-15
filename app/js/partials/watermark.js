@@ -106,7 +106,7 @@
         me.css(property, value);
 
         if (isAtPosition){
-            _position_at( me, [atPositionHor, atPositionVert] );
+            _position_at( me, atPositionHor, atPositionVert );
         }
 
         return this;
