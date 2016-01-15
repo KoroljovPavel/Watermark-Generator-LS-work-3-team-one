@@ -179,6 +179,9 @@ class merger {
                 $watermark = new Imagick();
                 $watermark->readImage($this->watermarkPath);
 
+                if (!$watermark->getImageAlphaChannel()) {
+                    $watermark->setImageAlphaChannel(1);
+                }
 
                 $watermark->evaluateImage(Imagick::EVALUATE_MULTIPLY, $this->watermarkTransparency,
                                                          Imagick::CHANNEL_ALPHA); 
@@ -187,7 +190,6 @@ class merger {
                                         $this->watermarkOfsetX, $this->watermarkOfsetY);
 
                 $image->writeImage($margedImagePath);
-
 
                 break;
             
