@@ -27,7 +27,7 @@ var download = function() {
                 ofsetY: $("#coordinate-cell-y").val(),
                 paddingX: $("#coordinate-line-x").val(),
                 paddingY: $("#coordinate-line-y").val(),
-                opacity: ($("#slider > .ui-slider-range").width() / 2.2)
+                opacity: ($("#opacity").data("opacity"))
             }, 
             type: "post", dataType: 'json'}
             )
