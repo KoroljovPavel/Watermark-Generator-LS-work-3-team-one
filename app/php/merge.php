@@ -30,7 +30,7 @@ if (!$wmMerger->setImage($__config['path']['imgUpload']
     exit();  
 }
 
-if (!$wmMerger->setWatermarkTransparency((int) $_POST['opacity'])) {
+if (!$wmMerger->setWatermarkTransparency((float) $_POST['opacity'])) {
     echo json_encode( array(
         'status' => 'error',
         'errorId' => '1-5',

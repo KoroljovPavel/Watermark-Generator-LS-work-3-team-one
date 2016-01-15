@@ -32,11 +32,11 @@ class merger {
     }
 
     public function setWatermarkTransparency($transparency) {
-        if (!is_integer($transparency) ||
-                $transparency < 0 || $transparency > 100) {
+        if (!is_float($transparency) ||
+                $transparency < 0 || $transparency > 1) {
             return false;
         }
-        $this->watermarkTransparency = $transparency / 100;
+        $this->watermarkTransparency = (float) $transparency;
         return true;
     }
 
@@ -180,7 +180,7 @@ class merger {
                 $watermark->readImage($this->watermarkPath);
 
 
-                $watermark->evaluateImage(Imagick::EVALUATE_MULTIPLY, $this->watermarkTransparency / 100,
+                $watermark->evaluateImage(Imagick::EVALUATE_MULTIPLY, $this->watermarkTransparency,
                                                          Imagick::CHANNEL_ALPHA); 
 
                 $image->compositeImage($watermark, imagick::COMPOSITE_OVER,
@@ -188,13 +188,6 @@ class merger {
 
                 $image->writeImage($margedImagePath);
 
-                echo json_encode( array(
-                    'status' => 'error',
-                    'errorId' => '1-7',
-                    'errorText' => $this->watermarkTransparency
-                    ), JSON_FORCE_OBJECT
-                );
-                exit();
 
                 break;
             
