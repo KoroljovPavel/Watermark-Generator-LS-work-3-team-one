@@ -131,11 +131,12 @@ var upload = function() {
 					};
 
 					wMark.watermark('size_width', watermarkWidth)
-							.watermark('size_height', watermarkHeight);
+							.watermark('size_height', watermarkHeight)
+							.watermark('position_at', 'left', 'top');
 
 					// Сбрасываем текущие координаты блока
-					wMark.css('left', '0px');
-					wMark.css('top', '0px');
+					//wMark.css('left', '0px');
+					//wMark.css('top', '0px');
 
 	        	} else {
 	        		console.log('Upload error');
