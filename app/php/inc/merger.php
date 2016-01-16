@@ -100,11 +100,10 @@ class merger {
 
                 for ($i = 0; $i < $imgInLine; $i++) { // цыкл движения по горизонтали
                     for ($j = 0; $j < $imgInCol; $j++) {  // Цыкл движения по вертикали 
-                        imagecopymerge($image, $watermark,
+                        imagecopy($image, $watermark,
                                 $i * ($watermarkInfo[0] + $this->tillingPaddingX),
                                 $j * ($watermarkInfo[1] + $this->tillingPaddingY),
-                                0, 0, $watermarkInfo[0], $watermarkInfo[1],
-                                $this->watermarkTransparency);
+                                0, 0, $watermarkInfo[0], $watermarkInfo[1]);
                     }
                 }
 
@@ -161,6 +160,24 @@ class merger {
                 imagealphablending($image, false);
                 imagealphablending($watermark, false);
 
+                if ($watermarkInfo[0] > $imageInfo[0] || $watermarkInfo[1] > $imageInfo[1]) {
+                    $kWidth = $watermarkInfo[0] / $imageInfo[0];
+                    $kHeight = $watermarkInfo[0] / $imageInfo[0];
+
+                    if ($kWidth > $kHeight) {
+                        // Масштабируем по ширине
+                        $watermarkInfo[0] = $watermarkInfo[0] / $kWidth;
+                        $watermarkInfo[1] = $watermarkInfo[1] / $kWidth;
+                    } else {
+                        // Масштабируем по высоте
+                        $watermarkInfo[0] = $watermarkInfo[0] / $kHeight;
+                        $watermarkInfo[1] = $watermarkInfo[1] / $kHeight;
+                    }
+
+                    imagecopyresampled($watermark,$watermark,0,0,0,0,$watermarkInfo[0],
+                            $watermarkInfo[1],imagesx($watermark),imagesy($watermark));
+                }
+
                 imagecopy($image, $watermark, $this->watermarkOfsetX,
                     $this->watermarkOfsetY, 0, 0, $watermarkInfo[0], $watermarkInfo[1]);
                 if ($imageInfo["mime"] == "image/png") {
@@ -181,6 +198,22 @@ class merger {
 
                 if (!$watermark->getImageAlphaChannel()) {
                     $watermark->setImageAlphaChannel(1);
+                }
+
+                if ($watermark->getImageWidth() > $image->getImageWidth() 
+                            || $watermark->getImageHeight() > $image->getImageHeight()) {
+                    $kWidth = $watermark->getImageWidth() / $image->getImageWidth();
+                    $kHeight = $watermark->getImageHeight() / $image->getImageHeight();
+
+                    if ($kWidth > $kHeight) {
+                        // Масштабируем по ширине
+                        $watermark->scaleImage($watermark->getImageWidth() / $kWidth,
+                                                $watermark->getImageHeight() / $kWidth);
+                    } else {
+                        // Масштабируем по высоте
+                        $watermark->scaleImage($watermark->getImageWidth() / $kHeight,
+                                                $watermark->getImageHeight() / $kHeight);
+                    }
                 }
 
                 $watermark->evaluateImage(Imagick::EVALUATE_MULTIPLY, $this->watermarkTransparency,
