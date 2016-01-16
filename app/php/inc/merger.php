@@ -117,6 +117,58 @@ class merger {
                 break;
 
             case 'imagick':
+                $image = new Imagick();
+                $image->readImage($this->imagePath);
+
+                $watermark = new Imagick();
+                $watermark->readImage($this->watermarkPath);
+
+                if (!$watermark->getImageAlphaChannel()) {
+                    $watermark->setImageAlphaChannel(1);
+                }
+
+                if ($watermark->getImageWidth() > $image->getImageWidth() 
+                            || $watermark->getImageHeight() > $image->getImageHeight()) {
+                    $kWidth = $watermark->getImageWidth() / $image->getImageWidth();
+                    $kHeight = $watermark->getImageHeight() / $image->getImageHeight();
+
+                    if ($kWidth > $kHeight) {
+                        // Масштабируем по ширине
+                        $watermark->scaleImage($watermark->getImageWidth() / $kWidth,
+                                                $watermark->getImageHeight() / $kWidth);
+                    } else {
+                        // Масштабируем по высоте
+                        $watermark->scaleImage($watermark->getImageWidth() / $kHeight,
+                                                $watermark->getImageHeight() / $kHeight);
+                    }
+                }
+
+                $watermark->evaluateImage(Imagick::EVALUATE_MULTIPLY, $this->watermarkTransparency,
+                                                         Imagick::CHANNEL_ALPHA); 
+
+                $imgInLine  = ceil($image->getImageWidth() / 
+                            ($watermark->getImageWidth() + $this->tillingPaddingX));
+                $imgInCol   = ceil($image->getImageHeight() /
+                            ($watermark->getImageHeight() + $this->tillingPaddingY));
+
+                $this->watermarkOfsetX = $this->watermarkOfsetX % 
+                        ($watermark->getImageWidth() + $this->tillingPaddingX);
+
+                $this->watermarkOfsetY = $this->watermarkOfsetY % 
+                        ($watermark->getImageHeight() + $this->tillingPaddingY);
+
+                for ($i = -1; $i < $imgInLine; $i++) { // цыкл движения по горизонтали
+                    for ($j = -1; $j < $imgInCol; $j++) {  // Цыкл движения по вертикали 
+
+                        $image->compositeImage($watermark, imagick::COMPOSITE_OVER,
+                            $this->watermarkOfsetX+($i * 
+                                ($watermark->getImageWidth() + $this->tillingPaddingX)),
+                             $this->watermarkOfsetY+($j * 
+                                ($watermark->getImageHeight() + $this->tillingPaddingY)));
+                    }
+                }
+
+                $image->writeImage($margedImagePath);
 
                 break;
 
