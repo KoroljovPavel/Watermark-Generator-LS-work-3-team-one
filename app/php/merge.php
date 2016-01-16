@@ -44,6 +44,9 @@ if ($_POST["type"] == 'tiling') {
     $wmMerger->setTillingPadding((int) $_POST['paddingX'], 
                                             (int) $_POST['paddingY']);
 
+    $wmMerger->setWatermarkOfsets((int) $_POST['ofsetX'],
+                                            (int) $_POST['ofsetY']);
+
     if (!$wmMerger->tiling($__config['path']['imgUpload'] . "marged-"
                     . $_SESSION["uploads"]["img"]["tmpName"])) {
         echo json_encode( array(
