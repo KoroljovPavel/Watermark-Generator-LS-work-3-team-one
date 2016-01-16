@@ -48,12 +48,12 @@ var movement = function() {
 			};
 		if ($(this).hasClass('x-pos')) {
 			if ($(this).val() * info.secondScale > info.bgWidth - info.wmWidth * info.secondScale) {
-				$(this).val((info.bgWidth - info.wmWidth * info.secondScale) / info.secondScale);	
+				$(this).val((info.bgWidth - Math.round(info.wmWidth * info.secondScale)) / info.secondScale);	
 			};
 			image.watermark('coordinate_x', $(this).val());
 		} else {
 			if ($(this).val() * info.secondScale > info.bgHeight - info.wmHeight * info.secondScale) {
-				$(this).val((info.bgHeight - info.wmHeight * info.secondScale)  / info.secondScale);	
+				$(this).val((info.bgHeight - Math.round(info.wmHeight * info.secondScale))  / info.secondScale);	
 			};
 			image.watermark('coordinate_y', $(this).val());
 		};
