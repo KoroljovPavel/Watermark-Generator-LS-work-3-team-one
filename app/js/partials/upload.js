@@ -243,3 +243,4 @@ var upload = function() {
 
 // Инициируем модуль
 upload.init();
+

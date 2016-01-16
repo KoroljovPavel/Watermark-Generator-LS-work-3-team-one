@@ -22,4 +22,5 @@
 //= partials/dict.js
 //= partials/translate.js
 
+//= partials/tile.js
 
