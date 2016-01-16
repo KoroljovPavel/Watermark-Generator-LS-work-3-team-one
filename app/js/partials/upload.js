@@ -14,6 +14,7 @@ var upload = function() {
 		newWatermarkWidth,
 		newWatermarkHeight,
 		scale,
+		secondScale,
 		newScaleW,
 		newScaleH,
 		newHeightImage,
@@ -118,15 +119,19 @@ var upload = function() {
 						wMark.watermark({scale: scale});
 					};
 
+					secondScale = 1;
+
 					if(watermarkWidth > widthImage || watermarkHeight > heightImage){
 						newScaleW = (widthImage/watermarkWidth)*scale;
 						newScaleH = (heightImage/watermarkHeight)*scale;
 						if(newScaleW < newScaleH){
 							wMark.watermark({scale: newScaleW});
 							scale = newScaleW;
+							secondScale = widthImage/watermarkWidth;
 						}else{
 							wMark.watermark({scale: newScaleH});
 							scale = newScaleH;
+							secondScale = heightImage/watermarkHeight;
 						};
 					};
 
@@ -178,7 +183,7 @@ var upload = function() {
 
 	var scaleRatio = function(){
 		console.log("Коэффициент масштбирования: " + scale);
-		return {scale: scale, bgWidth: widthImage, bgHeight: heightImage, wmWidth: watermarkWidth, wmHeight: watermarkHeight};
+		return {scale: scale, secondScale: secondScale, bgWidth: widthImage, bgHeight: heightImage, wmWidth: watermarkWidth, wmHeight: watermarkHeight};
 	};
 
 

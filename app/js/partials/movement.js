@@ -47,16 +47,17 @@ var movement = function() {
 				$(this).val(0);
 			};
 		if ($(this).hasClass('x-pos')) {
-			if ($(this).val() > info.bgWidth - info.wmWidth) {
-				$(this).val(info.bgWidth - info.wmWidth);	
+			if ($(this).val() * info.secondScale > info.bgWidth - info.wmWidth * info.secondScale) {
+				$(this).val((info.bgWidth - info.wmWidth * info.secondScale) / info.secondScale);	
 			};
 			image.watermark('coordinate_x', $(this).val());
 		} else {
-			if ($(this).val() > info.bgHeight - info.wmHeight) {
-				$(this).val(info.bgHeight - info.wmHeight);	
+			if ($(this).val() * info.secondScale > info.bgHeight - info.wmHeight * info.secondScale) {
+				$(this).val((info.bgHeight - info.wmHeight * info.secondScale)  / info.secondScale);	
 			};
 			image.watermark('coordinate_y', $(this).val());
 		};
+		_InputsRound();
 	};
 
 	// Обработка нажатия клавиши Enter при вводе координат в инпуты
