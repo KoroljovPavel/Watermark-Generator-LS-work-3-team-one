@@ -100,15 +100,15 @@ var movement = function() {
 		if (isSingleView){
 			info = upload.scaleRatio();
 			if (me.hasClass('x-pos')) {
-				if (me.val() * info.secondScale > info.bgWidth - info.wmWidth * info.secondScale) {
-					me.val((info.bgWidth - Math.round(info.wmWidth * info.secondScale)) / info.secondScale);
+				if (me.val() > Math.round(info.bgWidth - info.wmWidth * info.secondScale)) {
+					me.val(Math.round(info.bgWidth - info.wmWidth * info.secondScale));
 				}
-				image.watermark('coordinate_x', $(this).val());
+				image.watermark('coordinate_x', $(this).val() / info.secondScale);
 			} else {
-				if (me.val() * info.secondScale > info.bgHeight - info.wmHeight * info.secondScale) {
-					me.val((info.bgHeight - Math.round(info.wmHeight * info.secondScale))  / info.secondScale);
+				if (me.val() > Math.round(info.bgHeight - info.wmHeight * info.secondScale)) {
+					me.val(Math.round(info.bgHeight - info.wmHeight * info.secondScale));
 				}
-				image.watermark('coordinate_y', me.val());
+				image.watermark('coordinate_y', me.val() / info.secondScale);
 			}
 		}else {
 			if (me.hasClass('x-pos')) {
@@ -182,8 +182,8 @@ var movement = function() {
 			containment: 'parent',
 	        drag: function(event, ui) {
 				info = upload.scaleRatio();
-				$('.x-pos[data-view=single]').val(ui.position.left / info.scale);
-				$('.y-pos[data-view=single]').val(ui.position.top / info.scale);
+				$('.x-pos[data-view=single]').val(ui.position.left / info.scale * info.secondScale);
+				$('.y-pos[data-view=single]').val(ui.position.top / info.scale * info.secondScale);
 				$('.x-pos[data-view=single]').trigger('change');
 				$('.y-pos[data-view=single]').trigger('change');
 			}
