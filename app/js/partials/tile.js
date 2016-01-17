@@ -117,7 +117,7 @@ var tile = (function() {
              $(".position-lines-y").css({
                  'width': newlineWidth + "px"
               });
-     }
+    }
     function _lineY(){ 
         var yValue = $("#coordinate-line-x").val();
         var newValue = yValue * upload.scaleRatio().scale;
@@ -126,7 +126,7 @@ var tile = (function() {
              $(".position-lines-x").css({
                  'height': newlineHeight + "px"
               });
-     }
+    }
 
     return {
         init: _init,
