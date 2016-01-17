@@ -75,19 +75,20 @@ var tile = (function() {
 
     function _setMarginHorizontal(marginX) {
         console.log("_setMarginHorizontal", marginX);
-        $(tileItem).css("margin-right", (marginX * upload.scaleRatio().scale) + "px");
+
+        var value = marginX*upload.scaleRatio().scale;
+        $(tileItem).css("margin-right", value + "px");
     }
 
     function _setMarginVertical(marginY) {
         console.log("_setMarginVertical", marginY);
-        $(tileItem).css("margin-bottom", (marginY * upload.scaleRatio().scale) + "px");
+
+        var value = marginY*upload.scaleRatio().scale;
+        $(tileItem).css("margin-bottom", value + "px");
     }
 
     function _setOpacity(value){
         currentOpacity = value;
-
-        console.log("_setOpacity", currentOpacity);
-        console.log("isGenerated ", isGenerated);
 
         if (isGenerated){
             $(tileItem).css("opacity", value);
@@ -107,6 +108,7 @@ var tile = (function() {
         watermarkWidth = $(singleWatermarkName).width();
         watermarkHeight = $(singleWatermarkName).height();
     }
+
     function _lineX(){ 
         var xValue = $("#coordinate-line-y").val();
         var newValue = xValue * upload.scaleRatio().scale;
@@ -125,6 +127,7 @@ var tile = (function() {
                  'height': newlineHeight + "px"
               });
      }
+
     return {
         init: _init,
         generate: _generate,
