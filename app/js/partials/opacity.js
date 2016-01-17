@@ -28,8 +28,16 @@ var opacity = function(){
         });
     };
 
+     var resetOpacity = function() {
+        slider.slider({value: 50});
+        watermark.watermark('opacity', .5);
+        slider.data('opacity', .5).attr('data-opacity', .5);
+        tile.opacity(.5);
+    };
+
     return {
-        init: init
+        init: init,
+        resetOpacity: resetOpacity
     }
 
 }();
