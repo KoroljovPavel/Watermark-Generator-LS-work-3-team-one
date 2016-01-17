@@ -4,6 +4,7 @@ var movement = function() {
 
 	// Определяем блок с водяным знаком и переменные для его координат
 	var image = $('.output__watermark-result'),
+		tile = $('.watermarks'),
 		left,
 		top,
 		info;
@@ -11,6 +12,7 @@ var movement = function() {
 	var init = function() {
 		_setUpListners();
 		_changePositionDrag();
+		_tileDrag();
 	};
 
 	var mouseInterval;
@@ -183,6 +185,12 @@ var movement = function() {
 				$('.x-pos[data-view=single]').trigger('change');
 				$('.y-pos[data-view=single]').trigger('change');
 			}
+		});
+	};
+
+	var _tileDrag = function() {
+		tile.draggable({
+			cursor: 'move'
 		});
 	};
 

@@ -95,8 +95,11 @@
 	height: inherit;
     width: 500%;
     position: absolute;
-	top: -50%;
-	left: -50%;
+	top: 0;
+	left: 0;
+	margin-top: -200%;
+	margin-left: -200%;
+	cursor: move;
 }
 .manipulation__image-upload{
 	margin-bottom: 18px;
