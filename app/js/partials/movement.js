@@ -24,26 +24,42 @@ var movement = function() {
 		$('.y-pos').on('keypress', _noSubmit);
 		for (var i = 1; i <= 9; i += 1) {
 			$('.cell' + i).on('click', {number: i}, _changePositionGrid)
-		};
+		}
 	};
 
 	// Смена координат с помощью стрелочек
 	var _changePositionArrow = function(event) {
 		event.preventDefault();
-		val = +event.data.input.val();
-		val += event.data.param;
-		event.data.input.val(val);
-		event.data.input.trigger('change');
+
+		var me = $(this);
+		var input = event.data.input.filter("[data-view=" + me.data("view") + "]");
+		var val = +input.val() + event.data.param;
+
+		input.val(val);
+		input.trigger('change');
 	};
 
 	// Смена координат с помощью инпутов
 	var _changePositionInput = function(event) {
 		event.preventDefault();
-		if ($(this).hasClass('x-pos')) {
-			image.watermark('coordinate_x', $(this).val());	
-		} else {
+
+		var me = $(this);
+
+		var isSingleView = me.data("view") == "single";
+
+		if (isSingleView && me.hasClass('x-pos')) {
+			//single, x coordinate
+			image.watermark('coordinate_x', $(this).val());
+		}else if (isSingleView){
+			//single, y coordinate
 			image.watermark('coordinate_y', $(this).val());
-		};
+		}else if (me.hasClass('x-pos')){
+			//tile, hor margin
+			tile.setMarginHorizontal($(this).val());
+		}else {
+			//tile, vert margin
+			tile.setMarginVertical($(this).val());
+		}
 	};
 
 	// Обработка нажатия клавиши Enter при вводе координат в инпуты

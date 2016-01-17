@@ -1,65 +1,118 @@
-var tile = function() {
+var tile = (function() {
 
-	var imageWidth, imageHeight, watermarkWidth, watermarkHeight,
-  tileCount, tileInner;
+    var viewSingle = ".view__item-one",
+        viewTile = ".view__item-two",
+        tileWrapperName = ".output__many-watermark",
+        singleWrapperName = ".output__watermark-result",
+        tileInnerName = ".watermarks",
+        backgroundName = ".img-display",
+        singleWatermarkName = "#watermark-display",
+        tileItemClass = "wm__tile",
+        tileItem = "." + tileItemClass,
+        multiplier = 5;
 
-	var init = function() {
-    imageWidth = $(".img-display").width();
-    imageHeight = $(".img-display").height();
-    
-    watermarkWidth = $('.watermark-display').width();
-    watermarkHeight = $('.watermark-display').height();
-    
-    tileCount = (3 * imageWidth / watermarkWidth + 1) * 
-        (3 * imageHeight / watermarkHeight + 1);
-    
-     tileInner = $(".watermarks");
+    var imageWidth,
+        imageHeight,
+        watermarkWidth,
+        watermarkHeight;
 
-    for (var i = 0; i < tileCount; i++) {
-      var img = $('<img/>');
-      img.attr({
-        'src': $('#watermark-display').attr('src'),
-        'class': 'wm__tile'
-      });
-      img.css({
-        'display': 'block',
-        'width': watermarkWidth,
-        'height': watermarkHeight,
-        'float': 'left'
-      });
-      img.appendTo($(tileInner));
+    var currentOpacity,
+        isGenerated = false;
+
+    function _init() {
+
+        $(viewSingle).on("click", function(){
+
+            _updateSizes();
+
+            $(tileWrapperName).show();
+            $(singleWrapperName).hide();
+
+            _generate();
+
+            _setOpacity(currentOpacity);
+        });
+
+        $(viewTile).on("click", function(){
+            $(tileWrapperName).hide();
+            $(singleWrapperName).show();
+        });
+
     }
-  }
-  
-  var setMarginGorizontal = function(marginX) {
-  	$('.wm').css("margin-right", marginX);
-  }
-  var setMarginVertical = function(marginY) {
-    $('.wm').css("margin-bottom", marginY);
-  }
-  
-  var show = function() {
-    $('.view__item-one').click(function(event) {
-      $('.output__many-watermark').show();
-    });
-  	
-  }
-  
-  var hide = function() {
-    $('.view__item-two').click(function(event) {
-      $('.output__many-watermark').hide();
-    });
-  }
-  
-  return {
-  	init: init,
-    setMarginGorizontal: setMarginGorizontal,
-    setMarginVertical: setMarginVertical,
-    show: show,
-    hide: hide
-  }
 
-}();
+    function _generate(){
+
+        var tileCount = multiplier * (imageWidth / watermarkWidth + 1) *
+            (imageHeight / watermarkHeight + 1);
+
+        var tileInner = $(tileInnerName);
+
+        for (var i = 0; i < tileCount; ++i) {
+            var img = $('<img/>');
+
+            img.attr({
+                'src': $(singleWatermarkName).attr('src'),
+                'class': tileItemClass
+            });
+
+            img.css({
+                'display': 'block',
+                'width': watermarkWidth + "px",
+                'height': watermarkHeight + "px",
+                'float': 'left'
+            });
+
+            img.appendTo(tileInner);
+        }
+
+        isGenerated = true;
+    }
+
+    function _setMarginHorizontal(marginX) {
+        console.log("_setMarginHorizontal", marginX);
+        $(tileItem).css("margin-right", marginX + "px");
+    }
+
+    function _setMarginVertical(marginY) {
+        console.log("_setMarginVertical", marginY);
+        $(tileItem).css("margin-bottom", marginY + "px");
+    }
+
+    function _setOpacity(value){
+        currentOpacity = value;
+
+        console.log("_setOpacity", currentOpacity);
+        console.log("isGenerated ", isGenerated);
+
+        if (isGenerated){
+            $(tileItem).css("opacity", value);
+        }
+    }
+
+    function _reset(){
+        $(tileInnerName).empty();
+
+        _updateSizes();
+    }
+
+    function _updateSizes(){
+        imageWidth = $(backgroundName).width();
+        imageHeight = $(backgroundName).height();
+
+        watermarkWidth = $(singleWatermarkName).width();
+        watermarkHeight = $(singleWatermarkName).height();
+    }
+
+    return {
+        init: _init,
+        generate: _generate,
+        setMarginHorizontal: _setMarginHorizontal,
+        setMarginVertical: _setMarginVertical,
+        opacity: _setOpacity,
+        reset: _reset
+    }
+
+})();
 
 tile.init();
 

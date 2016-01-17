@@ -16,11 +16,11 @@
 
 //= partials/movement.js
 
+//= partials/tile.js
 //= partials/opacity.js
 //= partials/view-position.js
 //= partials/social.js
 //= partials/dict.js
 //= partials/translate.js
 
-//= partials/tile.js
 
