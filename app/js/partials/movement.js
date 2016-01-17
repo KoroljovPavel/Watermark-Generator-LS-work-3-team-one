@@ -236,6 +236,7 @@ var movement = function() {
 		$('.y-pos').val(0);
 		$('.x-pos').trigger('change');
 		$('.y-pos').trigger('change');
+		opacity.resetOpacity();
 	};
 
 	// Публичные методы
