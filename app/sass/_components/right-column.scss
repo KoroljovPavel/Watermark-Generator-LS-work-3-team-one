@@ -83,6 +83,19 @@
 	position: absolute;
 	cursor: move;
 }
+.output__many-watermark{
+	width: inherit;
+    height: inherit;
+    position: absolute;
+    top: 0;
+    overflow: hidden;
+    display: none;
+}
+.watermarks{
+	height: inherit;
+    width: 500%;
+    position: absolute;
+}
 .manipulation__image-upload{
 	margin-bottom: 18px;
 }
