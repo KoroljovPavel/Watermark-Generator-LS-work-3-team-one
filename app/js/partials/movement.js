@@ -54,7 +54,8 @@ var movement = function() {
 
 		for (var i = 1; i <= 9; i += 1) {
 			$('.cell' + i).on('click', {number: i}, _changePositionGrid)
-		}
+		};
+		$('.reset-btn').on('click', _resetPosition);
 	};
 
 	function _changePositionContinious(e){
@@ -194,12 +195,22 @@ var movement = function() {
 		$('.y-pos').val(top.substr(0, top.length - 2) / info.scale);
 	};
 
+	// Округление значений в инпутах до целых чисел
 	var _InputsRound = function() {
 		var xInput = $('.x-pos[data-view=single]');
 		var yInput = $('.y-pos[data-view=single]');
 
 		xInput.val(Math.round(xInput.val()));
 		yInput.val(Math.round(yInput.val()));
+	};
+
+	// Сброс позиции
+	var _resetPosition = function(event) {
+		event.preventDefault();
+		$('.x-pos').val(0);
+		$('.y-pos').val(0);
+		$('.x-pos').trigger('change');
+		$('.y-pos').trigger('change');
 	};
 
 	// Публичные методы
