@@ -16,6 +16,7 @@
 
 //= partials/movement.js
 
+//= partials/tile.js
 //= partials/opacity.js
 //= partials/view-position.js
 //= partials/social.js

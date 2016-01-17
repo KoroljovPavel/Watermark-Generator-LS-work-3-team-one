@@ -13,51 +13,108 @@ var movement = function() {
 		_changePositionDrag();
 	};
 
+	var mouseInterval;
+
+	var handlers = {
+		".x-up": {
+			"input": ".x-pos",
+			"param": 1
+		},
+		".x-down": {
+			"input": ".x-pos",
+			"param": -1
+		},
+		".y-up": {
+			"input": ".y-pos",
+			"param": 1
+		},
+		".y-down": {
+			"input": ".y-pos",
+			"param": -1
+		}
+	};
+
 	// Вешаем обработчики
 	var _setUpListners = function() {
-		$('.x-up').on('click', {input: $('.x-pos'), param: 1}, _changePositionArrow);
-		$('.x-down').on('click', {input: $('.x-pos'), param: -1}, _changePositionArrow);
-		$('.y-up').on('click', {input: $('.y-pos'), param: 1}, _changePositionArrow);
-		$('.y-down').on('click', {input: $('.y-pos'), param: -1}, _changePositionArrow);
+
+		$.each( handlers, function( handlerName, value ) {
+			var eventObject = {input: $(value["input"]), param: value["param"]};
+
+			$(handlerName).on('click', eventObject, _changePositionArrow);
+			$(handlerName).on("mousedown", eventObject, _changePositionContinious);
+			$(handlerName).on("mouseup mouseleave", function () {
+				clearInterval(mouseInterval)
+			});
+		});
+
 		$('.x-pos').on('change', _changePositionInput);
 		$('.y-pos').on('change', _changePositionInput);
 		$('.x-pos').on('keypress', _noSubmit);
 		$('.y-pos').on('keypress', _noSubmit);
+
 		for (var i = 1; i <= 9; i += 1) {
 			$('.cell' + i).on('click', {number: i}, _changePositionGrid)
 		};
 		$('.reset-btn').on('click', _resetPosition);
 	};
 
+	function _changePositionContinious(e){
+		mouseInterval = setInterval(function(){
+			_changePositionArrow(e);
+		}, 100);
+	}
+
 	// Смена координат с помощью стрелочек
 	var _changePositionArrow = function(event) {
 		event.preventDefault();
-		val = +event.data.input.val();
-		val += event.data.param;
-		event.data.input.val(val);
-		event.data.input.trigger('change');
+
+		//not $(this) because is called from _changePositionContinious
+		var me = $(event.target);
+		var input = event.data.input.filter("[data-view=" + me.data("view") + "]");
+
+		var val = +input.val() + event.data.param;
+
+		input.val(val);
+
+		input.trigger('change');
 	};
 
 	// Смена координат с помощью инпутов
 	var _changePositionInput = function(event) {
 		event.preventDefault();
 		_InputsRound();
-		info = upload.scaleRatio();
-		// Проверки на соответствие границам
-		if ($(this).val() < 0) {
-				$(this).val(0);
-			};
-		if ($(this).hasClass('x-pos')) {
-			if ($(this).val() * info.secondScale > info.bgWidth - info.wmWidth * info.secondScale) {
-				$(this).val((info.bgWidth - Math.round(info.wmWidth * info.secondScale)) / info.secondScale);	
-			};
-			image.watermark('coordinate_x', $(this).val());
-		} else {
-			if ($(this).val() * info.secondScale > info.bgHeight - info.wmHeight * info.secondScale) {
-				$(this).val((info.bgHeight - Math.round(info.wmHeight * info.secondScale))  / info.secondScale);	
-			};
-			image.watermark('coordinate_y', $(this).val());
-		};
+
+		var me = $(this);
+
+		var isSingleView = me.data("view") == "single";
+		console.log(me.data("view"), isSingleView);
+
+		if (isSingleView){
+			info = upload.scaleRatio();
+			// Проверки на соответствие границам
+			if (me.val() < 0) {
+					me.val(0);
+				}
+			if (me.hasClass('x-pos')) {
+				if (me.val() * info.secondScale > info.bgWidth - info.wmWidth * info.secondScale) {
+					me.val((info.bgWidth - Math.round(info.wmWidth * info.secondScale)) / info.secondScale);
+				}
+				image.watermark('coordinate_x', $(this).val());
+			} else {
+				if (me.val() * info.secondScale > info.bgHeight - info.wmHeight * info.secondScale) {
+					me.val((info.bgHeight - Math.round(info.wmHeight * info.secondScale))  / info.secondScale);
+				}
+				image.watermark('coordinate_y', me.val());
+			}
+		}else {
+			if (me.hasClass('x-pos')) {
+				//tile, hor margin
+				tile.setMarginHorizontal($(this).val());
+			} else {
+				//tile, vert margin
+				tile.setMarginVertical($(this).val());
+			}
+		}
 		_InputsRound();
 	};
 
@@ -140,8 +197,11 @@ var movement = function() {
 
 	// Округление значений в инпутах до целых чисел
 	var _InputsRound = function() {
-		$('.x-pos').val(Math.round($('.x-pos').val()));
-		$('.y-pos').val(Math.round($('.y-pos').val()));
+		var xInput = $('.x-pos[data-view=single]');
+		var yInput = $('.y-pos[data-view=single]');
+
+		xInput.val(Math.round(xInput.val()));
+		yInput.val(Math.round(yInput.val()));
 	};
 
 	// Сброс позиции
