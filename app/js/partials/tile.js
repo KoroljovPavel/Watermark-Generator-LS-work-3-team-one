@@ -70,19 +70,20 @@ var tile = (function() {
 
     function _setMarginHorizontal(marginX) {
         console.log("_setMarginHorizontal", marginX);
-        $(tileItem).css("margin-right", marginX + "px");
+
+        var value = marginX*upload.scaleRatio().scale;
+        $(tileItem).css("margin-right", value + "px");
     }
 
     function _setMarginVertical(marginY) {
         console.log("_setMarginVertical", marginY);
-        $(tileItem).css("margin-bottom", marginY + "px");
+
+        var value = marginY*upload.scaleRatio().scale;
+        $(tileItem).css("margin-bottom", value + "px");
     }
 
     function _setOpacity(value){
         currentOpacity = value;
-
-        console.log("_setOpacity", currentOpacity);
-        console.log("isGenerated ", isGenerated);
 
         if (isGenerated){
             $(tileItem).css("opacity", value);

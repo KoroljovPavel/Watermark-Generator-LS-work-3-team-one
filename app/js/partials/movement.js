@@ -178,10 +178,10 @@ var movement = function() {
 			containment: 'parent',
 	        drag: function(event, ui) {
 				info = upload.scaleRatio();
-				$('.x-pos').val(ui.position.left / info.scale);
-				$('.y-pos').val(ui.position.top / info.scale);
-				$('.x-pos').trigger('change');
-				$('.y-pos').trigger('change');
+				$('.x-pos[data-view=single]').val(ui.position.left / info.scale);
+				$('.y-pos[data-view=single]').val(ui.position.top / info.scale);
+				$('.x-pos[data-view=single]').trigger('change');
+				$('.y-pos[data-view=single]').trigger('change');
 			}
 		});
 	};
@@ -191,8 +191,8 @@ var movement = function() {
 		info = upload.scaleRatio();
 		left = block.css('left');
 		top = block.css('top');
-		$('.x-pos').val(left.substr(0, left.length - 2) / info.scale);
-		$('.y-pos').val(top.substr(0, top.length - 2) / info.scale);
+		$('.x-pos[data-view=single]').val(left.substr(0, left.length - 2) / info.scale);
+		$('.y-pos[data-view=single]').val(top.substr(0, top.length - 2) / info.scale);
 	};
 
 	// Округление значений в инпутах до целых чисел
