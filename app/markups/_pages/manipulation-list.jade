@@ -55,15 +55,15 @@ form.manipulation__list
 					span.position-lines.position-lines-y
 			div.manipulation__item_position-coordinates.clearfix
 				div.position__coordinates.position__coordinates-one
-					input#coordinate-line-x.coordinate__input.coordinate__input-x.x-pos(type='text' value="0" data-view="tile")
-					div.coordinate__arrows
-						button.coordinate__arrow.coordinate__arrow-up.x-up(data-view="tile")
-						button.coordinate__arrow.coordinate__arrow-down.x-down(data-view="tile")
-				div.position__coordinates.position__coordinates-two
-					input#coordinate-line-y.coordinate__input.coordinate__input-y.y-pos(type='text' value="0" data-view="tile")
+					input#coordinate-line-x.coordinate__input.coordinate__input-x.y-pos(type='text' value="0" data-view="tile")
 					div.coordinate__arrows
 						button.coordinate__arrow.coordinate__arrow-up.y-up(data-view="tile")
 						button.coordinate__arrow.coordinate__arrow-down.y-down(data-view="tile")
+				div.position__coordinates.position__coordinates-two
+					input#coordinate-line-y.coordinate__input.coordinate__input-y.x-pos(type='text' value="0" data-view="tile")
+					div.coordinate__arrows
+						button.coordinate__arrow.coordinate__arrow-up.x-up(data-view="tile")
+						button.coordinate__arrow.coordinate__arrow-down.x-down(data-view="tile")
 	div.manipulation__item.manipulation__item_image-opacity
 		div.manipulation__item_image-opacity_header
 			label.manipulation__label.opacity__label(data-translate-key="opacity__label") Прозрачность
