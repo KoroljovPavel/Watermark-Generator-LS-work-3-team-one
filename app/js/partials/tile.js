@@ -37,7 +37,12 @@ var tile = (function() {
             $(tileWrapperName).hide();
             $(singleWrapperName).show();
         });
-
+        $(".x-pos").on("change", function(){
+            _lineX();
+        });
+        $(".y-pos").on("change", function(){
+            _lineY();
+        });
     }
 
     function _generate(){
@@ -70,20 +75,19 @@ var tile = (function() {
 
     function _setMarginHorizontal(marginX) {
         console.log("_setMarginHorizontal", marginX);
-
-        var value = marginX*upload.scaleRatio().scale;
-        $(tileItem).css("margin-right", value + "px");
+        $(tileItem).css("margin-right", (marginX * upload.scaleRatio().scale) + "px");
     }
 
     function _setMarginVertical(marginY) {
         console.log("_setMarginVertical", marginY);
-
-        var value = marginY*upload.scaleRatio().scale;
-        $(tileItem).css("margin-bottom", value + "px");
+        $(tileItem).css("margin-bottom", (marginY * upload.scaleRatio().scale) + "px");
     }
 
     function _setOpacity(value){
         currentOpacity = value;
+
+        console.log("_setOpacity", currentOpacity);
+        console.log("isGenerated ", isGenerated);
 
         if (isGenerated){
             $(tileItem).css("opacity", value);
@@ -103,7 +107,24 @@ var tile = (function() {
         watermarkWidth = $(singleWatermarkName).width();
         watermarkHeight = $(singleWatermarkName).height();
     }
+    function _lineX(){ 
+        var xValue = $("#coordinate-line-y").val();
+        var newValue = xValue * upload.scaleRatio().scale;
 
+            var newlineWidth = Math.ceil((newValue * 105) / (watermarkWidth * 2 + newValue))
+             $(".position-lines-y").css({
+                 'width': newlineWidth + "px"
+              });
+     }
+    function _lineY(){ 
+        var yValue = $("#coordinate-line-x").val();
+        var newValue = yValue * upload.scaleRatio().scale;
+
+            var newlineHeight = Math.ceil((newValue * 100) / (watermarkHeight * 2 + newValue))
+             $(".position-lines-x").css({
+                 'height': newlineHeight + "px"
+              });
+     }
     return {
         init: _init,
         generate: _generate,
