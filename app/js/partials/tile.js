@@ -64,6 +64,8 @@ var tile = (function() {
 
             img.appendTo(tileInner);
         }
+ 
+        tileInner.css('margin-top', -imageHeight * 2 + 'px');
 
         isGenerated = true;
     }
