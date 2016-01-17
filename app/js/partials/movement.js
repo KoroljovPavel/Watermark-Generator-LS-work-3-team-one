@@ -31,32 +31,58 @@ var movement = function() {
 	// Смена координат с помощью стрелочек
 	var _changePositionArrow = function(event) {
 		event.preventDefault();
-		val = +event.data.input.val();
-		val += event.data.param;
-		event.data.input.val(val);
-		event.data.input.trigger('change');
+
+		var me = $(this);
+		var input = event.data.input.filter("[data-view=" + me.data("view") + "]");
+		console.log(me.data("view"));
+		var val = +input.val() + event.data.param;
+
+		var inputS = event.data.input.filter("[data-view=single]");
+		var inputT = event.data.input.filter("[data-view=tile]");
+
+		console.log(inputS.val(), inputT.val());
+		input.val(val);
+		console.log(inputS.val(), inputT.val());
+
+		input.trigger('change');
 	};
 
 	// Смена координат с помощью инпутов
 	var _changePositionInput = function(event) {
 		event.preventDefault();
 		_InputsRound();
-		info = upload.scaleRatio();
-		// Проверки на соответствие границам
-		if ($(this).val() < 0) {
-				$(this).val(0);
-			};
-		if ($(this).hasClass('x-pos')) {
-			if ($(this).val() * info.secondScale > info.bgWidth - info.wmWidth * info.secondScale) {
-				$(this).val((info.bgWidth - Math.round(info.wmWidth * info.secondScale)) / info.secondScale);	
-			};
-			image.watermark('coordinate_x', $(this).val());
-		} else {
-			if ($(this).val() * info.secondScale > info.bgHeight - info.wmHeight * info.secondScale) {
-				$(this).val((info.bgHeight - Math.round(info.wmHeight * info.secondScale))  / info.secondScale);	
-			};
-			image.watermark('coordinate_y', $(this).val());
-		};
+
+		var me = $(this);
+
+		var isSingleView = me.data("view") == "single";
+		console.log(me.data("view"), isSingleView);
+
+		if (isSingleView){
+			info = upload.scaleRatio();
+			// Проверки на соответствие границам
+			if (me.val() < 0) {
+					me.val(0);
+				}
+			if (me.hasClass('x-pos')) {
+				if (me.val() * info.secondScale > info.bgWidth - info.wmWidth * info.secondScale) {
+					me.val((info.bgWidth - Math.round(info.wmWidth * info.secondScale)) / info.secondScale);
+				}
+				image.watermark('coordinate_x', $(this).val());
+			} else {
+				if (me.val() * info.secondScale > info.bgHeight - info.wmHeight * info.secondScale) {
+					me.val((info.bgHeight - Math.round(info.wmHeight * info.secondScale))  / info.secondScale);
+				}
+				image.watermark('coordinate_y', me.val());
+			}
+		}else {
+			if (me.hasClass('x-pos')) {
+				//tile, hor margin
+				tile.setMarginHorizontal($(this).val());
+			} else {
+				//tile, vert margin
+				tile.setMarginVertical($(this).val());
+			}
+		}
 		_InputsRound();
 	};
 
@@ -138,8 +164,11 @@ var movement = function() {
 	};
 
 	var _InputsRound = function() {
-		$('.x-pos').val(Math.round($('.x-pos').val()));
-		$('.y-pos').val(Math.round($('.y-pos').val()));
+		var xInput = $('.x-pos[data-view=single]');
+		var yInput = $('.y-pos[data-view=single]');
+
+		xInput.val(Math.round(xInput.val()));
+		yInput.val(Math.round(yInput.val()));
 	};
 
 	// Публичные методы
