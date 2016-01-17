@@ -13,36 +13,67 @@ var movement = function() {
 		_changePositionDrag();
 	};
 
+	var mouseInterval;
+
+	var handlers = {
+		".x-up": {
+			"input": ".x-pos",
+			"param": 1
+		},
+		".x-down": {
+			"input": ".x-pos",
+			"param": -1
+		},
+		".y-up": {
+			"input": ".y-pos",
+			"param": 1
+		},
+		".y-down": {
+			"input": ".y-pos",
+			"param": -1
+		}
+	};
+
 	// Вешаем обработчики
 	var _setUpListners = function() {
-		$('.x-up').on('click', {input: $('.x-pos'), param: 1}, _changePositionArrow);
-		$('.x-down').on('click', {input: $('.x-pos'), param: -1}, _changePositionArrow);
-		$('.y-up').on('click', {input: $('.y-pos'), param: 1}, _changePositionArrow);
-		$('.y-down').on('click', {input: $('.y-pos'), param: -1}, _changePositionArrow);
+
+		$.each( handlers, function( handlerName, value ) {
+			var eventObject = {input: $(value["input"]), param: value["param"]};
+
+			$(handlerName).on('click', eventObject, _changePositionArrow);
+			$(handlerName).on("mousedown", eventObject, _changePositionContinious);
+			$(handlerName).on("mouseup mouseleave", function () {
+				clearInterval(mouseInterval)
+			});
+		});
+
 		$('.x-pos').on('change', _changePositionInput);
 		$('.y-pos').on('change', _changePositionInput);
 		$('.x-pos').on('keypress', _noSubmit);
 		$('.y-pos').on('keypress', _noSubmit);
+
 		for (var i = 1; i <= 9; i += 1) {
 			$('.cell' + i).on('click', {number: i}, _changePositionGrid)
-		};
+		}
 	};
+
+	function _changePositionContinious(e){
+		mouseInterval = setInterval(function(){
+			_changePositionArrow(e);
+		}, 100);
+	}
 
 	// Смена координат с помощью стрелочек
 	var _changePositionArrow = function(event) {
 		event.preventDefault();
 
-		var me = $(this);
+		//not $(this) because is called from _changePositionContinious
+		var me = $(event.target);
 		var input = event.data.input.filter("[data-view=" + me.data("view") + "]");
-		console.log(me.data("view"));
+
 		var val = +input.val() + event.data.param;
 
-		var inputS = event.data.input.filter("[data-view=single]");
-		var inputT = event.data.input.filter("[data-view=tile]");
-
-		console.log(inputS.val(), inputT.val());
 		input.val(val);
-		console.log(inputS.val(), inputT.val());
 
 		input.trigger('change');
 	};
