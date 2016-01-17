@@ -4,7 +4,8 @@ var movement = function() {
 
 	// Определяем блок с водяным знаком и переменные для его координат
 	var image = $('.output__watermark-result'),
-		tile = $('.watermarks'),
+		wmTile = $('.watermarks'),
+		tileContainer = $('.output__many-watermark'),
 		left,
 		top,
 		info;
@@ -91,12 +92,13 @@ var movement = function() {
 		var isSingleView = me.data("view") == "single";
 		console.log(me.data("view"), isSingleView);
 
+		// Проверки на соответствие границам
+		if (me.val() < 0) {
+			me.val(0);
+		}
+
 		if (isSingleView){
 			info = upload.scaleRatio();
-			// Проверки на соответствие границам
-			if (me.val() < 0) {
-					me.val(0);
-				}
 			if (me.hasClass('x-pos')) {
 				if (me.val() * info.secondScale > info.bgWidth - info.wmWidth * info.secondScale) {
 					me.val((info.bgWidth - Math.round(info.wmWidth * info.secondScale)) / info.secondScale);
@@ -188,9 +190,24 @@ var movement = function() {
 		});
 	};
 
+	// Смена координат замощения с помощью мыши
 	var _tileDrag = function() {
-		tile.draggable({
-			cursor: 'move'
+		wmTile.draggable({
+			cursor: 'move',
+			stop: function(event, ui) {
+				tileTop = ui.position.top;
+				tilePaddingY = $('.wm__tile').css('margin-bottom');
+				tilePaddingY = +tilePaddingY.substr(0, tilePaddingY.length - 2);
+				tileH = $('.wm__tile').css('height');
+				tileH = +tileH.substr(0, tileH.length - 2);
+				tileLeft = ui.position.left;
+				tilePaddingX = $('.wm__tile').css('margin-right');
+				tilePaddingX = +tilePaddingX.substr(0, tilePaddingX.length - 2);
+				tileW = $('.wm__tile').css('width');
+				tileW = +tileW.substr(0, tileW.length - 2);
+				wmTile.css('top', tileTop % (tileH + tilePaddingY));
+				wmTile.css('left', tileLeft % (tileW + tilePaddingX));
+			}
 		});
 	};
 
