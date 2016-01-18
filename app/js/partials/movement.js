@@ -73,9 +73,12 @@ var movement = function() {
 
 		//not $(this) because is called from _changePositionContinious
 		var me = $(event.target);
+		console.log('me: ' + me);
 		var input = event.data.input.filter("[data-view=" + me.data("view") + "]");
+		console.log('input: ' + input);
 
 		var val = +input.val() + event.data.param;
+		console.log('val: ' + val + '\nevent.data.param' + event.data.param);
 
 		input.val(val);
 
@@ -99,15 +102,15 @@ var movement = function() {
 		if (isSingleView){
 			info = upload.scaleRatio();
 			if (me.hasClass('x-pos')) {
-				if (me.val() > Math.round(info.bgWidth - info.wmWidth * info.scale  * info.secondScale)) {
-					me.val(Math.round(info.bgWidth - info.wmWidth * info.scale * info.secondScale));
+				if (me.val() > Math.round(info.bgWidth - info.wmWidth * info.secondScale)) {
+					me.val(Math.round(info.bgWidth - info.wmWidth * info.secondScale));
 				}
-				image.watermark('coordinate_x', $(this).val() / info.scale);
+				image.watermark('coordinate_x', me.val()); 
 			} else {
-				if (me.val() > Math.round(info.bgHeight - info.wmHeight * info.scale * info.secondScale)) {
-					me.val(Math.round(info.bgHeight - info.wmHeight * info.scale * info.secondScale));
+				if (me.val() > Math.round(info.bgHeight - info.wmHeight * info.secondScale)) {
+					me.val(Math.round(info.bgHeight - info.wmHeight  * info.secondScale));
 				}
-				image.watermark('coordinate_y', me.val() / info.scale);
+				image.watermark('coordinate_y', me.val());
 			}
 		}else {
 			if (me.hasClass('x-pos')) {

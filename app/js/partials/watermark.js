@@ -22,15 +22,20 @@
 
         var posValue;
 
+        /*
         if (isAbsOffset) {
-            posValue = _getNum(offset, "offset");
+            posValue = _getNum(offset, "offset") * upload.scaleRatio().scale;
         }else{
             posValue = _getNum(me.css(property), property) + _getNum(offset, "offset");
         }
+        */
 
+        posValue = _getNum(offset, "offset") * upload.scaleRatio().scale;
+        
         me.css(property, posValue);
 
         isAtPosition = false;
+        console.log('posValue: ' + posValue);
     }
 
     function _getNum(value, name){
@@ -203,7 +208,12 @@
 
         coordinate_x:function(x) {
 
-            x *= _options.scale;
+            //x *= _options.scale;
+
+            console.log('_options.scale: ' + _options.scale
+                + '\n.secondScale' + upload.scaleRatio().secondScale
+                + '\n.Scale' + upload.scaleRatio().scale
+                );
 
             _setPosition($(this), "left", x, true);
 
@@ -212,7 +222,7 @@
 
         coordinate_y:function(y) {
 
-            y *= _options.scale;
+            //y *= upload.scaleRatio().secondScale;
 
             _setPosition($(this), "top", y, true);
 
