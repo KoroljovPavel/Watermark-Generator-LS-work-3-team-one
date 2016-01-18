@@ -1,8 +1,74 @@
 form.manipulation__list
-	div.manipulation__item.manipulation__item_image-position
-		label.manipulation__label.position__label Положение
+	div.manipulation__item.manipulation__item_image-position.clearfix
+		div.manipulation__item_position-header
+			label.manipulation__label.position__label(data-translate-key="position__label") Положение
+			div.view__list
+				button.view__item.view__item-one
+				button.view__item.view__item-two
+		div.manipulation__item_position-block--cells.clearfix
+			div.manipulation__item_position-move
+				table.manipulation__item_position-table
+					tbody.manipulation__item_position-body
+						tr.position__line
+							td.position__cell.cell1
+							td.position__cell.cell2
+							td.position__cell.cell3
+						tr.position__line
+							td.position__cell.cell4
+							td.position__cell.cell5
+							td.position__cell.cell6
+						tr.position__line
+							td.position__cell.cell7
+							td.position__cell.cell8
+							td.position__cell.cell9
+			div.manipulation__item_position-coordinates.clearfix
+				div.position__coordinates.position__coordinates-one
+					p.coordinates X
+					input#coordinate-cell-x.coordinate__input.coordinate__input-x.x-pos(type='text' value="0" data-view="single")
+					div.coordinate__arrows
+						button.coordinate__arrow.coordinate__arrow-up.x-up(data-view="single")
+						button.coordinate__arrow.coordinate__arrow-down.x-down(data-view="single")
+				div.position__coordinates.position__coordinates-two
+					p.coordinates Y
+					input#coordinate-cell-y.coordinate__input.coordinate__input-y.y-pos(type='text' value="0" data-view="single")
+					div.coordinate__arrows
+						button.coordinate__arrow.coordinate__arrow-up.y-up(data-view="single")
+						button.coordinate__arrow.coordinate__arrow-down.y-down(data-view="single")
+		div.manipulation__item_position-block--lines.clearfix
+			div.manipulation__item_position-move
+				table.manipulation__item_position-table
+					tbody.manipulation__item_position-body
+						tr.position__line
+							td.position__cell
+							td.position__cell
+							td.position__cell
+						tr.position__line
+							td.position__cell
+							td.position__cell
+							td.position__cell
+						tr.position__line
+							td.position__cell
+							td.position__cell
+							td.position__cell
+				div.manipulation__item_position-lines
+					span.position-lines.position-lines-x
+					span.position-lines.position-lines-y
+			div.manipulation__item_position-coordinates.clearfix
+				div.position__coordinates.position__coordinates-one
+					input#coordinate-line-x.coordinate__input.coordinate__input-x.y-pos(type='text' value="0" data-view="tile")
+					div.coordinate__arrows
+						button.coordinate__arrow.coordinate__arrow-up.y-up(data-view="tile")
+						button.coordinate__arrow.coordinate__arrow-down.y-down(data-view="tile")
+				div.position__coordinates.position__coordinates-two
+					input#coordinate-line-y.coordinate__input.coordinate__input-y.x-pos(type='text' value="0" data-view="tile")
+					div.coordinate__arrows
+						button.coordinate__arrow.coordinate__arrow-up.x-up(data-view="tile")
+						button.coordinate__arrow.coordinate__arrow-down.x-down(data-view="tile")
 	div.manipulation__item.manipulation__item_image-opacity
-		label.manipulation__label.position__label Прозрачность
-	div.manipulation__item.manipulation__item_buttons
-		button.manipulation__btn-reset(type='reset') Сброс
-		button.manipulation__btn-submit(type='submit') Скачать
+		div.manipulation__item_image-opacity_header
+			label.manipulation__label.opacity__label(data-translate-key="opacity__label") Прозрачность
+		div(id="opacity" class="opacity-slider__range" data-opacity="0.5")
+	div.manipulation__item.manipulation__item_buttons.clearfix
+
+		button.manipulation__btn-reset.reset-btn(type='reset', data-translate-key="manipulation__btn-reset") Сброс
+		button.manipulation__btn-submit.downloadBtn(type='submit', data-translate-key="manipulation__btn-submit") Скачать

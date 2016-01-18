@@ -12,13 +12,14 @@ html(lang="ru-Ru")
 				include _pages/generator
 
 				div.container__manipulation
-					h2.manipulation__header Настройки
+					div.container__manipulation-header
+						h2.manipulation__header(data-translate-key="manipulation__header") Настройки
 					include _pages/input-image
 
 					include _pages/input-watermark
 
 					include _pages/manipulation-list
-	footer
-		div.generation-footer__copyrighting @ 2016 Это сайт команды № 1, пожалуйста, не копируйте и не воруйте его
+		footer
+			div.generation-footer__copyrighting @ 2016 Это сайт команды № 1, пожалуйста, не копируйте и не воруйте его
 
-	script(src = "js/main.js")
+		script(src = "js/main.js")
