@@ -1,4 +1,237 @@
 .container__left-column{
 	position: absolute;
-	top: 100px;
+	top: 90px;
+}
+.language__list{
+	padding: 0;
+}
+.language__btn{
+	padding: 0;
+	width: 43px;
+	height: 35px;
+	text-transform: uppercase;
+	color: #8e9298;
+	font-family: "segoeui", sans-serif;
+	font-weight: 300;
+	font-size: 20px;
+	background: #d4d2d1;
+	border: none;
+	&:hover{
+		color: #444a53;
+	}
+	&:active{
+		outline: none;
+		background: #8e9298;
+		color: #444a53;
+	}
+	&:focus{
+		outline: none;
+		background: #8e9298;
+		color: #444a53;
+	}
+}
+.language__btn-eng.active{
+	outline: none;
+	background: #8e9298;
+	color: #444a53;
+}
+.language__btn-rus.active{
+	outline: none;
+	background: #8e9298;
+	color: #444a53;
+}
+.social__list{
+	min-height: 123px; 
+}
+.socials{
+	display: none;
+	float: left;
+	padding: 0;
+	margin:0;
+}
+.social__item,.social__btn--fb,.social__btn--tw,.social__btn--vk{
+	width: 43px;
+	height: 41px;
+	background: #d4d2d1;
+}
+.social__btn--fb,.social__btn--tw,.social__btn--vk{
+	display: block;
+}
+.social__btn--fb:before{
+	content: "";
+	background: url("../img/socials.png");
+	width: 15px;
+	height: 27px;
+	background-position: -5px -5px;
+	position: absolute;
+	margin-top: 7px;
+	margin-left: 10px;
+}
+.social__btn--fb:hover:before{
+	background: url("../img/socials.png");
+	width: 15px;
+	height: 27px;
+	background-position: -30px -5px;
+	position: absolute;
+	margin-top: 7px;
+	margin-left: 10px;
+}
+.social__btn--tw:before{
+	content: "";
+	background: url("../img/socials.png");
+	width: 28px;
+	height: 22px;
+	background-position: -41px -47px;
+	position: absolute;
+	margin-top: 10px;
+	margin-left: 10px;
+}
+.social__btn--tw:hover:before{
+	content: "";
+	background: url("../img/socials.png");
+	width: 28px;
+	height: 22px;
+	background-position: -91px -5px;
+	position: absolute;
+	margin-top: 10px;
+	margin-left: 10px;
+}
+.social__btn--vk:before{
+	content: "";
+	background: url("../img/socials.png");
+	width: 32px;
+	height: 18px;
+	background-position: -91px -37px;
+	position: absolute;
+	margin-top: 15px;
+	margin-left: 5px;
+}
+.social__btn--vk:hover:before{
+	content: "";
+	background: url("../img/socials.png");
+	width: 32px;
+	height: 18px;
+	background-position: -79px -65px;
+	position: absolute;
+	margin-top: 15px;
+	margin-left: 5px;
+}
+.social__btn-open{
+	float: right;
+	width: 40px;
+	height: 40px;
+	background: #d4d2d1;
+	border: none;
+	position: absolute;
+	&:after{
+		content: "";
+		background: url("../img/socials.png");
+		width: 26px;
+		height: 32px;
+		background-position: -55px -5px;
+		position: absolute;
+		margin-top: 20px;
+		margin-top: -18px;
+		margin-left: -10px;
+	}
+	&:hover:after{
+		content: "";
+		background: url("../img/socials.png");
+		width: 26px;
+		height: 32px;
+		background-position: -5px -47px;
+		position: absolute;
+		margin-top: 20px;
+		margin-top: -18px;
+		margin-left: -10px;
+	}
+}
+.watermark-display{
+	opacity: .5;
+	display: block;
+	width: 100%;
+	height: 100%;
+}
+#my_canvas{
+	position: absolute;
+	display: none;
+	margin: auto;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	width: 535px;
+	height: 535px;
+	z-index:9999;
+}
+@keyframes loader {
+	0%, 10%, 100% {
+		width: 80px;
+		height: 80px;
+	}
+	65% {
+		width: 150px;
+		height: 150px;
+	}
+}
+@keyframes loaderBlock {
+	0%, 30% {
+		transform: rotate(0);
+	}
+	55% {
+		background-color: #9b6d7b;
+	}
+	100% {
+		transform: rotate(90deg);
+
+	}
+}
+@keyframes loaderBlockInverse {
+	0%, 20% {
+		transform: rotate(0);
+	}
+	55% {
+		background-color: #9b6d7b;
+	}
+	100% {
+		transform: rotate(-90deg);
+	}
+}
+.loader {
+	display: none;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 80px;
+	height: 80px;
+	transform: translate(-50%, -50%) rotate(45deg) translate3d(0,0,0);
+	animation: loader 1.2s infinite ease-in-out;
+
+	.loader_span {
+		position: absolute;
+		display: block;
+		width: 40px;
+		height: 40px;
+		background-color: #d8ba9d;
+		animation: loaderBlock 1.2s infinite ease-in-out both;
+
+		&:nth-child(1) {
+			top: 0;
+			left: 0;
+		}
+		&:nth-child(2) {
+			top: 0;
+			right: 0;
+			animation: loaderBlockInverse 1.2s infinite ease-in-out both;
+		}
+		&:nth-child(3) {
+			bottom: 0;
+			left: 0;
+			animation: loaderBlockInverse 1.2s infinite ease-in-out both;
+		}
+		&:nth-child(4) {
+			bottom: 0;
+			right: 0;
+		}
+	}
 }

@@ -1,4 +1,19 @@
 @import "../bower/normalize-css/normalize.css";
+html {
+	font-size: 14px;
+}
+body {
+	background: url("../img/background.jpg");
+	background-attachment: fixed;
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center center;
+}
+
+
+@import "../css/icons-sprite.css";
+@import "../css/social-sprite.css";
+
 @import "_mixins/clearfix";
 
 @import "_layout/layout";
@@ -7,19 +22,14 @@
 
 @import "_components/left-column";
 @import "_components/right-column";
+@import "_components/slider.scss";
 
 
 
-html {
-    font-size: 14px;
-}
-body {
-	background: #9f6f7a;
-}
 .clearfix {
 	@include clearfix;
 }
-$footer-height : 70px;
+$footer-height : 60px;
 .wrapper {
 	min-height: 100%;
 	min-width: 1120px;
@@ -34,9 +44,13 @@ $footer-height : 70px;
 }
 
 footer {
+	position: relative;
 	height: $footer-height;
 	margin-top: -$footer-height;
 	text-align: center;
 	font: 12px/12px "fira_sanslight", sans-serif;
 	color: #ffffff;
+}
+.generation-footer__copyrighting{
+	padding-top: 35px;
 }
