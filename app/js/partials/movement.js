@@ -99,15 +99,15 @@ var movement = function() {
 		if (isSingleView){
 			info = upload.scaleRatio();
 			if (me.hasClass('x-pos')) {
-				if (me.val() > Math.round(info.bgWidth - info.wmWidth * info.secondScale)) {
-					me.val(Math.round(info.bgWidth - info.wmWidth * info.secondScale));
+				if (me.val() > Math.round(info.bgWidth - info.wmWidth * info.scale)) {
+					me.val(Math.round(info.bgWidth - info.wmWidth * info.scale));
 				}
-				image.watermark('coordinate_x', $(this).val() / info.secondScale);
+				image.watermark('coordinate_x', $(this).val() / info.scale);
 			} else {
-				if (me.val() > Math.round(info.bgHeight - info.wmHeight * info.secondScale)) {
-					me.val(Math.round(info.bgHeight - info.wmHeight * info.secondScale));
+				if (me.val() > Math.round(info.bgHeight - info.wmHeight * info.scale)) {
+					me.val(Math.round(info.bgHeight - info.wmHeight * info.scale));
 				}
-				image.watermark('coordinate_y', me.val() / info.secondScale);
+				image.watermark('coordinate_y', me.val() / info.scale);
 			}
 		}else {
 			if (me.hasClass('x-pos')) {
