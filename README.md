@@ -2,7 +2,7 @@
 
 **LoftSchool nov 2015 Team #1**
 
-[![Build status](https://img.shields.io/badge/Version-0.1%20--%20Alpha-yellow.svg)](https://github.com/KoroljovPavel/Watermark-Generator-LS-work-3-team-one)
+[![Build status](https://img.shields.io/badge/Version-1.0%20--%20Final-green.svg)](https://github.com/KoroljovPavel/Watermark-Generator-LS-work-3-team-one)
 
 Watermark Generator — веб-сервис позволяющий производить наложение водяных знаков на другие изображения.
 
@@ -76,6 +76,8 @@ $ gulp build
 [Более подробно в нашей Wiki](https://github.com/KoroljovPavel/Watermark-Generator-LS-work-3-team-one/wiki/%D0%9A%D0%BE%D0%BC%D0%B0%D0%BD%D0%B4%D0%B0-%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B0).
 
 ## История изменений
+
+18.01.2016: Проект подготовлен к сдаче. Обозначена версия 1.0 Final
 
 17.01.2016: В проект добавлена поддержка мощения вотермарками и производятся финальные правки перед сдачей проекта.
 
