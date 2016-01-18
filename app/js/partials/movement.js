@@ -90,7 +90,6 @@ var movement = function() {
 		var me = $(this);
 
 		var isSingleView = me.data("view") == "single";
-		console.log(me.data("view"), isSingleView);
 
 		// Проверки на соответствие границам
 		if (me.val() < 0) {
@@ -132,7 +131,6 @@ var movement = function() {
 
 	// Смена координат с помощью сетки
 	var _changePositionGrid = function(event) {
-		console.log($(this));
 		switch (event.data.number) {
 			case 1:
 				image.watermark('position_at', 'left', 'top');
