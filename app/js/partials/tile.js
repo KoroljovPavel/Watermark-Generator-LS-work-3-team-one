@@ -1,7 +1,7 @@
 var tile = (function() {
 
-    var viewSingle = ".view__item-one",
-        viewTile = ".view__item-two",
+    var viewSingle = ".view__item-two",
+        viewTile = ".view__item-one",
         tileWrapperName = ".output__many-watermark",
         singleWrapperName = ".output__watermark-result",
         tileInnerName = ".watermarks",
@@ -17,11 +17,15 @@ var tile = (function() {
         watermarkHeight;
 
     var currentOpacity,
+        currentMarginX = 0,
+        currentMarginY = 0,
         isGenerated = false;
 
     function _init() {
 
-        $(viewSingle).on("click", function(){
+        $(viewTile).on("click", function(){
+
+            console.log("viewTile");
 
             _updateSizes();
 
@@ -30,13 +34,16 @@ var tile = (function() {
 
             _generate();
 
-            _setOpacity(currentOpacity);
         });
 
-        $(viewTile).on("click", function(){
+        $(viewSingle).on("click", function(){
+
+            console.log("viewSingle");
+
             $(tileWrapperName).hide();
             $(singleWrapperName).show();
         });
+
         $(".x-pos").on("change", function(){
             _lineX();
         });
@@ -45,10 +52,15 @@ var tile = (function() {
         });
     }
 
-    function _generate(){
+    function _generate() {
 
-        var tileCount = multiplier * (imageWidth / watermarkWidth + 1) *
-            (imageHeight / watermarkHeight + 1);
+        if (isGenerated) return;
+
+        console.log("_generate");
+
+        var xCount = multiplier * (imageWidth / watermarkWidth + 1);
+        var yCount = multiplier * (imageHeight / watermarkHeight + 1);
+        var tileCount = xCount * yCount;
 
         var tileInner = $(tileInnerName);
 
@@ -69,21 +81,23 @@ var tile = (function() {
 
             img.appendTo(tileInner);
         }
- 
-        tileInner.css('margin-top', -imageHeight * 2 + 'px');
 
         isGenerated = true;
+
+        _setOpacity(currentOpacity);
     }
 
     function _setMarginHorizontal(marginX) {
-        console.log("_setMarginHorizontal", marginX);
+
+        currentMarginX = marginX;
 
         var value = marginX*upload.scaleRatio().scale;
         $(tileItem).css("margin-right", value + "px");
     }
 
     function _setMarginVertical(marginY) {
-        console.log("_setMarginVertical", marginY);
+
+        currentMarginY = marginY;
 
         var value = marginY*upload.scaleRatio().scale;
         $(tileItem).css("margin-bottom", value + "px");
@@ -98,8 +112,12 @@ var tile = (function() {
     }
 
     function _reset(){
+
+        console.log("_reset");
+
         $(tileInnerName).empty();
 
+        isGenerated = false;
         _updateSizes();
     }
 
@@ -107,27 +125,32 @@ var tile = (function() {
         imageWidth = $(backgroundName).width();
         imageHeight = $(backgroundName).height();
 
-        watermarkWidth = $(singleWatermarkName).width();
-        watermarkHeight = $(singleWatermarkName).height();
+		watermarkWidth = $(singleWatermarkName).data("scaled-width");
+		watermarkHeight = $(singleWatermarkName).data("scaled-height");
     }
 
-    function _lineX(){ 
+    function _lineX(){
+        console.log("_lineX");
         var xValue = $("#coordinate-line-y").val();
         var newValue = xValue * upload.scaleRatio().scale;
 
-            var newlineWidth = Math.ceil((newValue * 105) / (watermarkWidth * 2 + newValue))
-             $(".position-lines-y").css({
-                 'width': newlineWidth + "px"
-              });
+        var newlineWidth = Math.ceil((newValue * 105) / (watermarkWidth * 2 + newValue));
+
+        $(".position-lines-y").css({
+            'width': newlineWidth + "px"
+        });
     }
-    function _lineY(){ 
+
+    function _lineY(){
+        console.log("_lineY");
         var yValue = $("#coordinate-line-x").val();
         var newValue = yValue * upload.scaleRatio().scale;
 
-            var newlineHeight = Math.ceil((newValue * 100) / (watermarkHeight * 2 + newValue))
-             $(".position-lines-x").css({
-                 'height': newlineHeight + "px"
-              });
+        var newlineHeight = Math.ceil((newValue * 100) / (watermarkHeight * 2 + newValue));
+
+        $(".position-lines-x").css({
+            'height': newlineHeight + "px"
+        });
     }
 
     return {
