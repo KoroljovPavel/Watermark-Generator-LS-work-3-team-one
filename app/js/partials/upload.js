@@ -63,7 +63,6 @@ var upload = function() {
 			add: function (e, data) {
 				// Выводим название файла
 				$(this).parent().find('input').attr('placeholder', data.files[0].name);
-				console.log(data);
 	        	data.submit();
 	        },
 
@@ -77,13 +76,9 @@ var upload = function() {
 		var path;
 
 		if (data.textStatus != 'success') {
-			console.log('Upload error');
-			console.log(data.result);
 			return;
 		}
 
-		console.log('Successfully uploaded');
-		console.log(data.result);
 		// Определяем путь к файлу
 		path = 'users_img/' + data.result.minName + '?' + e.timeStamp;
 		// Проверка (картинка или водяной знак)
@@ -202,7 +197,6 @@ var upload = function() {
 	}
 
 	var scaleRatio = function(){
-		console.log("Коэффициент масштбирования: " + scale);
 		return {scale: scale, secondScale: secondScale, bgWidth: widthImage, bgHeight: heightImage, wmWidth: watermarkWidth, wmHeight: watermarkHeight};
 	};
 

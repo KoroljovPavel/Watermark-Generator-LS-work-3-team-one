@@ -9,7 +9,6 @@
     var atPositionHor, atPositionVert;
 
     function _setCss(block, property, value){
-        console.log("_setCss", block, property, value);
 
         block.css(property, value);
     }
@@ -38,7 +37,6 @@
         value = parseInt(value);
 
         if (!$.isNumeric(value)) {
-            console.log("value of " + name + " is not numeric, setting to zero");
             value = 0;
         }
 
@@ -117,7 +115,6 @@
 
         var left = _getLeftPosition(valueHor, me),
             top = _getTopPosition(valueVert, me);
-        console.log(top, left);
 
         me.css("top", top);
         me.css("left", left);
@@ -139,7 +136,6 @@
         },
 
         image:function(imgPath) {
-            console.log("image", imgPath);
 
             var me = $(this);
             me.css("background-image", "url("+ imgPath +")");
@@ -154,10 +150,8 @@
         },
 
         move_up:function(offset) {
-            console.log("move_up", offset);
 
             offset *= _options.scale;
-            console.log("scaled", offset);
 
             _setPosition($(this), "top", -offset, false);
 
@@ -165,10 +159,8 @@
         },
 
         move_down:function(offset) {
-            console.log("move_down", offset);
 
             offset *= _options.scale;
-            console.log("scaled", offset);
 
             _setPosition($(this), "top", offset, false);
 
@@ -176,10 +168,8 @@
         },
 
         move_left:function(offset) {
-            console.log("move_left", offset);
 
             offset *= _options.scale;
-            console.log("scaled", offset);
 
             _setPosition($(this), "left", -offset, false);
 
@@ -187,10 +177,8 @@
         },
 
         move_right:function(offset) {
-            console.log("move_right", offset);
 
             offset *= _options.scale;
-            console.log("scaled", offset);
 
             _setPosition($(this), "left", offset, false);
 
@@ -198,7 +186,6 @@
         },
 
         opacity:function(value) {
-            console.log("opacity", value);
 
             $(this).css("opacity", value);
 
@@ -206,7 +193,6 @@
         },
 
         position_at:function(valueHor, valueVert) {
-            console.log("position_at", valueHor, valueVert);
 
             var me = $(this);
 
@@ -216,10 +202,8 @@
         },
 
         coordinate_x:function(x) {
-            console.log("coordinate_x", x);
 
             x *= _options.scale;
-            console.log("scaled", x);
 
             _setPosition($(this), "left", x, true);
 
@@ -227,10 +211,8 @@
         },
 
         coordinate_y:function(y) {
-            console.log("coordinate_y", y);
 
             y *= _options.scale;
-            console.log("scaled", y);
 
             _setPosition($(this), "top", y, true);
 
@@ -238,14 +220,10 @@
         },
 
         size_width:function(width) {
-            console.log("size_width", width);
 
             var me = $(this);
-            console.log( _options.scale);
-            console.log(width);
 
             width *= _options.scale;
-            console.log(width);
 
             _size(me, width, "width");
 
@@ -253,7 +231,6 @@
         },
 
         size_height:function(height) {
-            console.log("size_height", height);
 
             var me = $(this);
 

@@ -6,7 +6,6 @@ var opacity = function(){
 
 
     var initOpacity = watermark.css('opacity');
-    console.log(initOpacity);
 
     slider.slider({range: 'min',
                    value: initOpacity*100});
