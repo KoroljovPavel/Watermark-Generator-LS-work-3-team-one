@@ -195,7 +195,6 @@ var upload = function() {
 
 	var scaleRatio = function(){
 		var scaleData = {scale: scale, secondScale: secondScale, bgWidth: widthImage, bgHeight: heightImage, wmWidth: watermarkWidth, wmHeight: watermarkHeight};
-		console.log(scaleData);
 		return scaleData;
 	};
 
