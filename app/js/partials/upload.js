@@ -106,15 +106,15 @@ var upload = function() {
 			backgroundUploaded = true;
 		} else if (data.result.minName.indexOf('-watermark') + 1) {
 			$('.loader').hide();
-			$('.watermark-display').attr({'src': path, 'alt': 'Ваш водяной знак'});
+			var wmImage = $('#watermark-display');
+			wmImage.attr({'src': path, 'alt': 'Ваш водяной знак'});
 
 			// Записываем оригинальные размеры watermark
 			watermarkWidth = data.result.imgSize['width'];
 			watermarkHeight = data.result.imgSize['height'];
 			// И отмасштабированные
 			newWatermarkWidth = data.result.newSize['newWidth'];
-			newWatermarkHeight = data.result.newSize['newHeight']
-
+			newWatermarkHeight = data.result.newSize['newHeight'];
 
 			$('.view__item-two').addClass('active');
 			$('.manipulation__list').css({
@@ -155,9 +155,15 @@ var upload = function() {
 			.watermark('size_height', watermarkHeight)
 			.watermark('position_at', 'left', 'top');
 
+		var wmDisplay = $('#watermark-display');
+		wmDisplay.data("scaled-width", watermarkWidth*scale);
+		wmDisplay.data("scaled-height", watermarkHeight*scale);
+
+		$('.x-pos, .y-pos').val(0).trigger('change');
+
 		tile.reset();
 
-		if (backgroundUploaded && watermarkUploaded) {
+		if (backgroundUploaded && watermarkUploaded && $(".view__item-one").hasClass("active")) {
 			tile.generate();
 		}
 	}
