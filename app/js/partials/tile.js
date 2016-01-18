@@ -125,6 +125,7 @@ var tile = (function() {
         imageWidth = $(backgroundName).width();
         imageHeight = $(backgroundName).height();
 
+        $(tileInnerName).css('margin-top', imageHeight * -2);
 		watermarkWidth = $(singleWatermarkName).data("scaled-width");
 		watermarkHeight = $(singleWatermarkName).data("scaled-height");
     }
