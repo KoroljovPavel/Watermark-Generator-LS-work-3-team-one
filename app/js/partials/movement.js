@@ -180,8 +180,8 @@ var movement = function() {
 			containment: 'parent',
 	        drag: function(event, ui) {
 				info = upload.scaleRatio();
-				$('.x-pos[data-view=single]').val(ui.position.left / info.scale * info.secondScale);
-				$('.y-pos[data-view=single]').val(ui.position.top / info.scale * info.secondScale);
+				$('.x-pos[data-view=single]').val(ui.position.left / info.scale);
+				$('.y-pos[data-view=single]').val(ui.position.top / info.scale);
 				$('.x-pos[data-view=single]').trigger('change');
 				$('.y-pos[data-view=single]').trigger('change');
 			}
