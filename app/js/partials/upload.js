@@ -140,11 +140,11 @@ var upload = function() {
 			newScaleH = (heightImage / watermarkHeight) * scale;
 			if (newScaleW < newScaleH) {
 				wMark.watermark({scale: newScaleW});
-				scale = newScaleW;
+				//scale = newScaleW;
 				secondScale = widthImage / watermarkWidth;
 			} else {
 				wMark.watermark({scale: newScaleH});
-				scale = newScaleH;
+				// scale = newScaleH;
 				secondScale = heightImage / watermarkHeight;
 			}
 		}
@@ -154,8 +154,8 @@ var upload = function() {
 			.watermark('position_at', 'left', 'top');
 
 		var wmDisplay = $('#watermark-display');
-		wmDisplay.data("scaled-width", watermarkWidth*scale);
-		wmDisplay.data("scaled-height", watermarkHeight*scale);
+		wmDisplay.data("scaled-width", watermarkWidth*scale*secondScale);
+		wmDisplay.data("scaled-height", watermarkHeight*scale*secondScale);
 
 		$('.x-pos, .y-pos').val(0).trigger('change');
 
@@ -197,7 +197,8 @@ var upload = function() {
 	}
 
 	var scaleRatio = function(){
-		return {scale: scale, secondScale: secondScale, bgWidth: widthImage, bgHeight: heightImage, wmWidth: watermarkWidth, wmHeight: watermarkHeight};
+		var scaleData = {scale: scale, secondScale: secondScale, bgWidth: widthImage, bgHeight: heightImage, wmWidth: watermarkWidth, wmHeight: watermarkHeight};
+		return scaleData;
 	};
 
 	// Публичные методы
