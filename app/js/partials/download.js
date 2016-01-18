@@ -37,7 +37,6 @@ var download = function() {
             {
                 window.location.href = 'php/download.php';
             } else {
-                console.log(data);
                 alert("Произошла непредвиденная ошибка. Не удалось склеить файлы.");
             }
         });

@@ -25,7 +25,6 @@ var tile = (function() {
 
         $(viewTile).on("click", function(){
 
-            console.log("viewTile");
 
             _updateSizes();
 
@@ -38,7 +37,6 @@ var tile = (function() {
 
         $(viewSingle).on("click", function(){
 
-            console.log("viewSingle");
 
             $(tileWrapperName).hide();
             $(singleWrapperName).show();
@@ -56,7 +54,6 @@ var tile = (function() {
 
         if (isGenerated) return;
 
-        console.log("_generate");
 
         var xCount = multiplier * (imageWidth / watermarkWidth + 1);
         var yCount = multiplier * (imageHeight / watermarkHeight + 1);
@@ -113,7 +110,6 @@ var tile = (function() {
 
     function _reset(){
 
-        console.log("_reset");
 
         $(tileInnerName).empty();
 
@@ -131,7 +127,6 @@ var tile = (function() {
     }
 
     function _lineX(){
-        console.log("_lineX");
         var xValue = $("#coordinate-line-y").val();
         var newValue = xValue * upload.scaleRatio().scale;
 
@@ -143,7 +138,6 @@ var tile = (function() {
     }
 
     function _lineY(){
-        console.log("_lineY");
         var yValue = $("#coordinate-line-x").val();
         var newValue = yValue * upload.scaleRatio().scale;
 
