@@ -116,7 +116,10 @@ var upload = function() {
 			newWatermarkWidth = data.result.newSize['newWidth'];
 			newWatermarkHeight = data.result.newSize['newHeight'];
 
-			$('.view__item-two').addClass('active');
+			if(!($('.view__item-one').hasClass('active'))){
+				$('.view__item-two').addClass('active');
+			}
+
 			$('.manipulation__list').css({
 				'pointer-events': 'auto',
 				'opacity': '1'
