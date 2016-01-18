@@ -157,13 +157,19 @@ class merger {
                 $this->watermarkOfsetY = $this->watermarkOfsetY % 
                         ($watermark->getImageHeight() + $this->tillingPaddingY);
 
+                $startOfsetX = ($image->getImageWidth() * 2 ) %
+                    ($this->tillingPaddingX + $watermark->getImageWidth());
+
+                $startOfsetY = ($image->getImageHeight() * 2 ) %
+                    ($this->tillingPaddingY + $watermark->getImageHeight());
+
                 for ($i = -1; $i < $imgInLine; $i++) { // цыкл движения по горизонтали
                     for ($j = -1; $j < $imgInCol; $j++) {  // Цыкл движения по вертикали 
 
                         $image->compositeImage($watermark, imagick::COMPOSITE_OVER,
-                            $this->watermarkOfsetX+($i * 
+                            $startOfsetX+($i * 
                                 ($watermark->getImageWidth() + $this->tillingPaddingX)),
-                             $this->watermarkOfsetY+($j * 
+                            $startOfsetY+($j * 
                                 ($watermark->getImageHeight() + $this->tillingPaddingY)));
                     }
                 }
