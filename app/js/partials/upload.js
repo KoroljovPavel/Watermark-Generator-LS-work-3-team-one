@@ -13,7 +13,7 @@ var upload = function() {
 		watermarkHeight,
 		newWatermarkWidth,
 		newWatermarkHeight,
-		scale,
+		scale = 1,
 		secondScale,
 		newScaleW,
 		newScaleH,

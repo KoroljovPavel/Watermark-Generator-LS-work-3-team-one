@@ -147,9 +147,9 @@ class merger {
                                                          Imagick::CHANNEL_ALPHA); 
 
                 $imgInLine  = ceil($image->getImageWidth() / 
-                            ($watermark->getImageWidth() + $this->tillingPaddingX));
+                            ($watermark->getImageWidth() + $this->tillingPaddingX)) + 1;
                 $imgInCol   = ceil($image->getImageHeight() /
-                            ($watermark->getImageHeight() + $this->tillingPaddingY));
+                            ($watermark->getImageHeight() + $this->tillingPaddingY)) + 1;
 
                 $this->watermarkOfsetX = $this->watermarkOfsetX % 
                         ($watermark->getImageWidth() + $this->tillingPaddingX);
@@ -157,13 +157,19 @@ class merger {
                 $this->watermarkOfsetY = $this->watermarkOfsetY % 
                         ($watermark->getImageHeight() + $this->tillingPaddingY);
 
+                $startOfsetX = (-2 * $image->getImageWidth() 
+                % ($this->tillingPaddingX + $watermark->getImageWidth())) + $this->watermarkOfsetX;
+
+                $startOfsetY = (-2 * $image->getImageHeight() 
+                % ($this->tillingPaddingY + $watermark->getImageHeight())) + $this->watermarkOfsetY;
+
                 for ($i = -1; $i < $imgInLine; $i++) { // цыкл движения по горизонтали
                     for ($j = -1; $j < $imgInCol; $j++) {  // Цыкл движения по вертикали 
 
                         $image->compositeImage($watermark, imagick::COMPOSITE_OVER,
-                            $this->watermarkOfsetX+($i * 
+                            $startOfsetX+($i * 
                                 ($watermark->getImageWidth() + $this->tillingPaddingX)),
-                             $this->watermarkOfsetY+($j * 
+                            $startOfsetY+($j * 
                                 ($watermark->getImageHeight() + $this->tillingPaddingY)));
                     }
                 }
