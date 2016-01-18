@@ -55,11 +55,11 @@ $ git clone https://github.com/KoroljovPavel/Watermark-Generator-LS-work-3-team-
 $ cd watermark-generator
 $ npm i
 $ bower i
-$ gulp prod
+$ gulp build
 
 ```
 
-После сборки проекта скопируйте папку `watermark-generator/prodaction` на ваш сервер, предварительно внеся изменения в файл конфигурации согласно инструкции.
+После сборки проекта скопируйте папку `watermark-generator/build` на ваш сервер, предварительно внеся изменения в файл конфигурации согласно инструкции.
 
 ## Команда
 
