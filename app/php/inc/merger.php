@@ -147,9 +147,9 @@ class merger {
                                                          Imagick::CHANNEL_ALPHA); 
 
                 $imgInLine  = ceil($image->getImageWidth() / 
-                            ($watermark->getImageWidth() + $this->tillingPaddingX));
+                            ($watermark->getImageWidth() + $this->tillingPaddingX)) + 1;
                 $imgInCol   = ceil($image->getImageHeight() /
-                            ($watermark->getImageHeight() + $this->tillingPaddingY));
+                            ($watermark->getImageHeight() + $this->tillingPaddingY)) + 1;
 
                 $this->watermarkOfsetX = $this->watermarkOfsetX % 
                         ($watermark->getImageWidth() + $this->tillingPaddingX);
@@ -157,11 +157,11 @@ class merger {
                 $this->watermarkOfsetY = $this->watermarkOfsetY % 
                         ($watermark->getImageHeight() + $this->tillingPaddingY);
 
-                $startOfsetX = ($image->getImageWidth() * 2 ) %
-                    ($this->tillingPaddingX + $watermark->getImageWidth());
+                $startOfsetX = (-2 * $image->getImageWidth() 
+                % ($this->tillingPaddingX + $watermark->getImageWidth())) + $this->watermarkOfsetX;
 
-                $startOfsetY = ($image->getImageHeight() * 2 ) %
-                    ($this->tillingPaddingY + $watermark->getImageHeight());
+                $startOfsetY = (-2 * $image->getImageHeight() 
+                % ($this->tillingPaddingY + $watermark->getImageHeight())) + $this->watermarkOfsetY;
 
                 for ($i = -1; $i < $imgInLine; $i++) { // цыкл движения по горизонтали
                     for ($j = -1; $j < $imgInCol; $j++) {  // Цыкл движения по вертикали 
