@@ -7,7 +7,8 @@ var dict = {
         'position__label'          : 'Place',
         'opacity__label'           : 'Opacity',
         'manipulation__btn-reset'  : 'Reset',
-        'manipulation__btn-submit' : 'Download'
+        'manipulation__btn-submit' : 'Download',
+        'footer__copyrighting'     : '@ 2016 This is the site of team number 1, please don`t copy or steal it'
     },
     ru: {
         'generator__header'        : 'Генератор водяных знаков',
@@ -17,6 +18,7 @@ var dict = {
         'position__label'          : 'Положение',
         'opacity__label'           : 'Прозрачность',
         'manipulation__btn-reset'  : 'Сброс',
-        'manipulation__btn-submit' : 'Скачать'
+        'manipulation__btn-submit' : 'Скачать',
+        'footer__copyrighting'     : '@ 2016 Это сайт команды № 1, пожалуйста, не копируйте и не воруйте его'
     }
 };
