@@ -24,6 +24,7 @@ var download = function() {
                 (parseInt($(".watermarks").css('left'), 10) / upload.scaleRatio().scale);
         var ofsetY = (actionType === 'stamp') ? $("#coordinate-cell-y").val() : 
                 (parseInt($(".watermarks").css('top'), 10) / upload.scaleRatio().scale);
+        console.log('ofsetX: ' + ofsetX + '\nofsetY: ' + ofsetY);
         $.ajax({url:"php/merge.php", 
             data: {
                 type: actionType,

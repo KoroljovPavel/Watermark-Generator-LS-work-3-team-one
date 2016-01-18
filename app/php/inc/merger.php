@@ -147,9 +147,9 @@ class merger {
                                                          Imagick::CHANNEL_ALPHA); 
 
                 $imgInLine  = ceil($image->getImageWidth() / 
-                            ($watermark->getImageWidth() + $this->tillingPaddingX)) + 1;
+                            ($watermark->getImageWidth() + $this->tillingPaddingX)) + 2;
                 $imgInCol   = ceil($image->getImageHeight() /
-                            ($watermark->getImageHeight() + $this->tillingPaddingY)) + 1;
+                            ($watermark->getImageHeight() + $this->tillingPaddingY)) + 2;
 
                 $this->watermarkOfsetX = $this->watermarkOfsetX % 
                         ($watermark->getImageWidth() + $this->tillingPaddingX);
