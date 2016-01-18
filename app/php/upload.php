@@ -143,6 +143,10 @@ function imageresize($infile, $outfile, $neww, $newh, $mime, $quality) {
     }
     
     $im1=imagecreatetruecolor($neww,$newh);
+    imagesavealpha($im, true);
+    imagesavealpha($im1, true);
+    imagealphablending($im, false);
+    imagealphablending($im1, false);
     imagecopyresampled($im1,$im,0,0,0,0,$neww,$newh,imagesx($im),imagesy($im));
 
     if ($mime == "image/jpeg") {
