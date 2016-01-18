@@ -237,6 +237,13 @@ gulp.task('watch', function(){
 });
 
 
+
 gulp.task('server-php', ['dist', 'webserver-php', 'watch']);
 
 gulp.task('default', ['dist', 'webserver', 'watch']);
+
+
+gulp.task('new', function(){
+    gulp.watch('dist/**/*.*')
+    gulp    .dest('build');
+});
