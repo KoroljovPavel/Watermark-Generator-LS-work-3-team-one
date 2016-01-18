@@ -215,6 +215,13 @@ gulp.task('build', [
     'test_img'
 ]);
 
+gulp.task('copy', function() {
+    gulp.watch('dist/**/*.*', function () {
+        gulp.src(['dist/**/*.*'])
+            .pipe(gulp.dest('build'));
+    });
+});
+
 gulp.task('watch', function(){
     watch([path.watch.jade], function(event, cb) {
         gulp.start('jade:dist');
@@ -239,4 +246,4 @@ gulp.task('watch', function(){
 
 gulp.task('server-php', ['dist', 'webserver-php', 'watch']);
 
-gulp.task('default', ['dist', 'webserver', 'watch']);
+gulp.task('default', ['dist', 'webserver', 'watch', 'copy']);

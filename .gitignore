@@ -4,3 +4,4 @@ dist
 .idea
 app/test
 prod
+build
