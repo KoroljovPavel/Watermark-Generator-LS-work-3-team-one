@@ -5,4 +5,4 @@ $__config['path']['root'] = '../';
 $__config['path']['imgUpload'] = $__config['path']['root'] . 'users_img/';
 $__config['canvas']['width'] = 652;
 $__config['canvas']['height'] = 535;
-$__config['libs']['imageProcess'] = 'gd'; // 'imagic' || 'gd'
+$__config['libs']['imageProcess'] = 'imagick'; // 'imagic' || 'gd'
